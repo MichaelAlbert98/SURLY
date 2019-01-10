@@ -14,10 +14,12 @@ public class Parser {
   public static void parse(String filename) {
     String text = ReadIn.reader(filename);
     ArrayList<String> tokens = MakeTokens.tokenizer(text);
-    //temp
+
+    //temp to see if tokenizer is working
     for (int i = 0; i < tokens.size();i++) {
       System.out.println(tokens.get(i));
     }
+    //end temp
     return;
   }
 }
