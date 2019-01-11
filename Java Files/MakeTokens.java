@@ -11,7 +11,7 @@ public class MakeTokens {
   private MakeTokens() {
   }
 
-  //takes a string of text and converts it to tokens
+  //takes a string of text and converts it to valid tokens.
   public static ArrayList<String> tokenizer(String text) {
     ArrayList<String> tokenList = new ArrayList<String>();
     int i = 0;
@@ -83,7 +83,7 @@ public class MakeTokens {
             result = result + text.charAt(i);
             i++;
           }
-          tokenList.add(result);
+            tokenList.add(result);
           break;
       }
     }

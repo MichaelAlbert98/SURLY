@@ -15,8 +15,8 @@ public class ReadIn {
   public static String reader(String fileName) {
     String result = new String("");
     try {
-      //create scanner that ignores text between /* */
-      Scanner in = new Scanner(new FileReader(fileName + ".txt")).useDelimiter(("\\/\\*[^*]*\\*\\/"));
+      //create scanner that ignores comments and newlines
+      Scanner in = new Scanner(new FileReader(fileName + ".txt")).useDelimiter("\\/\\*[^*]*\\*\\/|\\n");
       while(in.hasNext()) {
         result = result + in.next();
       }
