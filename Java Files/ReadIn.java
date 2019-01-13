@@ -16,9 +16,9 @@ public class ReadIn {
     String result = new String("");
     try {
       //create scanner that ignores comments and newlines
-      Scanner in = new Scanner(new FileReader(fileName + ".txt")).useDelimiter("\\/\\*[^*]*\\*\\/|\\n");
+      Scanner in = new Scanner(new FileReader(fileName + ".txt")).useDelimiter("\\/\\*[^*]*\\*\\/|\\n|\\r");
       while(in.hasNext()) {
-        result = result + in.next();
+        result = result + in.next() + " ";
       }
       in.close();
     }
@@ -27,6 +27,7 @@ public class ReadIn {
     catch(Exception e) {
       System.out.println("The file name you specified could not be found.");
     }
+    //System.out.print(result);
     return result;
   }
 }

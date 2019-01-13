@@ -4,6 +4,7 @@
 //Revised January 10, 2019
 
 import java.util.*;
+import java.lang.*;
 
 public class Interpreter {
 
@@ -14,40 +15,40 @@ public class Interpreter {
   private Interpreter() {
   }
 
-  public static void interpret(ArrayList<String> tokens) {
+  public static void interpret(String text) {
     i = 0;
-    for (; i < tokens.size(); i++) {
-      if (tokens.get(i).toLowerCase().equals("relation")) {
-        relation(tokens);
+    String[] splitText = text.split("\\;");
+    //-1 is a temp fix until I look up how to remove empty elements of an array.
+    for (; i < splitText.length - 1; i++) {
+      splitText[i] = splitText[i].trim();
+      String[] command = splitText[i].split(" ", 2);
+      if (command[0].toLowerCase().equals("relation")) {
+        relation(command[1]);
       }
-      else if (tokens.get(i).toLowerCase().equals("insert")) {
-        insert(tokens);
+      else if (command[0].toLowerCase().equals("insert")) {
+        insert(command[1]);
       }
-      else if (tokens.get(i).toLowerCase().equals("print")) {
-        print(tokens);
+      else if (command[0].toLowerCase().equals("print")) {
+        print(command[1]);
       }
       else {
-        i = i + 0;
-        //System.out.println("The command found was not 'relation', 'insert', or 'print'. Please check the text file.");
+        System.out.println("The command found was not 'relation', 'insert', or 'print'. Please check the text file.");
       }
     }
   }
 
-  private static void relation(ArrayList<String> tokens) {
+  private static void relation(String info) {
     System.out.println("Relation started this token.");
-    i++;
     return;
   }
 
-  private static void insert(ArrayList<String> tokens) {
+  private static void insert(String info) {
     System.out.println("Insert started this token.");
-    i++;
     return;
   }
 
-  private static void print(ArrayList<String> tokens) {
+  private static void print(String info) {
     System.out.println("Print started this token.");
-    i++;
     return;
   }
 }
