@@ -13,7 +13,8 @@ public class Parser {
 
   public static void parse(String filename) {
     String text = ReadIn.reader(filename);
-    Interpreter.interpret(text);
+    ArrayList<String> tokens = MakeTokens.tokenizer(text);
+    Interpreter.interpret(tokens);
     return;
   }
 }
