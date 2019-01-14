@@ -75,11 +75,15 @@ public class MakeTokens {
           tokenList.add(",");
           i++;
           break;
+        case ' ':
+          tokenList.add(" ");
+          i++;
+          break;
         default:
           String result = "";
           while ((i < text.length()) && (text.charAt(i) != '(') && (text.charAt(i) != ')') && (text.charAt(i) != '=') && (text.charAt(i) != '(')
                 && (text.charAt(i) != '<') && (text.charAt(i) != '>') && (text.charAt(i) != ';') && (text.charAt(i) != '*')
-                && (text.charAt(i) != '\'') && (text.charAt(i) != ',')) {
+                && (text.charAt(i) != '\'') && (text.charAt(i) != ',') && (text.charAt(i) != ' ')) {
             result = result + text.charAt(i);
             i++;
           }
