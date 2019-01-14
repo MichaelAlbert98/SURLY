@@ -15,39 +15,33 @@ public class Interpreter {
   private Interpreter() {
   }
 
-  public static void interpret(String text) {
+  public static void interpret(ArrayList<String> splitText) {
     i = 0;
-    String[] splitText = text.split("\\;");
-    //-1 is a temp fix until I look up how to remove empty elements of an array.
-    for (; i < splitText.length - 1; i++) {
-      splitText[i] = splitText[i].trim();
-      String[] command = splitText[i].split(" ", 2);
-      if (command[0].toLowerCase().equals("relation")) {
-        relation(command[1]);
+    for (; i < splitText.size(); i++) {
+      String token = splitText.get(i).trim();
+      if (token.toLowerCase().equals("relation")) {
+        relation(splitText);
       }
-      else if (command[0].toLowerCase().equals("insert")) {
-        insert(command[1]);
+      else if (token.toLowerCase().equals("insert")) {
+        insert(splitText);
       }
-      else if (command[0].toLowerCase().equals("print")) {
-        print(command[1]);
-      }
-      else {
-        System.out.println("The command found was not 'relation', 'insert', or 'print'. Please check the text file.");
+      else if (token.toLowerCase().equals("print")) {
+        print(splitText);
       }
     }
   }
 
-  private static void relation(String info) {
+  private static void relation(ArrayList<String> splitText) {
     System.out.println("Relation started this token.");
     return;
   }
 
-  private static void insert(String info) {
+  private static void insert(ArrayList<String> splitText) {
     System.out.println("Insert started this token.");
     return;
   }
 
-  private static void print(String info) {
+  private static void print(ArrayList<String> splitText) {
     System.out.println("Print started this token.");
     return;
   }
