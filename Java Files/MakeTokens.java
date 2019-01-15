@@ -68,8 +68,16 @@ public class MakeTokens {
           i++;
           break;
         case '\'':
-          tokenList.add("'");
-          i++;
+          String result = "";
+          while ((i < text.length())) {
+            i++;
+            if (text.charAt(i) == '\'') {
+              i++;
+              break;
+            }
+            result = result + text.charAt(i);
+          }
+          //extra break in case of missing '
           break;
         case ',':
           tokenList.add(",");
@@ -80,7 +88,7 @@ public class MakeTokens {
           i++;
           break;
         default:
-          String result = "";
+          result = "";
           while ((i < text.length()) && (text.charAt(i) != '(') && (text.charAt(i) != ')') && (text.charAt(i) != '=') && (text.charAt(i) != '(')
                 && (text.charAt(i) != '<') && (text.charAt(i) != '>') && (text.charAt(i) != ';') && (text.charAt(i) != '*')
                 && (text.charAt(i) != '\'') && (text.charAt(i) != ',') && (text.charAt(i) != ' ')) {
