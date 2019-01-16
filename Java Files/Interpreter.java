@@ -15,6 +15,7 @@ public class Interpreter {
   private Interpreter() {
   }
 
+  // Iterate through the list of tokens, looking for keywords and calling the appropriate functions
   public static void interpret(ArrayList<String> splitText) {
     i = 0;
     for (; i < splitText.size(); i++) {
@@ -32,12 +33,13 @@ public class Interpreter {
   }
 
   private static void relation(ArrayList<String> splitText) {
-    int count = 0;
+    int count = 0; // Number of attributes in relation
     i++;
     String relationName = splitText.get(i);
     i++;
     if(!splitText.get(i).equals("(")) {
-      return;
+      System.out.println("bad syntax; no open paren");
+      return; // Fail on bad syntax
     }
     i++;
     while(!splitText.get(i).equals(")")){
@@ -46,7 +48,7 @@ public class Interpreter {
          if(isKeyword(splitText.get(i))) {
             i--;
             System.out.println("bad syntax");
-            return;
+            return; // If keyword is found mid-relation, throw away current relation and return to interpret()
          }   
       }
       if(splitText.get(i).equals(",")) {
@@ -59,17 +61,16 @@ public class Interpreter {
   }
 
   private static void insert(ArrayList<String> splitText) {
-    int count = 0;
+    int count = 0; // Number of attrubutes in insertion
     i++;
     String insertionName = splitText.get(i);
     i++;
     while(!splitText.get(i).equals(";")) {
-      //System.out.println("the " + count + "th item is " + splitText.get(i));
       i++;
       if(isKeyword(splitText.get(i))) {
             i--;
             System.out.println("bad syntax");
-            return;
+            return; // If keyword is found mid-insert, throw away current insertion and return to interpret()
          }
       count++;
     }
@@ -78,7 +79,7 @@ public class Interpreter {
   }
 
   private static void print(ArrayList<String> splitText) {
-    int count = 0;
+    int count = 0; // Number of relations being printed
     i++;
     while(!splitText.get(i).equals(";")) {
       i++;
@@ -88,7 +89,7 @@ public class Interpreter {
       if(isKeyword(splitText.get(i))) {
             i--;
             System.out.println("bad syntax");
-            return;
+            return; // If keyword is found mid-print, throw away current print job and return to interpret();
          }
       count++;
     }
@@ -96,20 +97,12 @@ public class Interpreter {
     return;
   }
 
+  // Returns true if the given string is a keyword (relation, insert, print: case insensitive)
   private static boolean isKeyword(String s) {
     if(s.toLowerCase().equals("relation") || s.toLowerCase().equals("insert") || s.toLowerCase().equals("print")) {
       return true;
     }
     return false;
   }
-
-  /*private static String analyzeToken(String s) {
-    if(s.toLowerCase().equals("relation") || s.toLowerCase().equals("insert") || s.toLowerCase().equals("print")) {return "keyword";}
-    if(s.toLowerCase().equals("(")){return "open paren";}
-    if(s.toLowerCase().equals(")")){return "close paren";}
-    if(s.toLowerCase().equals(",")){return "comma";}
-    if(s.toLowerCase().equals(";")){return "sc";}
-    return "none";
-  }*/
 
 }
