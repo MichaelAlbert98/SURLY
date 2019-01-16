@@ -1,2 +1,0 @@
-/* Testing testing. This is a comment test. */
-This is a non comment test. /* More comments. */ * hmm (test) ' " '
