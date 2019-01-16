@@ -41,7 +41,14 @@ public class Interpreter {
     }
     i++;
     while(!splitText.get(i).equals(")")){
-      i += 3;
+      for(int j = 0; j < 3; j++) {
+         i++;
+         if(isKeyword(splitText.get(i))) {
+            i--;
+            System.out.println("bad syntax");
+            return;
+         }   
+      }
       if(splitText.get(i).equals(",")) {
          i++;
       }
@@ -59,6 +66,11 @@ public class Interpreter {
     while(!splitText.get(i).equals(";")) {
       //System.out.println("the " + count + "th item is " + splitText.get(i));
       i++;
+      if(isKeyword(splitText.get(i))) {
+            i--;
+            System.out.println("bad syntax");
+            return;
+         }
       count++;
     }
     System.out.println("Inserting " + count + " attributes to " + insertionName + ".");
@@ -73,20 +85,25 @@ public class Interpreter {
       while(splitText.get(i).equals(",")){
          i++;
       }
+      if(isKeyword(splitText.get(i))) {
+            i--;
+            System.out.println("bad syntax");
+            return;
+         }
       count++;
     }
     System.out.println("Printing " + count + " relations.");
     return;
   }
 
-  /*private static boolean isKeyword(String s) {
+  private static boolean isKeyword(String s) {
     if(s.toLowerCase().equals("relation") || s.toLowerCase().equals("insert") || s.toLowerCase().equals("print")) {
       return true;
     }
     return false;
   }
 
-  private static String analyzeToken(String s) {
+  /*private static String analyzeToken(String s) {
     if(s.toLowerCase().equals("relation") || s.toLowerCase().equals("insert") || s.toLowerCase().equals("print")) {return "keyword";}
     if(s.toLowerCase().equals("(")){return "open paren";}
     if(s.toLowerCase().equals(")")){return "close paren";}
