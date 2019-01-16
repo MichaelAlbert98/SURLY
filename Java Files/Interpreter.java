@@ -78,7 +78,7 @@ public class Interpreter {
     System.out.println("Printing " + count + " relations.");
     return;
   }
-  
+
   /*private static boolean isKeyword(String s) {
     if(s.toLowerCase().equals("relation") || s.toLowerCase().equals("insert") || s.toLowerCase().equals("print")) {
       return true;
@@ -94,5 +94,5 @@ public class Interpreter {
     if(s.toLowerCase().equals(";")){return "sc";}
     return "none";
   }*/
-  
+
 }
