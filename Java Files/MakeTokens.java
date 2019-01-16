@@ -73,6 +73,7 @@ public class MakeTokens {
             i++;
             if (text.charAt(i) == '\'') {
               i++;
+              tokenList.add(result);
               break;
             }
             result = result + text.charAt(i);
@@ -84,8 +85,6 @@ public class MakeTokens {
           i++;
           break;
         case ' ':
-          //not needed?
-          //tokenList.add(" ");
           i++;
           break;
         default:

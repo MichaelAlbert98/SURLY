@@ -1,1 +1,1 @@
-Tokens created from strings in single quotes are not added to the token list. (eg "insert course csci141 'computer programming 1' 4;" creates the folllowing tokens: insert course csci141 4 ;)
+Single quote tokens not being added to the tokenList has been fixed.
