@@ -84,7 +84,8 @@ public class MakeTokens {
           i++;
           break;
         case ' ':
-          tokenList.add(" ");
+          //not needed?
+          //tokenList.add(" ");
           i++;
           break;
         default:
