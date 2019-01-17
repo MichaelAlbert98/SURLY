@@ -69,7 +69,7 @@ public class MakeTokens {
           break;
         case '\'':
           String result = "";
-          while ((i < text.length())) {
+          while ((i < text.length() - 1)) {
             i++;
             if (text.charAt(i) == '\'') {
               i++;
@@ -78,6 +78,7 @@ public class MakeTokens {
             }
             result = result + text.charAt(i);
           }
+          //System.out.println("Breaking because of missing '");
           //extra break in case of missing '
           break;
         case ',':
@@ -99,6 +100,7 @@ public class MakeTokens {
           break;
       }
     }
+    
     return tokenList;
   }
 }
