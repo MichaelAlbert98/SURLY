@@ -47,7 +47,6 @@ public class Interpreter {
          i++;
          if(isKeyword(splitText.get(i))) {
             i--;
-            System.out.println("bad syntax");
             return; // If keyword is found mid-relation, throw away current relation and return to interpret()
          }   
       }
@@ -67,9 +66,12 @@ public class Interpreter {
     i++;
     while(!splitText.get(i).equals(";")) {
       i++;
+      if(i >= splitText.size()) {
+         System.out.println("; not found");
+         return;
+      }
       if(isKeyword(splitText.get(i))) {
             i--;
-            System.out.println("bad syntax");
             return; // If keyword is found mid-insert, throw away current insertion and return to interpret()
          }
       count++;
@@ -88,7 +90,6 @@ public class Interpreter {
       }
       if(isKeyword(splitText.get(i))) {
             i--;
-            System.out.println("bad syntax");
             return; // If keyword is found mid-print, throw away current print job and return to interpret();
          }
       count++;
@@ -100,6 +101,7 @@ public class Interpreter {
   // Returns true if the given string is a keyword (relation, insert, print: case insensitive)
   private static boolean isKeyword(String s) {
     if(s.toLowerCase().equals("relation") || s.toLowerCase().equals("insert") || s.toLowerCase().equals("print")) {
+      System.out.println("Found keyword mid-command");
       return true;
     }
     return false;
