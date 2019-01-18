@@ -1,0 +1,13 @@
+Creating A with 3 attributes.
+Creating B with 2 attributes.
+Creating C with 5 attributes.
+Creating D with 2 attributes.
+bad syntax; missing semicolon
+Break char found where it shouldn't be. Check the file for typos.
+Break char found where it shouldn't be. Check the file for typos.
+Creating H with 0 attributes.
+bad syntax; no open paren
+Keyword found. Either a break character is missing or you inserted a command word where it shouldn't be.
+Break char found where it shouldn't be. Check the file for typos.
+Break char found where it shouldn't be. Check the file for typos.
+
