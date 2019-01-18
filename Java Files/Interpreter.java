@@ -37,7 +37,7 @@ public class Interpreter {
     int count = 0; // Number of attributes in relation
     String relationName = "";
     i++;
-    if (!isKeyword(splitText.get(i)) && !isBreakChar(splitText.get(i))) {
+    if (i < splitText.size() && !isKeyword(splitText.get(i)) && !isBreakChar(splitText.get(i))) {
       relationName = splitText.get(i); //make sure relation name is valid
     }
     else {
@@ -50,7 +50,7 @@ public class Interpreter {
       return; // Fail on bad syntax
     }
     i++;
-    while(!splitText.get(i).equals(")")){
+    while(i < splitText.size() && !splitText.get(i).equals(")")){
       for(int j = 0; j < 3; j++) {
          if(isKeyword(splitText.get(i))) {
             i--;
@@ -76,7 +76,7 @@ public class Interpreter {
     }
     //check for end of command semicolon
     i++;
-    if (!splitText.get(i).equals(";")) {
+    if (i < splitText.size() && !splitText.get(i).equals(";")) {
       System.out.println("bad syntax; missing semicolon");
       i--;
       return;
@@ -90,7 +90,7 @@ public class Interpreter {
     int count = 0; // Number of attrubutes in insertion
     i++;
     String insertionName = splitText.get(i);
-    if (!isKeyword(splitText.get(i)) && !isBreakChar(splitText.get(i)) && i < splitText.size()) {
+    if (i < splitText.size() && !isKeyword(splitText.get(i)) && !isBreakChar(splitText.get(i))) {
       insertionName = splitText.get(i); //make sure insert name is valid
     }
     else {
@@ -98,7 +98,7 @@ public class Interpreter {
       return;
     }
     i++;
-    while(!splitText.get(i).equals(";")) {
+    while(i < splitText.size() && !splitText.get(i).equals(";")) {
       if(i >= splitText.size()) {
         System.out.println("End of document reached.");
         return;
@@ -113,6 +113,10 @@ public class Interpreter {
       i++;
       count++;
     }
+    if (count == 0) {
+      System.out.println("No insert names given.");
+      return;
+    }
     System.out.println("Inserting " + count + " attributes to " + insertionName + ".");
     return;
   }
@@ -121,7 +125,7 @@ public class Interpreter {
     int count = 0; // Number of relations being printed
     ArrayList<String> relations = new ArrayList<String>();
     i++;
-    while(!splitText.get(i).equals(";")) {
+    while(i < splitText.size() && !splitText.get(i).equals(";")) {
       if(i >= splitText.size()) {
          System.out.println("End of document reached.");
          return;
