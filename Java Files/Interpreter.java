@@ -38,7 +38,7 @@ public class Interpreter {
     String relationName = "";
     i++;
     if (!isKeyword(splitText.get(i)) && !isBreakChar(splitText.get(i))) {
-      relationName = splitText.get(i);
+      relationName = splitText.get(i); //make sure relation name is valid
     }
     else {
       i--;
@@ -82,6 +82,13 @@ public class Interpreter {
     int count = 0; // Number of attrubutes in insertion
     i++;
     String insertionName = splitText.get(i);
+    if (!isKeyword(splitText.get(i)) && !isBreakChar(splitText.get(i))) {
+      insertionName = splitText.get(i); //make sure insert name is valid
+    }
+    else {
+      i--;
+      return;
+    }
     i++;
     while(!splitText.get(i).equals(";")) {
       if(i >= splitText.size()) {
