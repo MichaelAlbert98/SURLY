@@ -1,7 +1,7 @@
 //MakeTokens.java - Breaks a text file into a list of tokens
-//Created by Michael Albert
+//Created by Michael Albert and Jacob Coffland
 //Created January 09, 2019
-//Revised January 10, 2019
+//Revised January 18, 2019
 
 import java.util.*;
 
@@ -78,7 +78,6 @@ public class MakeTokens {
             }
             result = result + text.charAt(i);
           }
-          //System.out.println("Breaking because of missing '");
           //extra break in case of missing '
           break;
         case ',':
@@ -100,7 +99,7 @@ public class MakeTokens {
           break;
       }
     }
-    
+
     return tokenList;
   }
 }
