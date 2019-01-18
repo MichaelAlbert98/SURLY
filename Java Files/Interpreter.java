@@ -35,8 +35,15 @@ public class Interpreter {
 
   private static void relation(ArrayList<String> splitText) {
     int count = 0; // Number of attributes in relation
+    String relationName = "";
     i++;
-    String relationName = splitText.get(i);
+    if (!isKeyword(splitText.get(i)) && !isBreakChar(splitText.get(i))) {
+      relationName = splitText.get(i);
+    }
+    else {
+      i--;
+      return;
+    }
     i++;
     if(!splitText.get(i).equals("(")) {
       System.out.println("bad syntax; no open paren");
