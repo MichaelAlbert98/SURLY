@@ -1,7 +1,8 @@
-//Interpreter.java -
-//Created by Michael Albert
+//Interpreter.java - takes an ArrayList of tokens, iterates through them, and
+//prints to the terminal based on the commands found.
+//Created by Michael Albert and Jacob Coffland
 //Created January 09, 2019
-//Revised January 10, 2019
+//Revised January 18, 2019
 
 import java.util.*;
 import java.lang.*;
@@ -109,7 +110,7 @@ public class Interpreter {
       if(isKeyword(splitText.get(i))) {
          i--;
          return; // If keyword is found mid-print, throw away current print job and return to interpret();
-      } 
+      }
       if (isBreakChar(splitText.get(i))) {
         return; //make sure there are no break chars as attributes
       }
