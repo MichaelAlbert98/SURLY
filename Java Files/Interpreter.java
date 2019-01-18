@@ -44,17 +44,28 @@ public class Interpreter {
     i++;
     while(!splitText.get(i).equals(")")){
       for(int j = 0; j < 3; j++) {
-         i++;
          if(isKeyword(splitText.get(i))) {
             i--;
             return; // If keyword is found mid-relation, throw away current relation and return to interpret()
-         }   
+         }
+         if (isBreakChar(splitText.get(i))) {
+           return; //make sure there are no break chars as attributes
+         }
+         i++;
       }
       if(splitText.get(i).equals(",")) {
          i++;
       }
       count++;
     }
+    //check for end of command semicolon
+    i++;
+    if (!splitText.get(i).equals(";")) {
+      System.out.println("bad syntax; missing semicolon");
+      i--;
+      return;
+    }
+
     System.out.println("Creating " + relationName + " with " + count + " attributes.");
     return;
   }
@@ -65,15 +76,18 @@ public class Interpreter {
     String insertionName = splitText.get(i);
     i++;
     while(!splitText.get(i).equals(";")) {
-      i++;
       if(i >= splitText.size()) {
-         System.out.println("; not found");
-         return;
+        System.out.println("End of document reached.");
+        return;
       }
       if(isKeyword(splitText.get(i))) {
-            i--;
-            return; // If keyword is found mid-insert, throw away current insertion and return to interpret()
+        i--;
+        return; // If keyword is found mid-insert, throw away current insertion and return to interpret()
          }
+      if (isBreakChar(splitText.get(i))) {
+        return; //make sure there are no break chars as tuples
+      }
+      i++;
       count++;
     }
     System.out.println("Inserting " + count + " attributes to " + insertionName + ".");
@@ -82,26 +96,45 @@ public class Interpreter {
 
   private static void print(ArrayList<String> splitText) {
     int count = 0; // Number of relations being printed
+    ArrayList<String> relations = new ArrayList<String>();
     i++;
     while(!splitText.get(i).equals(";")) {
-      i++;
-      while(splitText.get(i).equals(",")){
+      if(i >= splitText.size()) {
+         System.out.println("End of document reached.");
+         return;
+      }
+      if(splitText.get(i).equals(",")){
          i++;
       }
       if(isKeyword(splitText.get(i))) {
-            i--;
-            return; // If keyword is found mid-print, throw away current print job and return to interpret();
-         }
+         i--;
+         return; // If keyword is found mid-print, throw away current print job and return to interpret();
+      } 
+      if (isBreakChar(splitText.get(i))) {
+        return; //make sure there are no break chars as attributes
+      }
+      relations.add(splitText.get(i));
+      i++;
       count++;
     }
-    System.out.println("Printing " + count + " relations.");
+    System.out.println("Printing " + count + " relations: " + relations);
     return;
   }
 
   // Returns true if the given string is a keyword (relation, insert, print: case insensitive)
   private static boolean isKeyword(String s) {
     if(s.toLowerCase().equals("relation") || s.toLowerCase().equals("insert") || s.toLowerCase().equals("print")) {
-      System.out.println("Found keyword mid-command");
+      System.out.println("Keyword found. Either a break character is missing or you inserted a command word where it shouldn't be.");
+      return true;
+    }
+    return false;
+  }
+
+  // Returns true if the given string is a break character
+  private static boolean isBreakChar(String s) {
+    if(s.equals("(") || s.equals(")") || s.equals("=") || s.equals("!=") || s.equals("<") || s.equals("<=") || s.equals(">")
+        || s.equals(">=") || s.equals(";") || s.equals("*") || s.equals("\'") || s.equals(",")) {
+      System.out.println("Break char found where it shouldn't be. Check the file for typos.");
       return true;
     }
     return false;
