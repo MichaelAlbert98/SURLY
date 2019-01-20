@@ -2,9 +2,8 @@ Inserting 3 attributes to A.
 Inserting 8 attributes to B.
 Inserting 11 attributes to C.
 Inserting 3 attributes to D.
-No print names given.
+No insert names given.
 Keyword found. Either a break character is missing or you inserted a command word where it shouldn't be.
 bad syntax; no open paren
 Break char found where it shouldn't be. Check the file for typos.
-No print names given.
-
+No insert names given.
