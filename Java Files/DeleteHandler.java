@@ -1,3 +1,9 @@
+//DeleteHandler.java - Iterates through the database for a given name. If a
+//relation with the name is found, all tuples in that relation are removed.
+//Created by Michael Albert
+//Created January 27, 2019
+//Revised January 28, 2019
+
 import java.util.*;
 import java.lang.*;
 
