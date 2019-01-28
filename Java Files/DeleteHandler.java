@@ -18,6 +18,7 @@ public class DeleteHandler {
           }
         }
         System.out.println("Relation name not found.");
+        return i + 3;
      }
      System.out.println("Delete command not correctly formatted.");
      return i;
