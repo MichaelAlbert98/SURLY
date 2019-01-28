@@ -18,6 +18,9 @@ public class Interpreter {
 
   // Iterate through the list of tokens, looking for keywords and calling the appropriate functions
   public static void interpret(ArrayList<String> splitText) {
+    LinkedList database = new LinkedList();
+    Relation catalog = new Relation("catalog",);
+    database.add(catalog);
     i = 0;
     for (; i < splitText.size(); i++) {
       String token = splitText.get(i).trim();
@@ -30,9 +33,12 @@ public class Interpreter {
       else if (token.toLowerCase().equals("print")) {
          i = PrintHandler.print(splitText, i);
       }
+      else if (token.toLowerCase().equals("destroy")) {
+         i = DeleteHandler.print(splitText, database, i);
+      }
     }
   }
-  
+
   // Returns true if the given string is a keyword (relation, insert, print: case insensitive)
   public static boolean isKeyword(String s) {
     if(s.toLowerCase().equals("relation") || s.toLowerCase().equals("insert") || s.toLowerCase().equals("print")) {
