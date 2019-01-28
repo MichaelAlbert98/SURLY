@@ -1,3 +1,9 @@
+//Relation.java - Class for a relation in the database. Contains the relation
+//name, the required tuple format, and tuples that have been inserted.
+//Created by Michael Albert
+//Created January 27, 2019
+//Revised January 28, 2019
+
 import java.util.*;
 import java.lang.*;
 
