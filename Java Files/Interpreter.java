@@ -19,7 +19,7 @@ public class Interpreter {
   // Iterate through the list of tokens, looking for keywords and calling the appropriate functions
   public static void interpret(ArrayList<String> splitText) {
     LinkedList<Relation> database = new LinkedList<Relation>();
-    Relation catalog = new Relation("catalog",);
+    Relation catalog = new Relation("catalog");
     database.add(catalog);
     i = 0;
     for (; i < splitText.size(); i++) {
@@ -34,10 +34,10 @@ public class Interpreter {
          i = PrintHandler.print(splitText, i);
       }
       else if (token.toLowerCase().equals("destroy")) {
-         i = DestroyHandler.print(splitText, database, i);
+         i = DestroyHandler.destroy(splitText, database, i);
       }
       else if (token.toLowerCase().equals("delete")) {
-         i = DeleteHandler.print(splitText, database, i);
+         i = DeleteHandler.delete(splitText, database, i);
       }
     }
   }
