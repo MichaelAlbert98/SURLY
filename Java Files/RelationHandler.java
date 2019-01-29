@@ -4,10 +4,11 @@ import java.lang.*;
 public class RelationHandler {
 
    private RelationHandler(){}
-   
+
    public static int relation(ArrayList<String> splitText, int i) {
-    int count = 0; // Number of attributes in relation
+    int count = 0;
     String relationName = "";
+    ArrayList<Attribute> attributeFormat = new ArrayList<Attribute>();
     i++;
     if (i < splitText.size() && !Interpreter.isKeyword(splitText.get(i)) && !Interpreter.isBreakChar(splitText.get(i))) {
       relationName = splitText.get(i); //make sure relation name is valid
@@ -41,6 +42,8 @@ public class RelationHandler {
          }
          i++;
       }
+      Attribute attr = new Attribute(splitText.get(i-2).toLowerCase(),splitText.get(i-1).toLowerCase(),Integer.parseInt(splitText.get(i)));
+      attributeFormat.add(attr);
       if(splitText.get(i).equals(",")) {
          i++;
       }
@@ -53,7 +56,7 @@ public class RelationHandler {
       i--;
       return i;
     }
-
+    Relation relation = new Relation(relationName,attributeFormat);
     System.out.println("Creating " + relationName + " with " + count + " attributes.");
     return i;
   }
