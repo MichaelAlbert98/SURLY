@@ -10,13 +10,13 @@ import java.lang.*;
 public class Relation {
 
   private String name;
-  private ArrayList attributeFormat;
+  private ArrayList<Attribute> attributeFormat;
   private LinkedList<Tuple> tuples;
 
-   public Relation(String name, ArrayList af){
+   public Relation(String name, ArrayList<Attribute> af){
      this.name = name;
      this.attributeFormat = af;
-     this.tuples = new LinkedList();
+     this.tuples = new LinkedList<Tuple>();
    }
 
    public Relation(String name) {
@@ -29,7 +29,8 @@ public class Relation {
      return this.name;
    }
 
-   public LinkedList getTuples() {
+   public LinkedList<Tuple> getTuples() {
      return this.tuples;
    }
+
 }
