@@ -11,7 +11,7 @@ public class Relation {
 
   private String name;
   private ArrayList attributeFormat;
-  private LinkedList tuples;
+  private LinkedList<Tuple> tuples;
 
    public Relation(String name, ArrayList af){
      this.name = name;
@@ -22,7 +22,7 @@ public class Relation {
    public Relation(String name) {
      this.name = name;
      this.attributeFormat = null;
-     this.tuples = new LinkedList();
+     this.tuples = new LinkedList<Tuple>();
    }
 
    public String getName() {
