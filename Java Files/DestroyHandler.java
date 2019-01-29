@@ -19,14 +19,14 @@ public class DestroyHandler {
         String relationName = splitText.get(j).trim();
         //remove relation from catalog
         for (int a = 0; a < database.get(0).getTuples().size(); a++) {
-          if (database.get(0).get(a).get(0).equals(relationName)) {
+          if (database.get(0).get(a).getName().equals(relationName)) {
             database.get(0).remove(a);
           }
         }
         //remove relation from database
         for (int a = 1; a < database.size(); a++) {
           if (database.get(a).getName().equals(relationName)) {
-            database.get(a) = null;
+            database.remove(a);
             return i + 3;
           }
         }
