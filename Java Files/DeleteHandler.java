@@ -11,9 +11,9 @@ public class DeleteHandler {
 
    private DeleteHandler(){}
 
-   public static int delete(ArrayList<String> splitText, LinkedList database, int i) {
-     j = i + 1;
-     k = i + 2;
+   public static int delete(ArrayList<String> splitText, LinkedList<Relation> database, int i) {
+     int j = i + 1;
+     int k = i + 2;
      if (k < splitText.size() && !Interpreter.isKeyword(splitText.get(j)) && !Interpreter.isBreakChar(splitText.get(j))
         && splitText.get(k).trim().equals(";")) {
         String relationName = splitText.get(j).trim();
