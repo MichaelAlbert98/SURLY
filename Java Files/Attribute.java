@@ -19,11 +19,4 @@ public class Attribute {
      this.dataType = dataType;
      this.length = length;
    }
-
-   //constructor for catalog
-   public Attribute(String dataType, int length){
-     this.name = null;
-     this.dataType = dataType;
-     this.length = length;
-   }
 }
