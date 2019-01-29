@@ -11,16 +11,16 @@ public class DestroyHandler {
 
    private DestroyHandler(){}
 
-   public static int destroy(ArrayList<String> splitText, LinkedList database, int i) {
-     j = i + 1;
-     k = i + 2;
+   public static int destroy(ArrayList<String> splitText, LinkedList<Relation> database, int i) {
+     int j = i + 1;
+     int k = i + 2;
      if (k < splitText.size() && !Interpreter.isKeyword(splitText.get(j)) && !Interpreter.isBreakChar(splitText.get(j))
         && splitText.get(k).trim().equals(";")) {
         String relationName = splitText.get(j).trim();
         //remove relation from catalog
         for (int a = 0; a < database.get(0).getTuples().size(); a++) {
-          if (database.get(0).get(a).getName().equals(relationName)) {
-            database.get(0).remove(a);
+          if (database.get(0).getTuples().get(a).getName().equals(relationName)) {
+            database.get(0).getTuples().remove(a);
           }
         }
         //remove relation from database
