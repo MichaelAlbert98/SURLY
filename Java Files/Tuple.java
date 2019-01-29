@@ -9,9 +9,24 @@ import java.lang.*;
 
 public class Tuple {
 
+  private String name;
   private LinkedList<Attribute> attributes;
 
    public Tuple(){
-     this.attributes = new LinkedList<Attribute>;
+     this.name = null;
+     this.attributes = new LinkedList<Attribute>();
+   }
+
+   public Tuple(String name) {
+     this.name = name;
+     this.attributes = new LinkedList<Attribute>();
+   }
+
+   public LinkedList<Attribute> getAttr() {
+     return this.attributes;
+   }
+
+   public String getName() {
+     return this.name;
    }
 }
