@@ -19,4 +19,17 @@ public class Attribute {
      this.dataType = dataType;
      this.length = length;
    }
+   
+   public String getDataType() {
+      return this.dataType;
+   }
+   
+   public int getLength() {
+      return this.length;
+   }
+   
+   public String toString() {
+      return "Attribute name: " + name + " | type: " + dataType + " | length: " + length + ".";
+   }
+   
 }
