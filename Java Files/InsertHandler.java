@@ -16,16 +16,18 @@ public class InsertHandler {
       i--;
       return i;
     }
+    // Iterate through db to find matching relation
     Iterator<Relation> dbIterator = database.iterator();
     Relation r = null;
     Relation tmp;
     while(dbIterator.hasNext()) {
       if((tmp = dbIterator.next()).getName().equals(relationName)) {
          r = tmp;
-         //System.out.print(r.getName());
       }
     }
+    // If relation does not exist, print error and return
     if(r == null) {
+      System.out.println("Error, relation \"" + relationName + "\" not found");
       return i;
     }
     Tuple tuple = new Tuple();
@@ -42,9 +44,9 @@ public class InsertHandler {
       if (Interpreter.isBreakChar(splitText.get(i))) {
         return i; //make sure there are no break chars as tuples
       }
+      // Create an attribute object, storing the value in attribute.name, and filling out the rest from the relation
       Attribute a = new Attribute(splitText.get(i), r.getAttributeType(count), r.getAttributeLength(count));
       tuple.addAttribute(a);
-      //System.out.print(splitText.get(i) + " " + r.getAttributeType(count) + " " + r.getAttributeLength(count));
       i++;
       count++;
     }
@@ -52,10 +54,8 @@ public class InsertHandler {
       System.out.println("No insert names given.");
       return i;
     }
-    System.out.println(tuple);
+    r.addTuple(tuple); // If no errors are found at this point, its safe to add to the tuple to the relation
     System.out.println("Inserting " + count + " attributes to " + relationName + ".");
     return i;
-  }
-
-  
+  }  
 }
