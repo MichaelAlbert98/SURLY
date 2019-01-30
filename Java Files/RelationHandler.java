@@ -5,10 +5,11 @@ public class RelationHandler {
 
    private RelationHandler(){}
 
-   public static int relation(ArrayList<String> splitText, int i) {
+   public static int relation(ArrayList<String> splitText, LinkedList<Relation> database, int i) {
     int count = 0;
     String relationName = "";
-    ArrayList<Attribute> attributeFormat = new ArrayList<Attribute>();
+    Tuple catTuple = new Tuple(relationName);
+    LinkedList<Attribute> attributeFormat = new LinkedList<Attribute>();
     i++;
     if (i < splitText.size() && !Interpreter.isKeyword(splitText.get(i)) && !Interpreter.isBreakChar(splitText.get(i))) {
       relationName = splitText.get(i); //make sure relation name is valid
@@ -42,8 +43,11 @@ public class RelationHandler {
          }
          i++;
       }
-      Attribute attr = new Attribute(splitText.get(i-2).toLowerCase(),splitText.get(i-1).toLowerCase(),Integer.parseInt(splitText.get(i)));
+      Attribute attr = new Attribute(splitText.get(i-3).toLowerCase(),splitText.get(i-2).toLowerCase(),Integer.parseInt(splitText.get(i-1)));
+      //add attributes to catalog tuple and attributeFormat
+      catTuple.getAttr().add(attr);
       attributeFormat.add(attr);
+
       if(splitText.get(i).equals(",")) {
          i++;
       }
@@ -56,7 +60,11 @@ public class RelationHandler {
       i--;
       return i;
     }
+    //add relation to catalog
+    database.get(0).getTuples().add(catTuple);
+    //create relation and add it to database
     Relation relation = new Relation(relationName,attributeFormat);
+    database.add(relation);
     System.out.println("Creating " + relationName + " with " + count + " attributes.");
     return i;
   }
