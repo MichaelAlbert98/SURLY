@@ -25,7 +25,7 @@ public class Interpreter {
     for (; i < splitText.size(); i++) {
       String token = splitText.get(i).trim();
       if (token.toLowerCase().equals("relation")) {
-         i = RelationHandler.relation(splitText, i);
+         i = RelationHandler.relation(splitText, database, i);
       }
       else if (token.toLowerCase().equals("insert")) {
          i = InsertHandler.insert(splitText, i);
