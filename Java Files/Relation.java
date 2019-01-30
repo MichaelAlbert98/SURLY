@@ -40,5 +40,29 @@ public class Relation {
    public LinkedList<Tuple> getTuples() {
      return this.tuples;
    }
+   
+   public void addTuple(Tuple t) {
+      tuples.add(t);
+   }
+   
+   public String toString() {
+      String ret = "";
+      
+      ret += "Relation name: " + name + "\n";
+      ret += "Attribute format: ";
+      for(int j = 0; j < attributeFormat.size(); j++) {
+         ret += attributeFormat.get(j);
+         if(j < attributeFormat.size() -1) {
+            ret += " | ";
+         }
+      }
+      ret += "\n";
+      for(int j = 0; j < tuples.size(); j++) {
+         ret += tuples.get(j).valueToString() + "\n";
+      }
+      
+      
+      return ret;
+   }
 
 }

@@ -28,6 +28,22 @@ public class PrintHandler {
       i++;
       count++;
     }
+    for(int j = 0; j < relations.size(); j++) {
+      Iterator<Relation> dbIterator = database.iterator();
+      Relation r = null;
+      while(dbIterator.hasNext()) {
+         Relation tmp = dbIterator.next();
+         if(tmp.getName().equals(relations.get(j))) {
+            r = tmp;
+         }
+      }
+      if(r != null) {
+         System.out.println(r);
+      }
+      else {
+         System.out.println("Relation \"" + relations.get(j).toString() + "\" does not exist.");
+      }
+    }
     System.out.println("Printing " + count + " relations: " + relations);
     return i;
   }

@@ -41,4 +41,12 @@ public class Tuple {
       }
       return ret;
    }
+   
+   public String valueToString() {
+      String ret = "";
+      for (int i = 0; i < attributes.size(); i++) {
+         ret += attributes.get(i).valueToString() + " ";
+      }
+      return ret;
+   }
 }

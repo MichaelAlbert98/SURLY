@@ -29,7 +29,11 @@ public class Attribute {
    }
    
    public String toString() {
-      return "Attribute name: " + name + " | type: " + dataType + " | length: " + length + ".";
+      return "" + name + " " + dataType + " " + length + "";
+   }
+   
+   public String valueToString() {
+      return name;
    }
    
 }
