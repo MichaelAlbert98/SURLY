@@ -10,10 +10,10 @@ import java.lang.*;
 public class Relation {
 
   private String name;
-  private ArrayList<Attribute> attributeFormat;
+  private LinkedList<Attribute> attributeFormat;
   private LinkedList<Tuple> tuples;
 
-   public Relation(String name, ArrayList<Attribute> af){
+   public Relation(String name, LinkedList<Attribute> af){
      this.name = name;
      this.attributeFormat = af;
      this.tuples = new LinkedList<Tuple>();
