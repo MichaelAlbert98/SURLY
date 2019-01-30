@@ -28,10 +28,10 @@ public class Interpreter {
          i = RelationHandler.relation(splitText, database, i);
       }
       else if (token.toLowerCase().equals("insert")) {
-         i = InsertHandler.insert(splitText, i);
+         i = InsertHandler.insert(splitText, database, i);
       }
       else if (token.toLowerCase().equals("print")) {
-         i = PrintHandler.print(splitText, i);
+         i = PrintHandler.print(splitText, database, i);
       }
       else if (token.toLowerCase().equals("destroy")) {
          i = DestroyHandler.destroy(splitText, database, i);

@@ -24,6 +24,14 @@ public class Relation {
      this.attributeFormat = null;
      this.tuples = new LinkedList<Tuple>();
    }
+   
+   public String getAttributeType(int index) {
+      return this.attributeFormat.get(index).getDataType();
+   }
+   
+   public int getAttributeLength(int index) {
+      return this.attributeFormat.get(index).getLength();
+   }
 
    public String getName() {
      return this.name;

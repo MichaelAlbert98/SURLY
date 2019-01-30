@@ -5,7 +5,7 @@ public class PrintHandler {
 
   private PrintHandler(){}
   
-  public static int print(ArrayList<String> splitText, int i) {
+  public static int print(ArrayList<String> splitText, LinkedList<Relation> database, int i) {
     int count = 0; // Number of relations being printed
     ArrayList<String> relations = new ArrayList<String>();
     i++;
