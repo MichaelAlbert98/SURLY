@@ -37,17 +37,7 @@ public class Attribute {
    }
    
    public String valueToString() {
-      String leadingSpaces = "";
-      String ret = name;
-      for(int i = 0; i < length - name.length(); i++) {
-         if(i%2 == 0) {
-            leadingSpaces += " ";
-         }
-         else {
-            ret += " ";
-         }
-      }
-      return leadingSpaces + ret;
+      return StringFormatter.formatString(name, length);
    }
    
 }

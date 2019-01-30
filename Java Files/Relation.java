@@ -75,7 +75,8 @@ public class Relation {
          
          
          //String tempret = attributeFormat.get(j).valueToString();
-         String leadingSpaces = "";
+         ret += StringFormatter.formatString(attributeFormat.get(j).getName(), attributeFormat.get(j).getLength()) + " ";
+         /*String leadingSpaces = "";
          String trailingSpaces = "";
          String choppedName = "";
          int k = 0;
@@ -94,7 +95,7 @@ public class Relation {
                k++;
             }
          }
-         ret += leadingSpaces + choppedName + trailingSpaces + " ";
+         ret += leadingSpaces + choppedName + trailingSpaces + " ";*/
          //ret += attributeFormat.get(j).valueToString();
       }
       ret += "\n";

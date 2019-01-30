@@ -45,7 +45,6 @@ public class PrintHandler {
          System.out.println("Relation \"" + relations.get(j).toString() + "\" does not exist.");
       }
     }
-    System.out.println("Printing " + count + " relations: " + relations);
     return i;
   }
 }
