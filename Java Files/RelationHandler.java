@@ -13,6 +13,9 @@ public class RelationHandler {
     i++;
     if (i < splitText.size() && !Interpreter.isKeyword(splitText.get(i)) && !Interpreter.isBreakChar(splitText.get(i))) {
       relationName = splitText.get(i); //make sure relation name is valid
+      if (alreadyExists(relationName,database)) {
+        return i;
+      }
     }
     else {
       i--;
@@ -69,4 +72,13 @@ public class RelationHandler {
     return i;
   }
 
+  private static Boolean alreadyExists(String name, LinkedList<Relation> database) {
+    for (int i = 1; i < database.size()-1;i++) {
+      if (database.get(i).getName().toLowerCase().equals(name)) {
+        System.out.println("A relation with this name already exists in the database.");
+        return true;
+      }
+    }
+    return false;
+  }
 }
