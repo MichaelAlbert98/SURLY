@@ -29,17 +29,19 @@ public class PrintHandler {
       count++;
     }
     System.out.println();
+    // Iterate through each string passed as an argument
     for(int j = 0; j < relations.size(); j++) {
+      // Iterate through each relation in the db
       Iterator<Relation> dbIterator = database.iterator();
       Relation r = null;
       while(dbIterator.hasNext()) {
          Relation tmp = dbIterator.next();
          if(tmp.getName().equals(relations.get(j))) {
-            r = tmp;
+            r = tmp; // When the string matches the relation name, save it
          }
       }
       if(r != null) {
-         System.out.println(r);
+         System.out.println(r); // If a relation was found, print it
       }
       else {
          System.out.println("Relation \"" + relations.get(j).toString() + "\" does not exist.");
