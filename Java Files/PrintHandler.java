@@ -28,6 +28,7 @@ public class PrintHandler {
       i++;
       count++;
     }
+    System.out.println();
     for(int j = 0; j < relations.size(); j++) {
       Iterator<Relation> dbIterator = database.iterator();
       Relation r = null;

@@ -20,6 +20,10 @@ public class Attribute {
      this.length = length;
    }
    
+   public String getName() {
+      return name;
+   }
+   
    public String getDataType() {
       return this.dataType;
    }
@@ -33,7 +37,17 @@ public class Attribute {
    }
    
    public String valueToString() {
-      return name;
+      String leadingSpaces = "";
+      String ret = name;
+      for(int i = 0; i < length - name.length(); i++) {
+         if(i%2 == 0) {
+            leadingSpaces += " ";
+         }
+         else {
+            ret += " ";
+         }
+      }
+      return leadingSpaces + ret;
    }
    
 }

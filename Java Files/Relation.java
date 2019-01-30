@@ -57,6 +57,47 @@ public class Relation {
          }
       }
       ret += "\n";
+      for(int j = 0; j < attributeFormat.size(); j++) {
+      
+         /*
+      String leadingSpaces = "";
+      String ret = name;
+      for(int i = 0; i < length - name.length(); i++) {
+         if(i%2 == 1) {
+            leadingSpaces += " ";
+         }
+         else {
+            ret += " ";
+         }
+      }
+      return leadingSpaces + ret;
+      */
+         
+         
+         //String tempret = attributeFormat.get(j).valueToString();
+         String leadingSpaces = "";
+         String trailingSpaces = "";
+         String choppedName = "";
+         int k = 0;
+         String attributeName = attributeFormat.get(j).getName();
+         while(k < attributeFormat.get(j).getLength()) {
+            if (k < attributeName.length()) {
+               choppedName += attributeName.charAt(k);
+               k++;
+            } else {
+               if(k%2 == 0) {
+                  trailingSpaces += " ";
+               }
+               else{
+                  leadingSpaces += " ";
+               }
+               k++;
+            }
+         }
+         ret += leadingSpaces + choppedName + trailingSpaces + " ";
+         //ret += attributeFormat.get(j).valueToString();
+      }
+      ret += "\n";
       for(int j = 0; j < tuples.size(); j++) {
          ret += tuples.get(j).valueToString() + "\n";
       }
