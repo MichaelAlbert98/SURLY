@@ -27,11 +27,11 @@ public class DestroyHandler {
         for (int a = 1; a < database.size(); a++) {
           if (database.get(a).getName().equals(relationName)) {
             database.remove(a);
-            return i + 3;
+            return i + 2;
           }
         }
         System.out.println("Relation name not found.");
-        return i + 3;
+        return i + 2;
      }
      System.out.println("Destroy command not correctly formatted.");
      return i;
