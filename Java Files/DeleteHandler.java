@@ -16,7 +16,7 @@ public class DeleteHandler {
      int k = i + 2;
      if (k < splitText.size() && !Interpreter.isKeyword(splitText.get(j)) && !Interpreter.isBreakChar(splitText.get(j))
         && splitText.get(k).trim().equals(";")) {
-        String relationName = splitText.get(j).trim();
+        String relationName = splitText.get(j).trim().toLowerCase();
         for (int a = 1; a < database.size(); a++) {
           if (database.get(a).getName().equals(relationName)) {
             database.get(a).getTuples().clear();
