@@ -13,6 +13,7 @@ public class Relation {
   private LinkedList<Attribute> attributeFormat;
   private LinkedList<Tuple> tuples;
 
+   // ----------------- Constructors -----------------------
    public Relation(String name, LinkedList<Attribute> af){
      this.name = name;
      this.attributeFormat = af;
@@ -25,18 +26,12 @@ public class Relation {
      this.tuples = new LinkedList<Tuple>();
    }
    
-   public String getAttributeType(int index) {
-      return this.attributeFormat.get(index).getDataType();
-   }
-   
-   public int getAttributeLength(int index) {
-      return this.attributeFormat.get(index).getLength();
-   }
+   // -------------------Getters ---------------------------
 
    public String getName() {
      return this.name;
    }
-
+   
    public LinkedList<Tuple> getTuples() {
      return this.tuples;
    }
@@ -45,10 +40,21 @@ public class Relation {
      return this.attributeFormat;
    }
    
+   public String getAttributeType(int index) {
+      return this.attributeFormat.get(index).getDataType();
+   }
+   
+   public int getAttributeLength(int index) {
+      return this.attributeFormat.get(index).getLength();
+   }
+
+   // ---------------- Other methods ----------------------
+   
    public void addTuple(Tuple t) {
       tuples.add(t);
    }
    
+   //Checks to see if the relation already contains a given tuple
    public boolean contains(Tuple t) {
       for(int i = 0; i < tuples.size(); i++) {
          if(tuples.get(i).equals(t)) {
@@ -60,7 +66,6 @@ public class Relation {
    
    public String toString() {
       String ret = "";
-      
       ret += "Relation name: " + name + "\n";
       ret += "Attribute format: ";
       for(int j = 0; j < attributeFormat.size(); j++) {
@@ -72,52 +77,12 @@ public class Relation {
       ret += "\n";
       for(int j = 0; j < attributeFormat.size(); j++) {
       
-         /*
-      String leadingSpaces = "";
-      String ret = name;
-      for(int i = 0; i < length - name.length(); i++) {
-         if(i%2 == 1) {
-            leadingSpaces += " ";
-         }
-         else {
-            ret += " ";
-         }
-      }
-      return leadingSpaces + ret;
-      */
-         
-         
-         //String tempret = attributeFormat.get(j).valueToString();
          ret += StringFormatter.formatString(attributeFormat.get(j).getName(), attributeFormat.get(j).getLength()) + " ";
-         /*String leadingSpaces = "";
-         String trailingSpaces = "";
-         String choppedName = "";
-         int k = 0;
-         String attributeName = attributeFormat.get(j).getName();
-         while(k < attributeFormat.get(j).getLength()) {
-            if (k < attributeName.length()) {
-               choppedName += attributeName.charAt(k);
-               k++;
-            } else {
-               if(k%2 == 0) {
-                  trailingSpaces += " ";
-               }
-               else{
-                  leadingSpaces += " ";
-               }
-               k++;
-            }
-         }
-         ret += leadingSpaces + choppedName + trailingSpaces + " ";*/
-         //ret += attributeFormat.get(j).valueToString();
       }
       ret += "\n";
       for(int j = 0; j < tuples.size(); j++) {
          ret += tuples.get(j).valueToString() + "\n";
       }
-      
-      
       return ret;
    }
-
 }

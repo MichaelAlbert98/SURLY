@@ -12,6 +12,7 @@ public class Tuple {
   private String name;
   private LinkedList<Attribute> attributes;
 
+   // -------------- Constructors ---------------------
    public Tuple(){
      this.name = null;
      this.attributes = new LinkedList<Attribute>();
@@ -22,10 +23,8 @@ public class Tuple {
      this.attributes = new LinkedList<Attribute>();
    }
    
-   public void addAttribute(Attribute a){
-      attributes.add(a);
-   }
-
+   // --------------- Getters -------------------------
+   
    public LinkedList<Attribute> getAttr() {
      return this.attributes;
    }
@@ -34,6 +33,12 @@ public class Tuple {
      return this.name;
    }
    
+   // --------------- Other Methods --------------------
+   
+   public void addAttribute(Attribute a){
+      attributes.add(a);
+   }
+ 
    public String toString() {
       String ret = "Tuple name: " + this.name;
       for(int i = 0; i < attributes.size(); i++) {

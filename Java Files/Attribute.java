@@ -20,6 +20,7 @@ public class Attribute {
      this.length = length;
    }
    
+   // -------------------Getters ---------------------------
    public String getName() {
       return name;
    }
@@ -31,6 +32,8 @@ public class Attribute {
    public int getLength() {
       return this.length;
    }
+   
+   // ---------------Other Methods -------------------------
    
    public String toString() {
       return "" + name + " " + dataType + " " + length + "";
