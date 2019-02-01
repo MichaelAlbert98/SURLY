@@ -49,4 +49,17 @@ public class Tuple {
       }
       return ret;
    }
+   
+   public boolean equals(Tuple t) {
+      LinkedList<Attribute> otherAttributes = t.getAttr();
+      for(int i = 0; i < attributes.size(); i++ ) {
+         if(i >= otherAttributes.size()) {
+            return false;
+         }
+         if(!otherAttributes.get(i).equals(attributes.get(i))) {
+            return false;
+         }
+      }
+      return true;
+   }
 }
