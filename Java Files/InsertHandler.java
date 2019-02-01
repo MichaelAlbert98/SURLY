@@ -99,7 +99,7 @@ public class InsertHandler {
   private static String parseRelationName(ArrayList<String> splitText, int i) {
     i++;
     if (i < splitText.size() && !Interpreter.isKeyword(splitText.get(i)) && !Interpreter.isBreakChar(splitText.get(i))) {
-      return splitText.get(i);
+      return splitText.get(i).toLowerCase();
     }
     return null;
   }
