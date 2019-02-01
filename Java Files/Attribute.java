@@ -40,4 +40,11 @@ public class Attribute {
       return StringFormatter.formatString(name, length);
    }
    
+   public boolean equals(Attribute a) {
+      if(!a.getName().equals(name)) {
+         return false;
+      }
+      return true;
+   }
+   
 }
