@@ -16,7 +16,7 @@ public class DestroyHandler {
      int k = i + 2;
      if (k < splitText.size() && !Interpreter.isKeyword(splitText.get(j)) && !Interpreter.isBreakChar(splitText.get(j))
         && splitText.get(k).trim().equals(";")) {
-        String relationName = splitText.get(j).trim();
+        String relationName = splitText.get(j).trim().toLowerCase();
         //remove relation from catalog
         for (int a = 0; a < database.get(0).getTuples().size(); a++) {
           if (database.get(0).getTuples().get(a).getName().equals(relationName)) {
