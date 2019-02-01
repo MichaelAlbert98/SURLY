@@ -8,11 +8,12 @@ public class RelationHandler {
    public static int relation(ArrayList<String> splitText, LinkedList<Relation> database, int i) {
     int count = 0;
     String relationName = "";
-    Tuple catTuple = new Tuple(relationName);
+    Tuple catTuple;
     LinkedList<Attribute> attributeFormat = new LinkedList<Attribute>();
     i++;
     if (i < splitText.size() && !Interpreter.isKeyword(splitText.get(i)) && !Interpreter.isBreakChar(splitText.get(i))) {
       relationName = splitText.get(i); //make sure relation name is valid
+      catTuple = new Tuple(relationName.toLowerCase());
       if (alreadyExists(relationName,database)) {
         return i;
       }

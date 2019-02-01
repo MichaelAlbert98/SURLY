@@ -44,9 +44,22 @@ public class PrintHandler {
          System.out.println(r); // If a relation was found, print it
       }
       else {
-         System.out.println("Relation \"" + relations.get(j).toString() + "\" does not exist.");
+         if(relations.get(j).toLowerCase().equals("catalog")) {
+            printCatalog(database.get(0));
+         }
+         else{
+            System.out.println("Relation \"" + relations.get(j).toString() + "\" does not exist.");
+         }
       }
     }
     return i;
+  }
+  
+  private static void printCatalog(Relation r) {
+    String printval = "Printing Catalog:\n";
+    for(int i = 0; i < r.getTuples().size(); i++) {
+      printval+= r.getTuples().get(i).toString() + " ";
+    }
+    System.out.print(printval + "\n");
   }
 }
