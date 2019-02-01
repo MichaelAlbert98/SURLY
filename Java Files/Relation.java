@@ -49,6 +49,15 @@ public class Relation {
       tuples.add(t);
    }
    
+   public boolean contains(Tuple t) {
+      for(int i = 0; i < tuples.size(); i++) {
+         if(tuples.get(i).equals(t)) {
+            return true;
+         }
+      }
+      return false;
+   }
+   
    public String toString() {
       String ret = "";
       
