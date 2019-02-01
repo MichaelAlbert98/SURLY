@@ -41,6 +41,10 @@ public class Relation {
      return this.tuples;
    }
    
+   public LinkedList<Attribute> getAttributeFormat() {
+     return this.attributeFormat;
+   }
+   
    public void addTuple(Tuple t) {
       tuples.add(t);
    }

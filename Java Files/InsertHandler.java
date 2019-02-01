@@ -16,16 +16,7 @@ public class InsertHandler {
       i--;
       return i;
     }
-    // Iterate through db to find matching relation
-    Iterator<Relation> dbIterator = database.iterator();
-    Relation r = null;
-    Relation tmp;
-    while(dbIterator.hasNext()) {
-      if((tmp = dbIterator.next()).getName().equals(relationName)) {
-         r = tmp;
-      }
-    }
-    // If relation does not exist, print error and return
+    Relation r = getRelation(relationName, database);
     if(r == null) {
       System.out.println("Error, relation \"" + relationName + "\" not found");
       return i;
@@ -37,12 +28,13 @@ public class InsertHandler {
         System.out.println("End of document reached.");
         return i;
       }
-      if(Interpreter.isKeyword(splitText.get(i))) {
+      if(Interpreter.isKeyword(splitText.get(i)) || Interpreter.isBreakChar(splitText.get(i))) {
         i--;
         return i; // If keyword is found mid-insert, throw away current insertion and return to interpret()
-         }
-      if (Interpreter.isBreakChar(splitText.get(i))) {
-        return i; //make sure there are no break chars as tuples
+      }
+      if(count >= r.getAttributeFormat().size()) {
+        System.out.println("Too many attributes for selected relation");
+        return i;
       }
       // Create an attribute object, storing the value in attribute.name, and filling out the rest from the relation
       Attribute a = new Attribute(splitText.get(i), r.getAttributeType(count), r.getAttributeLength(count));
@@ -54,8 +46,37 @@ public class InsertHandler {
       System.out.println("No insert names given.");
       return i;
     }
+    if (!verifyAttributeFormat(tuple, r.getAttributeFormat())) {
+      System.out.println("Insert format does not match relation format");
+      return i;
+    }
     r.addTuple(tuple); // If no errors are found at this point, its safe to add to the tuple to the relation
     System.out.println("Inserting " + count + " attributes to " + relationName + ".");
     return i;
   }  
+  
+  private static Relation getRelation(String name, LinkedList<Relation> db) {
+    Iterator<Relation> dbIterator = db.iterator();
+    Relation r;
+    while(dbIterator.hasNext()) {
+      if((r = dbIterator.next()).getName().equals(name)) {
+         return r;
+      }
+    }
+    return null;
+  }
+  
+  private static boolean verifyAttributeFormat(Tuple t, LinkedList<Attribute> relationFormat) {
+    //LinkedList<Attribute> relationFormat = attributeFormat.getAttr();
+    LinkedList<Attribute> tupleAttributes = t.getAttr();
+    for(int i = 0; i < relationFormat.size(); i++) {
+      if( i >= tupleAttributes.size() ) {
+         return false;
+      }
+      if( tupleAttributes.get(i).getName().length() > relationFormat.get(i).getLength() ) {
+         return false;
+      }
+    }
+    return true;
+  }
 }
