@@ -20,11 +20,11 @@ public class DeleteHandler {
         for (int a = 1; a < database.size(); a++) {
           if (database.get(a).getName().equals(relationName)) {
             database.get(a).getTuples().clear();
-            return i + 3;
+            return i + 2;
           }
         }
         System.out.println("Relation name not found.");
-        return i + 3;
+        return i + 2;
      }
      System.out.println("Delete command not correctly formatted.");
      return i;
