@@ -1,5 +1,4 @@
-/*Uses the sample input file to test the following cases that may break INSERT: Inserting into the catalog, inserting a duplicate tuple in the same relation,
-inserting with attribute types not equal to the relation format, inserting with attribute lengths not equal to the relation format, */
+/*Uses the sample input file to test the following cases that may break INSERT: Inserting into the catalog, inserting a duplicate tuple in the same relation,inserting with attribute types not equal to the relation format, inserting with attribute lengths not equal to the relation format, */
 
 /*  RELATION
     DEFINITIONS */
