@@ -7,6 +7,7 @@ public class InsertHandler {
   private final static String ERR_ATT_OVERFLOW = "Too many attributes for selected relation";
   private final static String ERR_NO_ATT = "No insert names given.";
   private final static String ERR_BAD_FORMAT = "Insert format does not match relation format";
+  private final static String ERR_DUP_TUPLE = "Duplicate tuple found, not inserted";
   
   private InsertHandler(){}
 
@@ -50,6 +51,10 @@ public class InsertHandler {
     
     if (!verifyAttributeFormat(tuple, r.getAttributeFormat())) {
       System.out.println(ERR_BAD_FORMAT);
+      return i;
+    }
+    if(r.contains(tuple)) {
+      System.out.println(ERR_DUP_TUPLE);
       return i;
     }
     
