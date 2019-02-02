@@ -66,7 +66,7 @@ public class Relation {
    
    public String toString() {
       String ret = "";
-      ret += "Relation name: " + name + "\n";
+      ret += "Relation name: " + name + ", ";
       ret += "Attribute format: ";
       for(int j = 0; j < attributeFormat.size(); j++) {
          ret += attributeFormat.get(j);
@@ -74,7 +74,7 @@ public class Relation {
             ret += " | ";
          }
       }
-      ret += "\n";
+      ret += "\n-------------------------------------------------\n";
       for(int j = 0; j < attributeFormat.size(); j++) {
       
          ret += StringFormatter.formatString(attributeFormat.get(j).getName(), attributeFormat.get(j).getLength()) + " ";

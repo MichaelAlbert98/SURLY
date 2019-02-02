@@ -40,7 +40,7 @@ public class Tuple {
    }
  
    public String catalogPrint() {
-      String ret = "Relation name: " + this.name;
+      String ret = "Relation name: " + this.name + ", Attribute format: ";
       for(int i = 0; i < attributes.size(); i++) {
          ret += attributes.get(i).toString();
          if(i < attributes.size() - 1) {
