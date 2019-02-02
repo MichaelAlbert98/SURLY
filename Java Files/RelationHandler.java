@@ -12,8 +12,8 @@ public class RelationHandler {
     LinkedList<Attribute> attributeFormat = new LinkedList<Attribute>();
     i++;
     if (i < splitText.size() && !Interpreter.isKeyword(splitText.get(i)) && !Interpreter.isBreakChar(splitText.get(i))) {
-      relationName = splitText.get(i); //make sure relation name is valid
-      catTuple = new Tuple(relationName.toLowerCase());
+      relationName = splitText.get(i).toLowerCase(); //make sure relation name is valid
+      catTuple = new Tuple(relationName);
       if (alreadyExists(relationName,database)) {
         return i;
       }
@@ -74,8 +74,8 @@ public class RelationHandler {
   }
 
   private static Boolean alreadyExists(String name, LinkedList<Relation> database) {
-    for (int i = 1; i < database.size()-1;i++) {
-      if (database.get(i).getName().toLowerCase().equals(name)) {
+    for (int i = 1; i < database.size();i++) {
+      if (database.get(i).getName().equals(name) || name.equals("catalog")) {
         System.out.println("A relation with this name already exists in the database.");
         return true;
       }
