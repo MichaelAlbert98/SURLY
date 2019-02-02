@@ -4,7 +4,7 @@ import java.lang.*;
 public class PrintHandler {
 
   private PrintHandler(){}
-  
+
   public static int print(ArrayList<String> splitText, LinkedList<Relation> database, int i) {
     int count = 0; // Number of relations being printed
     ArrayList<String> relations = new ArrayList<String>();
@@ -24,7 +24,7 @@ public class PrintHandler {
       if (Interpreter.isBreakChar(splitText.get(i))) {
         return i; //make sure there are no break chars as attributes
       }
-      relations.add(splitText.get(i));
+      relations.add(splitText.get(i).toLowerCase());
       i++;
       count++;
     }
@@ -41,20 +41,20 @@ public class PrintHandler {
          }
       }
       if(r != null) {
-         System.out.println(r); // If a relation was found, print it
+        if(relations.get(j).toLowerCase().equals("catalog")) {
+           printCatalog(database.get(0));
+        }
+        else {
+          System.out.println(r); // If a relation was found, print it
+        }
       }
       else {
-         if(relations.get(j).toLowerCase().equals("catalog")) {
-            printCatalog(database.get(0));
-         }
-         else{
-            System.out.println("Relation \"" + relations.get(j).toString() + "\" does not exist.");
-         }
+        System.out.println("Relation \"" + relations.get(j) + "\" does not exist.");
       }
     }
     return i;
   }
-  
+
   private static void printCatalog(Relation r) {
     String printval = "Printing Catalog:\n";
     for(int i = 0; i < r.getTuples().size(); i++) {
