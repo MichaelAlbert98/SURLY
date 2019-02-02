@@ -58,7 +58,7 @@ public class PrintHandler {
   private static void printCatalog(Relation r) {
     String printval = "Printing Catalog:\n";
     for(int i = 0; i < r.getTuples().size(); i++) {
-      printval+= r.getTuples().get(i).toString() + " ";
+      printval+= r.getTuples().get(i).catalogPrint() + " ";
     }
     System.out.print(printval + "\n");
   }

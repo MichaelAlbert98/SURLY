@@ -39,13 +39,18 @@ public class Tuple {
       attributes.add(a);
    }
  
-   public String toString() {
-      String ret = "Tuple name: " + this.name;
+   public String catalogPrint() {
+      String ret = "Relation name: " + this.name;
       for(int i = 0; i < attributes.size(); i++) {
          ret += attributes.get(i).toString();
+         if(i < attributes.size() - 1) {
+            ret += " | ";
+         }
       }
+      ret += "\n";
       return ret;
    }
+   
    
    public String valueToString() {
       String ret = "";
