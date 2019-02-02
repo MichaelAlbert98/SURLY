@@ -8,6 +8,7 @@ public class InsertHandler {
   private final static String ERR_NO_ATT = "No insert names given.";
   private final static String ERR_BAD_FORMAT = "Insert format does not match relation format";
   private final static String ERR_DUP_TUPLE = "Duplicate tuple found, not inserted";
+  private final static String ERR_INST_CAT = "Cannot insert tuples to Catalog";
   
   private InsertHandler(){}
 
@@ -20,6 +21,7 @@ public class InsertHandler {
     
     Relation r = getRelation(relationName, database);
     if(r == null) { return i + 1; }
+    if(r.getName().toLowerCase().equals("catalog")){ System.out.println(ERR_INST_CAT); return i; }
     
     Tuple tuple = new Tuple();
     i += 2;
@@ -68,7 +70,7 @@ public class InsertHandler {
     Iterator<Relation> dbIterator = db.iterator();
     Relation r;
     while(dbIterator.hasNext()) {
-      if((r = dbIterator.next()).getName().equals(name)) {
+      if((r = dbIterator.next()).getName().toLowerCase().equals(name)) {
          return r;
       }
     }
