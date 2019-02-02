@@ -1,12 +1,10 @@
-Creating COURSE with 3 attributes.
-Creating COURSE with 3 attributes.
-Creating CATALOG with 3 attributes.
+Creating course with 3 attributes.
+A relation with this name already exists in the database.
+A relation with this name already exists in the database.
 
-Relation name: COURSE, Attribute format: test char 8 | test2 num 5 | test3 char 25
+Relation name: course, Attribute format: cnum char 8 | title char 30 | credits num 4
 -------------------------------------------------
-  test   test2           test3           
+  cnum                title             cred
 
-Relation name: CATALOG, Attribute format: cnum char 8 | title char 30 | credits num 4
--------------------------------------------------
-  cnum                title             cred 
-
+Printing Catalog:
+Relation name: course, Attribute format: cnum char 8 | title char 30 | credits num 4
