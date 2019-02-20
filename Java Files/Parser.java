@@ -8,14 +8,17 @@ import java.util.*;
 
 public class Parser {
 
-  private Parser() {
+  public Parser() {
   }
 
-  public static void parse(String[] args) {
+  public void parse(String[] args) {
     try{
-      String text = ReadIn.reader(args[0]);
-      ArrayList<String> tokens = MakeTokens.tokenizer(text);
-      Interpreter.interpret(tokens);
+      ReadIn reader = new ReadIn();
+      MakeTokens tokenMaker = new MakeTokens();
+      Interpreter inter = new Interpreter();
+      String text = reader.read(args[0]);
+      ArrayList<String> tokens = tokenMaker.tokenizer(text);
+      inter.interpret(tokens);
       return;
     }
     catch (ArrayIndexOutOfBoundsException e) {

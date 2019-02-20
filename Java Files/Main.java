@@ -6,7 +6,8 @@
 public class Main {
 
   public static void main(String[] args) {
-    Parser.parse(args);
+    Parser parser = new Parser();
+    parser.parse(args);
     return;
   }
 }

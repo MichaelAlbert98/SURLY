@@ -3,9 +3,9 @@ import java.lang.*;
 
 public class PrintHandler {
 
-  private PrintHandler(){}
+  public PrintHandler(){}
 
-  public static int print(ArrayList<String> splitText, LinkedList<Relation> database, int i) {
+  public int print(ArrayList<String> splitText, LinkedList<Relation> database, int i) {
     int count = 0; // Number of relations being printed
     ArrayList<String> relations = new ArrayList<String>();
     i++;
@@ -17,11 +17,11 @@ public class PrintHandler {
       if(splitText.get(i).equals(",")){
          i++;
       }
-      if(Interpreter.isKeyword(splitText.get(i))) {
+      if(Helper.isKeyword(splitText.get(i))) {
          i--;
          return i; // If keyword is found mid-print, throw away current print job and return to interpret();
       }
-      if (Interpreter.isBreakChar(splitText.get(i))) {
+      if (Helper.isBreakChar(splitText.get(i))) {
         return i; //make sure there are no break chars as attributes
       }
       relations.add(splitText.get(i).toLowerCase());
@@ -55,7 +55,7 @@ public class PrintHandler {
     return i;
   }
 
-  private static void printCatalog(Relation r) {
+  private void printCatalog(Relation r) {
     String printval = "Printing Catalog:\n";
     for(int i = 0; i < r.getTuples().size(); i++) {
       printval+= r.getTuples().get(i).catalogPrint();

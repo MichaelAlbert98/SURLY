@@ -9,12 +9,12 @@ import java.lang.*;
 
 public class DeleteHandler {
 
-   private DeleteHandler(){}
+   public DeleteHandler(){}
 
-   public static int delete(ArrayList<String> splitText, LinkedList<Relation> database, int i) {
+   public int delete(ArrayList<String> splitText, LinkedList<Relation> database, int i) {
      int j = i + 1;
      int k = i + 2;
-     if (k < splitText.size() && !Interpreter.isKeyword(splitText.get(j)) && !Interpreter.isBreakChar(splitText.get(j))
+     if (k < splitText.size() && !Helper.isKeyword(splitText.get(j)) && !Helper.isBreakChar(splitText.get(j))
         && splitText.get(k).trim().equals(";")) {
         String relationName = splitText.get(j).trim().toLowerCase();
         for (int a = 1; a < database.size(); a++) {

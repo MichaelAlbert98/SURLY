@@ -25,35 +25,35 @@ public class Relation {
      this.attributeFormat = null;
      this.tuples = new LinkedList<Tuple>();
    }
-   
+
    // -------------------Getters ---------------------------
 
    public String getName() {
      return this.name;
    }
-   
+
    public LinkedList<Tuple> getTuples() {
      return this.tuples;
    }
-   
+
    public LinkedList<Attribute> getAttributeFormat() {
      return this.attributeFormat;
    }
-   
+
    public String getAttributeType(int index) {
       return this.attributeFormat.get(index).getDataType();
    }
-   
+
    public int getAttributeLength(int index) {
       return this.attributeFormat.get(index).getLength();
    }
 
    // ---------------- Other methods ----------------------
-   
+
    public void addTuple(Tuple t) {
       tuples.add(t);
    }
-   
+
    //Checks to see if the relation already contains a given tuple
    public boolean contains(Tuple t) {
       for(int i = 0; i < tuples.size(); i++) {
@@ -63,7 +63,7 @@ public class Relation {
       }
       return false;
    }
-   
+
    public String toString() {
       String ret = "";
       ret += "Relation name: " + name + ", ";
@@ -76,8 +76,8 @@ public class Relation {
       }
       ret += "\n-------------------------------------------------\n";
       for(int j = 0; j < attributeFormat.size(); j++) {
-      
-         ret += StringFormatter.formatString(attributeFormat.get(j).getName(), attributeFormat.get(j).getLength()) + " ";
+
+         ret += Helper.formatString(attributeFormat.get(j).getName(), attributeFormat.get(j).getLength()) + " ";
       }
       ret += "\n";
       for(int j = 0; j < tuples.size(); j++) {

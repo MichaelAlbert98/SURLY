@@ -8,11 +8,11 @@ import java.io.FileReader;
 
 public class ReadIn {
   //constructor
-  private ReadIn() {
+  public ReadIn() {
   }
 
   //reads the text file, ignoring comments, and returns a string of the text
-  public static String reader(String fileName) {
+  public String read(String fileName) {
     String result = new String("");
     try {
       //create scanner that ignores comments and newlines

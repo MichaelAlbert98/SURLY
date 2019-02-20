@@ -9,12 +9,12 @@ import java.lang.*;
 
 public class DestroyHandler {
 
-   private DestroyHandler(){}
+   public DestroyHandler(){}
 
-   public static int destroy(ArrayList<String> splitText, LinkedList<Relation> database, int i) {
+   public int destroy(ArrayList<String> splitText, LinkedList<Relation> database, int i) {
      int j = i + 1;
      int k = i + 2;
-     if (k < splitText.size() && !Interpreter.isKeyword(splitText.get(j)) && !Interpreter.isBreakChar(splitText.get(j))
+     if (k < splitText.size() && !Helper.isKeyword(splitText.get(j)) && !Helper.isBreakChar(splitText.get(j))
         && splitText.get(k).trim().equals(";")) {
         String relationName = splitText.get(j).trim().toLowerCase();
         //remove relation from catalog

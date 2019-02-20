@@ -13,11 +13,16 @@ public class Interpreter {
   private static int i;
 
   //constructor
-  private Interpreter() {
+  public Interpreter() {
   }
 
   // Iterate through the list of tokens, looking for keywords and calling the appropriate functions
-  public static void interpret(ArrayList<String> splitText) {
+  public void interpret(ArrayList<String> splitText) {
+    RelationHandler relationer = new RelationHandler();
+    InsertHandler inserter = new InsertHandler();
+    PrintHandler printer = new PrintHandler();
+    DestroyHandler destroyer = new DestroyHandler();
+    DeleteHandler deleter = new DeleteHandler();
     LinkedList<Relation> database = new LinkedList<Relation>();
     Relation catalog = new Relation("catalog");
     database.add(catalog);
@@ -25,51 +30,20 @@ public class Interpreter {
     for (; i < splitText.size(); i++) {
       String token = splitText.get(i).trim();
       if (token.toLowerCase().equals("relation")) {
-         i = RelationHandler.relation(splitText, database, i);
+         i = relationer.relation(splitText, database, i);
       }
       else if (token.toLowerCase().equals("insert")) {
-         i = InsertHandler.insert(splitText, database, i);
+         i = inserter.insert(splitText, database, i);
       }
       else if (token.toLowerCase().equals("print")) {
-         i = PrintHandler.print(splitText, database, i);
+         i = printer.print(splitText, database, i);
       }
       else if (token.toLowerCase().equals("destroy")) {
-         i = DestroyHandler.destroy(splitText, database, i);
+         i = destroyer.destroy(splitText, database, i);
       }
       else if (token.toLowerCase().equals("delete")) {
-         i = DeleteHandler.delete(splitText, database, i);
+         i = deleter.delete(splitText, database, i);
       }
     }
   }
-
-  // Returns true if the given string is a keyword (relation, insert, print: case insensitive)
-  public static boolean isKeyword(String s) {
-    if(s.toLowerCase().equals("relation") || s.toLowerCase().equals("insert") || s.toLowerCase().equals("print")) {
-      System.out.println("Keyword found. Either a break character is missing or you inserted a command word where it shouldn't be.");
-      return true;
-    }
-    return false;
-  }
-
-  // Returns true if the given string is a break character
-  public static boolean isBreakChar(String s) {
-    if(s.equals("(") || s.equals(")") || s.equals("=") || s.equals("!=") || s.equals("<") || s.equals("<=") || s.equals(">")
-        || s.equals(">=") || s.equals(";") || s.equals("*") || s.equals("\'") || s.equals(",")) {
-      System.out.println("Break char found where it shouldn't be. Check the file for typos.");
-      return true;
-    }
-    return false;
-  }
-
-   public static boolean isPositiveInt(String s) {
-      try{
-         if(Integer.parseInt(s) > 0) {
-            return true;
-         }
-         return false;
-         }
-         catch(Exception e) {
-            return false;
-         }
-   }
 }

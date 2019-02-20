@@ -8,11 +8,11 @@ import java.util.*;
 public class MakeTokens {
 
   //constructor
-  private MakeTokens() {
+  public MakeTokens() {
   }
 
   //takes a string of text and converts it to valid tokens.
-  public static ArrayList<String> tokenizer(String text) {
+  public ArrayList<String> tokenizer(String text) {
     ArrayList<String> tokenList = new ArrayList<String>();
     int i = 0;
     while (i < text.length()) {

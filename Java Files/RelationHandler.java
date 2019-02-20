@@ -3,15 +3,15 @@ import java.lang.*;
 
 public class RelationHandler {
 
-   private RelationHandler(){}
+   public RelationHandler(){}
 
-   public static int relation(ArrayList<String> splitText, LinkedList<Relation> database, int i) {
+   public  int relation(ArrayList<String> splitText, LinkedList<Relation> database, int i) {
     int count = 0;
     String relationName = "";
     Tuple catTuple;
     LinkedList<Attribute> attributeFormat = new LinkedList<Attribute>();
     i++;
-    if (i < splitText.size() && !Interpreter.isKeyword(splitText.get(i)) && !Interpreter.isBreakChar(splitText.get(i))) {
+    if (i < splitText.size() && !Helper.isKeyword(splitText.get(i)) && !Helper.isBreakChar(splitText.get(i))) {
       relationName = splitText.get(i).toLowerCase(); //make sure relation name is valid
       catTuple = new Tuple(relationName);
       if (alreadyExists(relationName,database)) {
@@ -30,18 +30,18 @@ public class RelationHandler {
     i++;
     while(i < splitText.size() && !splitText.get(i).equals(")")){
       for(int j = 0; j < 3; j++) {
-         if(Interpreter.isKeyword(splitText.get(i))) {
+         if(Helper.isKeyword(splitText.get(i))) {
             i--;
             return i; // If keyword is found mid-relation, throw away current relation and return to interpret()
          }
-         if (Interpreter.isBreakChar(splitText.get(i))) {
+         if (Helper.isBreakChar(splitText.get(i))) {
            return i; //make sure there are no break chars as attributes
          }
          if(j == 1 && (!splitText.get(i).toLowerCase().equals("num") && !splitText.get(i).toLowerCase().equals("char"))) {
             System.out.print("Type of attribute must be CHAR or NUM; found " + splitText.get(i) + "\n");
             return i;
          }
-         if(j == 2 && !Interpreter.isPositiveInt(splitText.get(i))) {
+         if(j == 2 && !Helper.isPositiveInt(splitText.get(i))) {
             System.out.print("Attribute length must be a positive integer; found " + splitText.get(i) + "\n");
             return i;
          }
@@ -73,7 +73,7 @@ public class RelationHandler {
     return i;
   }
 
-  private static Boolean alreadyExists(String name, LinkedList<Relation> database) {
+  private  Boolean alreadyExists(String name, LinkedList<Relation> database) {
     for (int i = 1; i < database.size();i++) {
       if (database.get(i).getName().equals(name) || name.equals("catalog")) {
         System.out.println("A relation with this name already exists in the database.");
