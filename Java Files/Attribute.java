@@ -19,35 +19,35 @@ public class Attribute {
      this.dataType = dataType;
      this.length = length;
    }
-   
+
    // -------------------Getters ---------------------------
    public String getName() {
       return name;
    }
-   
+
    public String getDataType() {
       return this.dataType;
    }
-   
+
    public int getLength() {
       return this.length;
    }
-   
+
    // ---------------Other Methods -------------------------
-   
+
    public String toString() {
       return "" + name + " " + dataType + " " + length + "";
    }
-   
+
    public String valueToString() {
-      return StringFormatter.formatString(name, length);
+      return Helper.formatString(name, length);
    }
-   
+
    public boolean equals(Attribute a) {
       if(!a.getName().equals(name)) {
          return false;
       }
       return true;
    }
-   
+
 }

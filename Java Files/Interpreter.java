@@ -10,7 +10,7 @@ import java.lang.*;
 public class Interpreter {
 
   //attributes
-  private static int i;
+  private int i;
 
   //constructor
   public Interpreter() {
