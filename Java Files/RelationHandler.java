@@ -33,26 +33,21 @@ public class RelationHandler {
     while(i < splitText.size() && !splitText.get(i).equals(")")){
       i = formatCheck(splitText,i);
       Attribute attr = new Attribute(splitText.get(i-3).toLowerCase(),splitText.get(i-2).toLowerCase(),Integer.parseInt(splitText.get(i-1)));
-      //add attributes to catalog tuple and attributeFormat
-      catTuple.getAttr().add(attr);
+      catTuple.getAttr().add(attr); //add attributes to catalog tuple and attributeFormat
       attributeFormat.add(attr);
-
       if(splitText.get(i).equals(",")) {
          i++;
       }
       count++;
     }
-    //check for end of command semicolon
     i++;
     if (i < splitText.size() && !splitText.get(i).equals(";")) {
       System.out.println("bad syntax; missing semicolon");
       i--;
       return i;
     }
-    //add relation to catalog
-    database.get(0).getTuples().add(catTuple);
-    //create relation and add it to database
-    Relation relation = new Relation(relationName,attributeFormat);
+    database.get(0).getTuples().add(catTuple); //add relation to catalog
+    Relation relation = new Relation(relationName,attributeFormat); //create relation and add it to database
     database.add(relation);
     System.out.println("Creating " + relationName + " with " + count + " attributes.");
     return i;

@@ -46,21 +46,28 @@ public class InsertHandler {
       this.i++;
       count++;
     }
-    if (count == 0) {
-      System.out.println(ERR_NO_ATT);
-      return this.i;
-    }
-    if (!verifyAttributeFormat(tuple, r.getAttributeFormat())) {
-      System.out.println(ERR_BAD_FORMAT);
-      return this.i;
-    }
-    if(r.contains(tuple)) {
-      System.out.println(ERR_DUP_TUPLE);
+    if(checkTuple(count,tuple,r)) {
       return this.i;
     }
     r.addTuple(tuple); // If no errors are found at this point, its safe to add to the tuple to the relation
     System.out.println("Inserting " + count + " attributes to " + relationName + ".");
     return this.i;
+  }
+
+  private Boolean checkTuple(int count, Tuple tuple, Relation r) {
+    if (count == 0) {
+      System.out.println(ERR_NO_ATT);
+      return true;
+    }
+    if (!verifyAttributeFormat(tuple, r.getAttributeFormat())) {
+      System.out.println(ERR_BAD_FORMAT);
+      return true;
+    }
+    if(r.contains(tuple)) {
+      System.out.println(ERR_DUP_TUPLE);
+      return true;
+    }
+    return false;
   }
 
   private Boolean checkFormat(ArrayList<String> splitText,int count, Relation r) {

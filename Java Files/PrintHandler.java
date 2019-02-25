@@ -3,45 +3,37 @@ import java.lang.*;
 
 public class PrintHandler {
 
+  private int i;
+
   public PrintHandler(){}
 
-  public int print(ArrayList<String> splitText, LinkedList<Relation> database, int i) {
+  public int print(ArrayList<String> splitText, LinkedList<Relation> database, int j) {
+    this.i = j;
     int count = 0; // Number of relations being printed
     ArrayList<String> relations = new ArrayList<String>();
-    i++;
-    while(i < splitText.size() && !splitText.get(i).equals(";")) {
-      if(i >= splitText.size()) {
-         System.out.println("End of document reached.");
-         return i;
+    this.i++;
+    while(this.i < splitText.size() && !splitText.get(this.i).equals(";")) {
+      if (formatCheck(splitText)) {
+        return this.i;
       }
-      if(splitText.get(i).equals(",")){
-         i++;
-      }
-      if(Helper.isKeyword(splitText.get(i))) {
-         i--;
-         return i; // If keyword is found mid-print, throw away current print job and return to interpret();
-      }
-      if (Helper.isBreakChar(splitText.get(i))) {
-        return i; //make sure there are no break chars as attributes
-      }
-      relations.add(splitText.get(i).toLowerCase());
-      i++;
+      relations.add(splitText.get(this.i).toLowerCase());
+      this.i++;
       count++;
     }
     System.out.println();
     // Iterate through each string passed as an argument
-    for(int j = 0; j < relations.size(); j++) {
+    for(int k = 0; k < relations.size(); k++) {
       // Iterate through each relation in the db
       Iterator<Relation> dbIterator = database.iterator();
       Relation r = null;
       while(dbIterator.hasNext()) {
          Relation tmp = dbIterator.next();
-         if(tmp.getName().equals(relations.get(j))) {
+         if(tmp.getName().equals(relations.get(k))) {
             r = tmp; // When the string matches the relation name, save it
          }
       }
       if(r != null) {
-        if(relations.get(j).toLowerCase().equals("catalog")) {
+        if(relations.get(k).toLowerCase().equals("catalog")) {
            printCatalog(database.get(0));
         }
         else {
@@ -49,10 +41,28 @@ public class PrintHandler {
         }
       }
       else {
-        System.out.println("Relation \"" + relations.get(j) + "\" does not exist.");
+        System.out.println("Relation \"" + relations.get(k) + "\" does not exist.");
       }
     }
-    return i;
+    return this.i;
+  }
+
+  private Boolean formatCheck(ArrayList<String> splitText) {
+    if(this.i >= splitText.size()) {
+       System.out.println("End of document reached.");
+       return true;
+    }
+    if(splitText.get(this.i).equals(",")){
+       this.i++;
+    }
+    if(Helper.isKeyword(splitText.get(this.i))) {
+       this.i--;
+       return true; // If keyword is found mid-print, throw away current print job and return to interpret();
+    }
+    if (Helper.isBreakChar(splitText.get(this.i))) {
+      return true; //make sure there are no break chars as attributes
+    }
+    return false;
   }
 
   private void printCatalog(Relation r) {
