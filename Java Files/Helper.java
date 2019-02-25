@@ -1,3 +1,7 @@
+//Helper.java - List of utility functions for Surly
+//Created by Michael Albert
+//Created Febuary 19, 2019
+//Revised January 24, 2019
 
 public class Helper {
 
@@ -38,13 +42,11 @@ public class Helper {
       String leadingSpaces = "";
       String trailingSpaces = "";
       String choppedString = "";
-
       int k = 0;
       while( k < s.length() && k < size ) {
          choppedString += s.charAt(k);
          k++;
       }
-
       for(int i = 0; i < size - choppedString.length(); i++) {
          if(i%2 == 0) {
             leadingSpaces += " ";
