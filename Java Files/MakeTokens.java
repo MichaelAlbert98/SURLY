@@ -7,6 +7,8 @@ import java.util.*;
 
 public class MakeTokens {
 
+  private int i = 0;
+
   //constructor
   public MakeTokens() {
   }
@@ -14,58 +16,31 @@ public class MakeTokens {
   //takes a string of text and converts it to valid tokens.
   public ArrayList<String> tokenizer(String text) {
     ArrayList<String> tokenList = new ArrayList<String>();
-    int i = 0;
     while (i < text.length()) {
       switch (text.charAt(i)) {
         case '(':
-          tokenList.add("(");
-          i++;
+          tokenList = caseChar("(",tokenList);
           break;
         case ')':
-          tokenList.add(")");
-          i++;
+          tokenList = caseChar(")",tokenList);
           break;
         case '=':
-          tokenList.add("=");
-          i++;
+          tokenList = caseChar("=",tokenList);
           break;
         case '!':
-          if (text.charAt(i+1) == ('=')) {
-            tokenList.add("!=");
-            i = i + 2;
-          }
-          else {
-            tokenList.add("!");
-            i++;
-          }
+          tokenList = caseChar2("!",tokenList,text);
           break;
         case '<':
-          if (text.charAt(i+1) == ('=')) {
-            tokenList.add("<=");
-            i = i + 2;
-          }
-          else {
-            tokenList.add("<");
-            i++;
-          }
+          tokenList = caseChar2("<",tokenList,text);
           break;
         case '>':
-          if (text.charAt(i+1) == ('=')) {
-            tokenList.add(">=");
-            i = i + 2;
-          }
-          else {
-            tokenList.add(">");
-            i++;
-          }
+          tokenList = caseChar2(">",tokenList,text);
           break;
         case ';':
-          tokenList.add(";");
-          i++;
+          tokenList = caseChar(";",tokenList);
           break;
         case '*':
-          tokenList.add("*");
-          i++;
+          tokenList = caseChar("*",tokenList);
           break;
         case '\'':
           String result = "";
@@ -81,25 +56,45 @@ public class MakeTokens {
           //extra break in case of missing '
           break;
         case ',':
-          tokenList.add(",");
-          i++;
+          tokenList = caseChar(",",tokenList);
           break;
         case ' ':
           i++;
           break;
         default:
-          result = "";
-          while ((i < text.length()) && (text.charAt(i) != '(') && (text.charAt(i) != ')') && (text.charAt(i) != '=') && (text.charAt(i) != '(')
-                && (text.charAt(i) != '<') && (text.charAt(i) != '>') && (text.charAt(i) != ';') && (text.charAt(i) != '*')
-                && (text.charAt(i) != '\'') && (text.charAt(i) != ',') && (text.charAt(i) != ' ')) {
-            result = result + text.charAt(i);
-            i++;
-          }
-            tokenList.add(result);
+          tokenList = caseCharDefault(tokenList,text);
           break;
       }
     }
+    return tokenList;
+  }
 
+  private ArrayList<String> caseChar(String value, ArrayList<String> tokenList) {
+    tokenList.add(value);
+    i++;
+    return tokenList;
+  }
+
+  private ArrayList<String> caseChar2(String value, ArrayList<String> tokenList, String text) {
+    if (text.charAt(i+1) == ('=')) {
+      tokenList.add(value + "=");
+      i = i + 2;
+    }
+    else {
+      tokenList = caseChar(value,tokenList);
+    }
+    return tokenList;
+  }
+
+  private ArrayList<String> caseCharDefault(ArrayList<String> tokenList, String text) {
+    String result = "";
+    while ((i < text.length()) && (text.charAt(i) != '(') && (text.charAt(i) != ')') && (text.charAt(i) != '=') && (text.charAt(i) != '(')
+          && (text.charAt(i) != '<') && (text.charAt(i) != '>') && (text.charAt(i) != ';') && (text.charAt(i) != '*')
+          && (text.charAt(i) != '\'') && (text.charAt(i) != ',') && (text.charAt(i) != ' ')) {
+      result = result + text.charAt(i);
+      i++;
+    }
+    tokenList.add(result);
     return tokenList;
   }
 }
