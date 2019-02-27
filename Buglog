@@ -1,2 +1,2 @@
-Single quote tokens not being added to the tokenList has been fixed.
-^ Hell yeah
+Implement catalog in similar fashion to other relations. (For each relation, store as multiple catalog entries where each entry contains info on one column of that relation's schema)
+Change instances to constants. Make constant class that contains all constants. 
