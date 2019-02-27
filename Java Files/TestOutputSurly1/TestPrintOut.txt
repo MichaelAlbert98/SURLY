@@ -72,8 +72,8 @@ Relation name: prereq, Attribute format: cnum char 8 | pnum char 8
 
 
 
-Relation "null" does not exist.
-Relation "notreal" does not exist.
+Could not find the specified name.
+Could not find the specified name.
 Relation name: offering, Attribute format: cnum char 8 | section num 5 | starthour char 5 | endhour char 5 | days char 5 | room char 10 | instructor char 20
 -------------------------------------------------
   cnum   secti start endho  days    room         instructor
@@ -84,7 +84,7 @@ Relation name: offering, Attribute format: cnum char 8 | section num 5 | startho
  CSCI330 27974 12:00 12:50  MTWF    CF314          DENEKE
  CSCI330 27977 14:00 14:50  MTWF    CF316          DENEKE
 
-Relation "fake" does not exist.
+Could not find the specified name.
 
 Relation name: course, Attribute format: cnum char 8 | title char 30 | credits num 4
 -------------------------------------------------

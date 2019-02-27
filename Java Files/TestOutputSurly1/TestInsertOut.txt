@@ -7,12 +7,12 @@ Creating dept with 2 attributes.
 Cannot insert tuples to Catalog
 Break char found where it shouldn't be. Check the file for typos.
 Inserting 3 attributes to course.
-Duplicate tuple found, not inserted
+This name already exists.
 Inserting 3 attributes to course.
 Inserting 3 attributes to course.
 Inserting 3 attributes to course.
 Inserting 3 attributes to course.
-Insert format does not match relation format
+Format is not correct.
 Inserting 3 attributes to course.
 Inserting 2 attributes to prereq.
 Too many attributes for selected relation
@@ -28,7 +28,7 @@ Inserting 2 attributes to prereq.
 Inserting 7 attributes to offering.
 Inserting 7 attributes to offering.
 Inserting 7 attributes to offering.
-Insert format does not match relation format
+Format is not correct.
 Inserting 7 attributes to offering.
 Inserting 7 attributes to offering.
 Inserting 7 attributes to offering.

@@ -1,6 +1,6 @@
 Creating course with 3 attributes.
-A relation with this name already exists in the database.
-A relation with this name already exists in the database.
+This name already exists.
+This name already exists.
 
 Relation name: course, Attribute format: cnum char 8 | title char 30 | credits num 4
 -------------------------------------------------

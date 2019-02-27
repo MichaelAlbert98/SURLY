@@ -43,9 +43,9 @@ Relation name: prereq, Attribute format: cnum char 8 | pnum char 8
  CSCI330  CSCI241
  CSCI345  CSCI241
 
-Relation name not found.
-Relation name not found.
-Delete command not correctly formatted.
+Could not find the specified name.
+Could not find the specified name.
+Format is not correct.
 
 Relation name: course, Attribute format: cnum char 8 | title char 30 | credits num 4
 -------------------------------------------------
