@@ -26,7 +26,7 @@ public class RelationHandler {
     }
     i++;
     if(!splitText.get(i).equals("(")) {
-      System.out.println(Helper.ERR_BAD_FORMAT);
+      System.out.println(Constants.ERR_BAD_FORMAT);
       return i; // Fail on bad syntax
     }
     i++;
@@ -42,7 +42,7 @@ public class RelationHandler {
     }
     i++;
     if (i < splitText.size() && !splitText.get(i).equals(";")) {
-      System.out.println(Helper.ERR_BAD_FORMAT);
+      System.out.println(Constants.ERR_BAD_FORMAT);
       i--;
       return i;
     }
@@ -55,8 +55,8 @@ public class RelationHandler {
 
   private Boolean alreadyExists(String name, LinkedList<Relation> database) {
     for (int i = 1; i < database.size();i++) {
-      if (database.get(i).getName().equals(name) || name.equals("catalog")) {
-        System.out.println(Helper.ERR_DUP_ITEM);
+      if (database.get(i).getName().equals(name) || name.equals(Constants.CATALOG)) {
+        System.out.println(Constants.ERR_DUP_ITEM);
         return true;
       }
     }
@@ -72,12 +72,12 @@ public class RelationHandler {
        if (Helper.isBreakChar(splitText.get(i))) {
          return i; //make sure there are no break chars as attributes
        }
-       if(j == 1 && (!splitText.get(i).toLowerCase().equals("num") && !splitText.get(i).toLowerCase().equals("char"))) {
-          System.out.print(Helper.ERR_BAD_FORMAT);
+       if(j == 1 && (!splitText.get(i).toLowerCase().equals(Constants.NUM) && !splitText.get(i).toLowerCase().equals(Constants.CHAR))) {
+          System.out.print(Constants.ERR_BAD_FORMAT);
           return i;
        }
        if(j == 2 && !Helper.isPositiveInt(splitText.get(i))) {
-          System.out.print(Helper.ERR_BAD_FORMAT);
+          System.out.print(Constants.ERR_BAD_FORMAT);
           return i;
        }
        i++;

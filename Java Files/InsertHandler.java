@@ -24,8 +24,8 @@ public class InsertHandler {
     if(r == null) {
       return this.i + 1;
     }
-    if(r.getName().toLowerCase().equals("catalog")) {
-      System.out.println(Helper.ERR_INST_CAT);
+    if(r.getName().toLowerCase().equals(Constants.CATALOG)) {
+      System.out.println(Constants.ERR_INST_CAT);
       return this.i;
     }
     Tuple tuple = new Tuple();
@@ -50,15 +50,15 @@ public class InsertHandler {
 
   private Boolean checkTuple(int count, Tuple tuple, Relation r) {
     if (count == 0) {
-      System.out.println(Helper.ERR_NO_ATT);
+      System.out.println(Constants.ERR_NO_ATT);
       return true;
     }
     if (!verifyAttributeFormat(tuple, r.getAttributeFormat())) {
-      System.out.println(Helper.ERR_BAD_FORMAT);
+      System.out.println(Constants.ERR_BAD_FORMAT);
       return true;
     }
     if(r.contains(tuple)) {
-      System.out.println(Helper.ERR_DUP_ITEM);
+      System.out.println(Constants.ERR_DUP_ITEM);
       return true;
     }
     return false;
@@ -66,7 +66,7 @@ public class InsertHandler {
 
   private Boolean checkFormat(ArrayList<String> splitText,int count, Relation r) {
     if(this.i >= splitText.size()) {
-      System.out.println(Helper.ERR_END_REACHED);
+      System.out.println(Constants.ERR_END_REACHED);
       return true;
     }
     if(Helper.isKeyword(splitText.get(this.i)) || Helper.isBreakChar(splitText.get(this.i))) {
@@ -74,7 +74,7 @@ public class InsertHandler {
       return true; // If keyword is found mid-insert, throw away current insertion and return to interpret()
     }
     if(count >= r.getAttributeFormat().size()) {
-      System.out.println(Helper.ERR_ATT_OVERFLOW);
+      System.out.println(Constants.ERR_ATT_OVERFLOW);
       return true;
     }
     return false;
@@ -89,7 +89,7 @@ public class InsertHandler {
          return r;
       }
     }
-    System.out.println(Helper.ERR_NOT_FND);
+    System.out.println(Constants.ERR_NOT_FND);
     return null;
   }
 
@@ -103,7 +103,7 @@ public class InsertHandler {
       if( tupleAttributes.get(j).getName().length() > relationFormat.get(j).getLength() ) {
          return false;
       }
-      if( tupleAttributes.get(j).getDataType().toLowerCase().equals("num") ) {
+      if( tupleAttributes.get(j).getDataType().toLowerCase().equals(Constants.NUM) ) {
          if(!isNum(tupleAttributes.get(j).getName())) {
             return false;
          }

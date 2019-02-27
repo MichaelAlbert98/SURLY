@@ -33,7 +33,7 @@ public class PrintHandler {
          }
       }
       if(r != null) {
-        if(relations.get(k).toLowerCase().equals("catalog")) {
+        if(relations.get(k).toLowerCase().equals(Constants.CATALOG)) {
            printCatalog(database.get(0));
         }
         else {
@@ -41,7 +41,7 @@ public class PrintHandler {
         }
       }
       else {
-        System.out.println(Helper.ERR_NOT_FND);
+        System.out.println(Constants.ERR_NOT_FND);
       }
     }
     return this.i;
@@ -49,7 +49,7 @@ public class PrintHandler {
 
   private Boolean formatCheck(ArrayList<String> splitText) {
     if(this.i >= splitText.size()) {
-       System.out.println(Helper.ERR_END_REACHED);
+       System.out.println(Constants.ERR_END_REACHED);
        return true;
     }
     if(splitText.get(this.i).equals(",")){

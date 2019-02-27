@@ -5,19 +5,11 @@
 
 public class Helper {
 
-  public final static String ERR_END_REACHED = "End of document reached.";
-  public final static String ERR_BAD_FORMAT = "Format is not correct.";
-  public final static String ERR_NOT_FND = "Could not find the specified name.";
-  public final static String ERR_DUP_ITEM = "This name already exists.";
-  public final static String ERR_ATT_OVERFLOW = "Too many attributes for selected relation";
-  public final static String ERR_NO_ATT = "No insert names given.";
-  public final static String ERR_INST_CAT = "Cannot insert tuples to Catalog";
-
   private Helper() {}
 
   // Returns true if the given string is a keyword (relation, insert, print: case insensitive)
   public static boolean isKeyword(String s) {
-    if(s.toLowerCase().equals("relation") || s.toLowerCase().equals("insert") || s.toLowerCase().equals("print")) {
+    if(s.toLowerCase().equals(Constants.RELATION) || s.toLowerCase().equals(Constants.INSERT) || s.toLowerCase().equals(Constants.PRINT)) {
       System.out.println("Keyword found. Either a break character is missing or you inserted a command word where it shouldn't be.");
       return true;
     }

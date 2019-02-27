@@ -30,10 +30,10 @@ public class DestroyHandler {
             return i + 2;
           }
         }
-        System.out.println(Helper.ERR_NOT_FND);
+        System.out.println(Constants.ERR_NOT_FND);
         return i + 2;
      }
-     System.out.println(Helper.ERR_BAD_FORMAT);
+     System.out.println(Constants.ERR_BAD_FORMAT);
      return i;
    }
 }

@@ -24,24 +24,24 @@ public class Interpreter {
     DestroyHandler destroyer = new DestroyHandler();
     DeleteHandler deleter = new DeleteHandler();
     LinkedList<Relation> database = new LinkedList<Relation>();
-    Relation catalog = new Relation("catalog");
+    Relation catalog = new Relation(Constants.CATALOG);
     database.add(catalog);
     i = 0;
     for (; i < splitText.size(); i++) {
       String token = splitText.get(i).trim();
-      if (token.toLowerCase().equals("relation")) {
+      if (token.toLowerCase().equals(Constants.RELATION)) {
          i = relationer.relation(splitText, database, i);
       }
-      else if (token.toLowerCase().equals("insert")) {
+      else if (token.toLowerCase().equals(Constants.INSERT)) {
          i = inserter.insert(splitText, database, i);
       }
-      else if (token.toLowerCase().equals("print")) {
+      else if (token.toLowerCase().equals(Constants.PRINT)) {
          i = printer.print(splitText, database, i);
       }
-      else if (token.toLowerCase().equals("destroy")) {
+      else if (token.toLowerCase().equals(Constants.DESTROY)) {
          i = destroyer.destroy(splitText, database, i);
       }
-      else if (token.toLowerCase().equals("delete")) {
+      else if (token.toLowerCase().equals(Constants.DELETE)) {
          i = deleter.delete(splitText, database, i);
       }
     }
