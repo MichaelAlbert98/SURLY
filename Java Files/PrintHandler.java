@@ -41,7 +41,7 @@ public class PrintHandler {
         }
       }
       else {
-        System.out.println("Relation \"" + relations.get(k) + "\" does not exist.");
+        System.out.println(Helper.ERR_NOT_FND);
       }
     }
     return this.i;
@@ -49,7 +49,7 @@ public class PrintHandler {
 
   private Boolean formatCheck(ArrayList<String> splitText) {
     if(this.i >= splitText.size()) {
-       System.out.println("End of document reached.");
+       System.out.println(Helper.ERR_END_REACHED);
        return true;
     }
     if(splitText.get(this.i).equals(",")){

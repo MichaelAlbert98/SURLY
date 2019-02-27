@@ -30,10 +30,10 @@ public class DestroyHandler {
             return i + 2;
           }
         }
-        System.out.println("Relation name not found.");
+        System.out.println(Helper.ERR_NOT_FND);
         return i + 2;
      }
-     System.out.println("Destroy command not correctly formatted.");
+     System.out.println(Helper.ERR_BAD_FORMAT);
      return i;
    }
 }

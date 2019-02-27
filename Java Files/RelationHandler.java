@@ -26,7 +26,7 @@ public class RelationHandler {
     }
     i++;
     if(!splitText.get(i).equals("(")) {
-      System.out.println("bad syntax; no open paren");
+      System.out.println(Helper.ERR_BAD_FORMAT);
       return i; // Fail on bad syntax
     }
     i++;
@@ -42,7 +42,7 @@ public class RelationHandler {
     }
     i++;
     if (i < splitText.size() && !splitText.get(i).equals(";")) {
-      System.out.println("bad syntax; missing semicolon");
+      System.out.println(Helper.ERR_BAD_FORMAT);
       i--;
       return i;
     }
@@ -56,7 +56,7 @@ public class RelationHandler {
   private Boolean alreadyExists(String name, LinkedList<Relation> database) {
     for (int i = 1; i < database.size();i++) {
       if (database.get(i).getName().equals(name) || name.equals("catalog")) {
-        System.out.println("A relation with this name already exists in the database.");
+        System.out.println(Helper.ERR_DUP_ITEM);
         return true;
       }
     }
@@ -73,11 +73,11 @@ public class RelationHandler {
          return i; //make sure there are no break chars as attributes
        }
        if(j == 1 && (!splitText.get(i).toLowerCase().equals("num") && !splitText.get(i).toLowerCase().equals("char"))) {
-          System.out.print("Type of attribute must be CHAR or NUM; found " + splitText.get(i) + "\n");
+          System.out.print(Helper.ERR_BAD_FORMAT);
           return i;
        }
        if(j == 2 && !Helper.isPositiveInt(splitText.get(i))) {
-          System.out.print("Attribute length must be a positive integer; found " + splitText.get(i) + "\n");
+          System.out.print(Helper.ERR_BAD_FORMAT);
           return i;
        }
        i++;
