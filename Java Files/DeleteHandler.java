@@ -12,6 +12,57 @@ public class DeleteHandler {
    public DeleteHandler(){}
 
    public int delete(ArrayList<String> splitText, LinkedList<Relation> database, int i) {
+     i++;
+     if (i < splitText.size() && !Helper.isKeyword(splitText.get(i)) && !Helper.isBreakChar(splitText.get(i))) {
+       String relationName = splitText.get(i).toLowerCase(); //make sure relation name is valid
+     }
+     else {
+       i--;
+       return i;
+     }
+     i++;
+     if (!splitText.get(i).equals(";") && !splitText.get(i).toLowerCase().equals("where")) {
+       System.out.println(ERR_BAD_FORMAT);
+       i--;
+       return i
+     }
+
+     //find tuples that match where conditions and delete
+     if (splitText.get(i).toLowerCase().equals("where")) {
+       if (Helper.whereFormat(splitText,i)) {
+         ArrayList<Relation> deleteList = Helper.whereFind(splitText,database,i);
+         for (int j=1; j<database.size(); j++) {
+           if (database.get(j).getName().equals(relationName)) {
+             for (int k=0; k<deleteList.size(); k++) {
+               database.get(j).getTuples().remove(deleteList.get(k));
+             }
+           }
+         }
+       }
+       while (!splitText.get(i).equals(";")) {
+         i++;
+       }
+       else { //format not correct, return
+         System.out.println(ERR_BAD_FORMAT);
+         return i;
+       }
+       return i;
+     }
+
+     //delete all tuples in given relation
+     else {
+       for (int j = 1; j < database.size(); j++) {
+         if (database.get(j).getName().equals(relationName)) {
+           database.get(j).getTuples().clear();
+           return i ;
+         }
+       }
+       System.out.println(Constants.ERR_NOT_FND);
+       return i;
+     }
+
+     //old version of DeleteHandler
+     /*
      int j = i + 1;
      int k = i + 2;
      if (k < splitText.size() && !Helper.isKeyword(splitText.get(j)) && !Helper.isBreakChar(splitText.get(j))
@@ -28,5 +79,5 @@ public class DeleteHandler {
      }
      System.out.println(Constants.ERR_BAD_FORMAT);
      return i;
-   }
+   } */
 }
