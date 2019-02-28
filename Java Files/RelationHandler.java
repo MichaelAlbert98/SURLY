@@ -10,12 +10,10 @@ public class RelationHandler {
    public int relation(ArrayList<String> splitText, LinkedList<Relation> database, int i) {
     count = 0;
     String relationName = "";
-    Tuple catTuple;
     LinkedList<Attribute> attributeFormat = new LinkedList<Attribute>();
     i++;
     if (i < splitText.size() && !Helper.isKeyword(splitText.get(i)) && !Helper.isBreakChar(splitText.get(i))) {
       relationName = splitText.get(i).toLowerCase(); //make sure relation name is valid
-      catTuple = new Tuple(relationName);
       if (alreadyExists(relationName,database)) {
         return i;
       }
@@ -27,13 +25,15 @@ public class RelationHandler {
     i++;
     if(!splitText.get(i).equals("(")) {
       System.out.println(Constants.ERR_BAD_FORMAT);
+      i--;
       return i; // Fail on bad syntax
     }
     i++;
+    ArrayList<Attribute> attrList = new ArrayList<Attribute>();
     while(i < splitText.size() && !splitText.get(i).equals(")")){
       i = formatCheck(splitText,i);
       Attribute attr = new Attribute(splitText.get(i-3).toLowerCase(),splitText.get(i-2).toLowerCase(),Integer.parseInt(splitText.get(i-1)));
-      catTuple.getAttr().add(attr); //add attributes to catalog tuple and attributeFormat
+      attrList.add(attr);
       attributeFormat.add(attr);
       if(splitText.get(i).equals(",")) {
          i++;
@@ -46,7 +46,11 @@ public class RelationHandler {
       i--;
       return i;
     }
-    database.get(0).getTuples().add(catTuple); //add relation to catalog
+    for (int j=0;j<attrList.size();j++) {
+      Tuple catTuple = new Tuple(relationName);
+      catTuple.addAttribute(attrList.get(j));
+      database.get(0).getTuples().add(catTuple); //add relation to catalog
+    }
     Relation relation = new Relation(relationName,attributeFormat); //create relation and add it to database
     database.add(relation);
     System.out.println("Creating " + relationName + " with " + count + " attributes.");
