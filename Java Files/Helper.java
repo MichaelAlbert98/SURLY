@@ -7,6 +7,37 @@ public class Helper {
 
   private Helper() {}
 
+  //makes sure the formatting of the conditions are correct
+  public static boolean whereFormat(ArrayList<String> splitText, int i) {
+    i++;
+    while (!splitText.get(i).equals(";")) {
+      //return if first part of conditions isn't non-keyword string
+      if (Helper.isKeyword(splitText.get(i+1)) || Helper.isBreakChar(splitText.get(i+1))) {
+        return false;
+      }
+      //return if second part of conditions isn't operator
+      if (!Constants.OPERATORS.contains(splitText.get(i+2))) {
+        return false;
+      }
+      //return if third part of conditions isn't non-keyword string
+      if (Helper.isKeyword(splitText.get(i+3)) || Helper.isBreakChar(splitText.get(i+3))) {
+        return false;
+      }
+      //return if fourth part of conditions isn't 'and' 'or', or ';'
+      if ((!splitText.get(i+4).toLowerCase.equals("and")) && (!splitText.get(i+4).toLowerCase.equals("or"))
+         && (!splitText.get(i+4).toLowerCase.equals(";"))) {
+        return false;
+      }
+      i = i +4;
+    }
+    return true;
+  }
+
+  //returns an arraylist of relations which match the given conditions
+  public static ArrayList<Relation> whereFind(ArrayList<String> splitText, LinkedList<Relation> database, int i) {
+
+  }
+
   // Returns true if the given string is a keyword (relation, insert, print: case insensitive)
   public static boolean isKeyword(String s) {
     if(s.toLowerCase().equals(Constants.RELATION) || s.toLowerCase().equals(Constants.INSERT) || s.toLowerCase().equals(Constants.PRINT)) {
