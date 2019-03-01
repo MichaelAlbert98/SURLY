@@ -40,6 +40,15 @@ public class Relation {
      return this.attributeFormat;
    }
 
+   public int getAttrFormSpecif(String name) {
+     for (int i=0; i < attributeFormat.size(); i++) {
+       if (attributeFormat.get(i).getName().equals(name.toLowerCase())) {
+         return i;
+       }
+     }
+     return -1;
+   }
+
    public String getAttributeType(int index) {
       return this.attributeFormat.get(index).getDataType();
    }
