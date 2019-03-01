@@ -4,6 +4,7 @@
 //Revised January 24, 2019
 
 import java.util.*;
+import java.lang.*;
 
 public class Helper {
 
@@ -103,45 +104,30 @@ public class Helper {
 
   private static boolean compareCheck(int relAttrForm, Tuple tup, String operator, String cond) {
     boolean meetsCond = false;
-    switch (operator) {
-      case "=":
-        if (tup.getAttr().get(relAttrForm) == cond) {
-          meetsCond = true;
-          return meetsCond;
-        }
-        break;
-      case "!=":
-        if (tup.getAttr().get(relAttrForm) != cond) {
-          meetsCond = true;
-          return meetsCond;
-        }
-        break;
-      case "<":
-        if (tup.getAttr().get(relAttrForm) < cond) {
-          meetsCond = true;
-          return meetsCond;
-        }
-        break;
-      case ">":
-        if (tup.getAttr().get(relAttrForm) > cond) {
-          meetsCond = true;
-          return meetsCond;
-        }
-        break;
-      case "<=":
-        if (tup.getAttr().get(relAttrForm) <= cond) {
-          meetsCond = true;
-          return meetsCond;
-        }
-        break;
-      case ">=":
-        if (tup.getAttr().get(relAttrForm) >= cond) {
-          meetsCond = true;
-          return meetsCond;
-        }
-        break;
-      }
-      return meetsCond;
+    Attribute attr = tup.getAttr().get(relAttrForm);
+    String type = getType(cond);
+
+    //check that condition is of correct type for given attribute
+    if (attr.getDataType().equals("num") && type.equals("num")) {
+      int condNum = Integer.parseInt(cond);
+
+    }
+
+    //check that condition is of correct type for given attribute
+    else if (attr.getDataType().equals("string") && type.equals("string")) {
+      
+    }
+
+    //return false if neither if statement procs
+    return meetsCond;
+  }
+
+  //determines if String is an int or string.
+  private static String getType(String cond) {
+    if (cond.matches("-?\\d+")) {
+      return "num";
+    }
+    return "string"
   }
 
   // Returns true if the given string is a keyword (relation, insert, print: case insensitive)
