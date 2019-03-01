@@ -2,6 +2,9 @@
 //Created by Michael Albert
 //Created Febuary 27, 2019
 //Revised January 27, 2019
+
+import java.util.*;
+
 public class Constants {
 
   //error messages
@@ -24,6 +27,6 @@ public class Constants {
   public final static String NUM = "num";
 
   //object constants
-  ArrayList<String> OPERATORS = new ArrayList<>(Arrays.asList("=","!=","<",">","<=",">="));
+  public final static ArrayList<String> OPERATORS = new ArrayList<>(Arrays.asList("=","!=","<",">","<=",">="));
 
 }
