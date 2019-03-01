@@ -22,9 +22,9 @@ public class Tuple {
      this.name = name;
      this.attributes = new LinkedList<Attribute>();
    }
-   
+
    // --------------- Getters -------------------------
-   
+
    public LinkedList<Attribute> getAttr() {
      return this.attributes;
    }
@@ -32,13 +32,13 @@ public class Tuple {
    public String getName() {
      return this.name;
    }
-   
+
    // --------------- Other Methods --------------------
-   
+
    public void addAttribute(Attribute a){
       attributes.add(a);
    }
- 
+
    public String catalogPrint() {
       String ret = "Relation name: " + this.name + ", Attribute format: ";
       for(int i = 0; i < attributes.size(); i++) {
@@ -50,8 +50,7 @@ public class Tuple {
       ret += "\n";
       return ret;
    }
-   
-   
+
    public String valueToString() {
       String ret = "";
       for (int i = 0; i < attributes.size(); i++) {
@@ -59,7 +58,7 @@ public class Tuple {
       }
       return ret;
    }
-   
+
    public boolean equals(Tuple t) {
       LinkedList<Attribute> otherAttributes = t.getAttr();
       for(int i = 0; i < attributes.size(); i++ ) {
