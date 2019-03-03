@@ -29,10 +29,30 @@ public class ProjectionHandler {
    
    private LinkedList<Attribute> parseAttributes(ArrayList<String> tokens, Relation r, int ix) {
       LinkedList<Attribute> attributes = new LinkedList<Attribute>();
-      ix++;
       LinkedList<Attribute> relationAttributes = r.getAttributeFormat();
+      do{
+         ix++;
+         String att = tokens.get(ix);
+         Attribute attribute = getAttribute(relationAttributes, att);
+         if(attribute != null) {
+            attributes.push(attribute);
+         }
+         ix++;
+      }
+      while (tokens.get(ix).equals(","));
       String s = tokens.get(ix);
       return attributes;
+   }
+   
+   private Attribute getAttribute(LinkedList<Attribute> atts, String name) {
+      ListIterator<Attribute> li = atts.listIterator();
+      while(li.hasNext()) {
+         Attribute a = li.next();
+         if(a.getName().equals(name)) {
+            return a;
+         }
+      }
+      return null;
    }
    
    private Relation parseRelation(ArrayList<String> tokens, int ix) {
