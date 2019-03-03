@@ -23,6 +23,7 @@ public class Interpreter {
     PrintHandler printer = new PrintHandler();
     DestroyHandler destroyer = new DestroyHandler();
     DeleteHandler deleter = new DeleteHandler();
+    SelectHandler selecter = new SelectHandler();
     LinkedList<Relation> database = new LinkedList<Relation>();
     Relation catalog = new Relation(Constants.CATALOG);
     database.add(catalog);
@@ -43,6 +44,9 @@ public class Interpreter {
       }
       else if (token.toLowerCase().equals(Constants.DELETE)) {
          i = deleter.delete(splitText, database, i);
+      }
+      else if (token.toLowerCase().equals(Constants.SELECT)) {
+         i = selecter.select(splitText, database, i);
       }
     }
   }
