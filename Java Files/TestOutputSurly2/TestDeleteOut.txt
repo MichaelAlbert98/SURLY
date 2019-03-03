@@ -1,0 +1,56 @@
+Creating course with 3 attributes.
+Creating prereq with 2 attributes.
+Inserting 3 attributes to course.
+Inserting 3 attributes to course.
+Inserting 3 attributes to course.
+Inserting 3 attributes to course.
+Inserting 3 attributes to course.
+Inserting 3 attributes to course.
+Inserting 3 attributes to course.
+Inserting 2 attributes to prereq.
+Inserting 2 attributes to prereq.
+Inserting 2 attributes to prereq.
+Inserting 2 attributes to prereq.
+Inserting 2 attributes to prereq.
+Inserting 2 attributes to prereq.
+Inserting 2 attributes to prereq.
+Inserting 2 attributes to prereq.
+Inserting 2 attributes to prereq.
+Inserting 2 attributes to prereq.
+
+Relation name: course, Attribute format: cnum char 8 | title char 30 | credits num 4
+-------------------------------------------------
+  cnum                title             cred
+ CSCI141     COMPUTER PROGRAMMING I       4
+ CSCI145  COMP PROG & LINER DATA STRUCT   4
+ CSCI241         DATA STRUCTURES          4
+ CSCI301        FORMAL LANGUAGES          5
+ CSCI305           ALGORITHMS             4
+ CSCI330        DATABASE SYSTEMS          4
+ CSCI345     OBJECT ORIENTED DESIGN       4
+
+Relation name: prereq, Attribute format: cnum char 8 | pnum char 8
+-------------------------------------------------
+  cnum     pnum
+ CSCI141  MATH112
+ CSCI145  MATH115
+ CSCI145  CSCI141
+ CSCI241  MATH124
+ CSCI241  CSCI145
+ CSCI301  CSCI145
+ CSCI305  CSCI301
+ CSCI305  CSCI241
+ CSCI330  CSCI241
+ CSCI345  CSCI241
+
+Could not find the specified name.
+Could not find the specified name.
+Format is not correct.
+
+Relation name: course, Attribute format: cnum char 8 | title char 30 | credits num 4
+-------------------------------------------------
+  cnum                title             cred
+
+Relation name: prereq, Attribute format: cnum char 8 | pnum char 8
+-------------------------------------------------
+  cnum     pnum
