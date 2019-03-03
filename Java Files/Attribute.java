@@ -50,4 +50,9 @@ public class Attribute {
       return true;
    }
 
+   //Creates a deep copy so temp relations can be created without references to original
+   public Attribute deepCopy() {
+     Attribute copy = new Attribute(this.name,this.dataType,this.length);
+     return copy;
+   }
 }
