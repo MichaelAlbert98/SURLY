@@ -38,13 +38,12 @@ PRINT COURSE, PREREQ;
 
 /*  DELETING TUPLES  */
 DELETE CATALOG;
-test = SELECT COURSE WHERE credits != 4 and cnum = csci141 or credits = 4;
+temp = SELECT COURSE WHERE credits = 4 AND title = 'computer programming i' OR cnum != csci141;
 DELETE PREREQ;
 DELETE FAKE;
 
 
 /*  PRINTING DELETED TUPLES  */
-PRINT COURSE, PREREQ, test;
-
+PRINT COURSE, PREREQ, temp;
 
 
