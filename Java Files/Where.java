@@ -65,7 +65,7 @@ public class Where {
 
     int relAttrForm;
     int temp = i; //make temp variable to maintain i
-    while (splitText.get(temp+4).toLowerCase().equals("and") || splitText.get(temp+4).toLowerCase().equals("or")) {
+    while (splitText.get(temp+4).equals("and") || splitText.get(temp+4).equals("or") || splitText.get(temp+4).equals(";")) {
 
       meetsConds = new ArrayList<Boolean>();
       for (j=0; j<allTuples.size(); j++) {
