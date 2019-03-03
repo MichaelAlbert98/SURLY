@@ -36,6 +36,10 @@ public class Relation {
      return this.tuples;
    }
 
+   public void setTuples(LinkedList<Tuple> tups) {
+     this.tuples = tups;
+   }
+
    public LinkedList<Attribute> getAttributeFormat() {
      return this.attributeFormat;
    }
