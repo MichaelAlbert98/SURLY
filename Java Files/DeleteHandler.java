@@ -70,24 +70,4 @@ public class DeleteHandler {
        return i;
      }
    }
-
-     //old version of DeleteHandler
-     /*
-     int j = i + 1;
-     int k = i + 2;
-     if (k < splitText.size() && !Helper.isKeyword(splitText.get(j)) && !Helper.isBreakChar(splitText.get(j))
-        && splitText.get(k).trim().equals(";")) {
-        String relationName = splitText.get(j).trim().toLowerCase();
-        for (int a = 1; a < database.size(); a++) {
-          if (database.get(a).getName().equals(relationName)) {
-            database.get(a).getTuples().clear();
-            return i + 2;
-          }
-        }
-        System.out.println(Constants.ERR_NOT_FND);
-        return i + 2;
-     }
-     System.out.println(Constants.ERR_BAD_FORMAT);
-     return i;
-   } */
 }
