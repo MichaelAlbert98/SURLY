@@ -1,8 +1,9 @@
 //Relation.java - Class for a relation in the database. Contains the relation
-//name, the required tuple format, and tuples that have been inserted.
+//name, whether it is temporary, the required tuple format, and tuples that
+//have been inserted.
 //Created by Michael Albert
 //Created January 27, 2019
-//Revised January 28, 2019
+//Revised March 2, 2019
 
 import java.util.*;
 import java.lang.*;
@@ -10,26 +11,33 @@ import java.lang.*;
 public class Relation {
 
   private String name;
+  private boolean temp;
   private LinkedList<Attribute> attributeFormat;
   private LinkedList<Tuple> tuples;
 
    // ----------------- Constructors -----------------------
    public Relation(String name, LinkedList<Attribute> af){
      this.name = name;
+     this.temp = false;
      this.attributeFormat = af;
      this.tuples = new LinkedList<Tuple>();
    }
 
    public Relation(String name) {
      this.name = name;
+     this.temp = false;
      this.attributeFormat = null;
      this.tuples = new LinkedList<Tuple>();
    }
 
-   // -------------------Getters ---------------------------
+   // -------------------Getters and Setters ---------------------------
 
    public String getName() {
      return this.name;
+   }
+
+   public boolean getTemp() {
+     return this.temp;
    }
 
    public LinkedList<Tuple> getTuples() {
@@ -44,21 +52,22 @@ public class Relation {
      return this.attributeFormat;
    }
 
-   public int getAttrFormSpecif(String name) {
-     for (int i=0; i < attributeFormat.size(); i++) {
-       if (attributeFormat.get(i).getName().equals(name.toLowerCase())) {
-         return i;
-       }
-     }
-     return -1;
-   }
-
    public String getAttributeType(int index) {
       return this.attributeFormat.get(index).getDataType();
    }
 
    public int getAttributeLength(int index) {
       return this.attributeFormat.get(index).getLength();
+   }
+
+   public void setTemp(boolean value) {
+     this.temp = value;
+     return;
+   }
+
+   public void setAF(LinkedList<Attribute> af) {
+     this.attributeFormat = af;
+     return;
    }
 
    // ---------------- Other methods ----------------------
@@ -75,6 +84,16 @@ public class Relation {
          }
       }
       return false;
+   }
+
+   //Returns positioning of an attribute with a given name
+   public int getAttrFormSpecif(String name) {
+     for (int i=0; i < attributeFormat.size(); i++) {
+       if (attributeFormat.get(i).getName().equals(name.toLowerCase())) {
+         return i;
+       }
+     }
+     return -1;
    }
 
    public String toString() {
