@@ -48,7 +48,7 @@ public class MakeTokens {
             i++;
             if (text.charAt(i) == '\'') {
               i++;
-              tokenList.add(result);
+              tokenList.add(result.toLowerCase());
               break;
             }
             result = result + text.charAt(i);
@@ -94,7 +94,7 @@ public class MakeTokens {
       result = result + text.charAt(i);
       i++;
     }
-    tokenList.add(result);
+    tokenList.add(result.toLowerCase());
     return tokenList;
   }
 }
