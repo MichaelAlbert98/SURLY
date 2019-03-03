@@ -23,7 +23,7 @@ public class Tuple {
      this.attributes = new LinkedList<Attribute>();
    }
 
-   // --------------- Getters -------------------------
+   // --------------- Getters and Setters -------------------------
 
    public LinkedList<Attribute> getAttr() {
      return this.attributes;
@@ -31,6 +31,16 @@ public class Tuple {
 
    public String getName() {
      return this.name;
+   }
+
+   public void setAttr(LinkedList<Attribute> attr) {
+     this.attributes = attr;
+     return;
+   }
+
+   public void setName(String name) {
+     this.name = name;
+     return;
    }
 
    // --------------- Other Methods --------------------
@@ -70,5 +80,18 @@ public class Tuple {
          }
       }
       return true;
+   }
+
+   //Creates a deep copy so temp relations can be created without references to original
+   public Tuple deepCopy() {
+     Tuple copy = new Tuple();
+     LinkedList<Attribute> copyAttrs = new LinkedList<Attribute>();
+     for (int i = 0; i < this.attributes.size(); i++) {
+       Attribute copyAttr = this.attributes.get(i).deepCopy();
+       copyAttrs.add(copyAttr);
+     }
+     copy.setName(this.name);
+     copy.setAttr(copyAttrs);
+     return copy;
    }
 }
