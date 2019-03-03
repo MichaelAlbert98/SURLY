@@ -10,116 +10,25 @@ public class Helper {
 
   private Helper() {}
 
-  //returns boolean that lets user know if the format is correct
-  public static boolean whereFormat(ArrayList<String> splitText, int i) {
-    i++;
-    while ((i+4) < splitText.size() && !splitText.get(i).equals(";")) {
-      //return if first part of conditions isn't non-keyword string
-      if (Helper.isKeyword(splitText.get(i+1)) || Helper.isBreakChar(splitText.get(i+1))) {
-        return false;
-      }
-      //return if second part of conditions isn't operator
-      if (!Constants.OPERATORS.contains(splitText.get(i+2))) {
-        return false;
-      }
-      //return if third part of conditions isn't non-keyword string
-      if (Helper.isKeyword(splitText.get(i+3)) || Helper.isBreakChar(splitText.get(i+3))) {
-        return false;
-      }
-      //check if 'and' or 'or' or ';'
-      if ((!splitText.get(i+4).toLowerCase().equals("and")) && (!splitText.get(i+4).toLowerCase().equals("or"))
-         && (!splitText.get(i+4).toLowerCase().equals(";")))  {
-        return false;
-      }
-      i = i +4;
-    }
-    return true;
-  }
-
-  //returns a linkedlist of tuples which match the given conditions
-  public static LinkedList<Tuple> whereFind(ArrayList<String> splitText, LinkedList<Relation> database, int i) {
-    //get specified relation
-    Relation relation;
-    boolean found = false;
-    int j = 0;
-    while (!found) {
-      if (database.get(j).getName().equals(splitText.get(i-1).toLowerCase())) {
-        found = true;
-        relation = database.get(j);
-      }
-      j++;
-    }
-    LinkedList<Tuple> allTuples = relation.getTuples();
-
-    //create list of a list of tuples which fit each group of 'and' qualifiers
-    LinkedList<LinkedList<Tuple>> andTuples = new LinkedList<LinkedList<Tuple>>();
-
-    int relAttrForm;
-    int temp = i; //make temp variable to maintain i
-    while (splitText.get(temp+4).equals(";") || splitText.get(temp+4).toLowerCase().equals("and") || splitText.get(temp+4).toLowerCase().equals("or")) {
-      //start off with all tuples in list
-      LinkedList<Tuple> andGroupTuple = allTuples;
-
-      //do first condition no matter what
-      relAttrForm = relation.getAttrFormSpecif(splitText.get(temp+1));
-      for (j=0; j<andGroupTuple.size(); j++) {
-        if (!compareCheck(relAttrForm, andGroupTuple.get(j), splitText.get(temp+2), splitText.get(temp+3))) {
-          andGroupTuple.remove(j);
-        }
-      }
-      //continue narrowing down if 'and' statements follow
-      while (splitText.get(temp+4).toLowerCase().equals("and")) {
-
-        temp = temp + 4;
-        //narrow down List to tuples who fulfill condition
-        relAttrForm = relation.getAttrFormSpecif(splitText.get(temp+1));
-        for (j=0; j<andGroupTuple.size(); j++) {
-          if (!compareCheck(relAttrForm, andGroupTuple.get(j), splitText.get(temp+2), splitText.get(temp+3))) {
-            andGroupTuple.remove(j);
-          }
-        }
-
-      }
-      andTuples.add(andGroupTuple);
-      temp = temp + 4;
-    }
-
-    //now 'or' together all of the grouped 'and' Tuples into a single linkedlist
-    temp = i; //remake temp
-    int count = 1;
-    while (count < andTuples.size()) {
-
-      //check each grouped 'and'. If it has tuples not in the first grouped 'and', add them.
-      for (j=0; j<andTuples.get(count).size(); j++) {
-        if (!andTuples.get(0).contains(andTuples.get(count).get(j))) {
-          andTuples.get(0).add(andTuples.get(count).get(j));
-        }
-      }
-
-      count++;
-    }
-
-    return andTuples.get(0);
-  }
-
-  private static boolean compareCheck(int relAttrForm, Tuple tup, String operator, String cond) {
-    boolean meetsCond = false;
+  public static boolean compareCheck(int relAttrForm, Tuple tup, String operator, String cond) {
     Attribute attr = tup.getAttr().get(relAttrForm);
     String type = getType(cond);
 
     //check that condition is of correct type for given attribute
     if (attr.getDataType().equals("num") && type.equals("num")) {
       int condNum = Integer.parseInt(cond);
-
+      boolean meetsCond = testNumCond(Integer.parseInt(attr.getName()),operator,Integer.parseInt(cond));
+      return meetsCond;
     }
 
     //check that condition is of correct type for given attribute
-    else if (attr.getDataType().equals("string") && type.equals("string")) {
-      
+    else if (attr.getDataType().equals("char") && type.equals("string")) {
+      boolean meetsCond = testStringCond(attr.getName(),operator,cond);
+      return meetsCond;
     }
 
     //return false if neither if statement procs
-    return meetsCond;
+    return false;
   }
 
   //determines if String is an int or string.
@@ -127,7 +36,59 @@ public class Helper {
     if (cond.matches("-?\\d+")) {
       return "num";
     }
-    return "string"
+    return "string";
+  }
+
+  private static boolean testNumCond(int attr, String op, int cond) {
+    switch (op) {
+      case "=":
+        if (attr == cond) {
+          return true;
+        }
+        break;
+      case "!=":
+        if (attr != cond) {
+          return true;
+        }
+        break;
+      case "<":
+        if (attr < cond) {
+          return true;
+        }
+        break;
+      case ">":
+        if (attr > cond) {
+          return true;
+        }
+        break;
+      case "<=":
+        if (attr <= cond) {
+          return true;
+        }
+        break;
+      case ">=":
+        if (attr >= cond) {
+          return true;
+        }
+        break;
+    }
+    return false;
+  }
+
+  private static boolean testStringCond(String attr, String op, String cond) {
+    switch (op) {
+      case "=":
+        if (attr.equals(cond)) {
+          return true;
+        }
+        break;
+      case "!=":
+        if (!attr.equals(cond)) {
+          return true;
+        }
+        break;
+    }
+    return false;
   }
 
   // Returns true if the given string is a keyword (relation, insert, print: case insensitive)
