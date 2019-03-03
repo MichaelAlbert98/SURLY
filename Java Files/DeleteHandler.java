@@ -9,41 +9,28 @@ import java.lang.*;
 
 public class DeleteHandler {
 
+   private int i;
+   private String relName;
+
    public DeleteHandler(){}
 
-   public int delete(ArrayList<String> splitText, LinkedList<Relation> database, int i) {
-     String relationName = "";
-     i++;
+   public int delete(ArrayList<String> splitText, LinkedList<Relation> database, int ix) {
+     this.i = ix;
+     Where where = new Where();
 
-     if (i < splitText.size() && !Helper.isKeyword(splitText.get(i)) && !Helper.isBreakChar(splitText.get(i))) {
-       relationName = splitText.get(i).toLowerCase(); //make sure relation name is valid
-     }
-     else {
-       System.out.println(Constants.ERR_BAD_FORMAT);
-       i--;
-       return i;
+     if (!formatCheck(splitText)) {
+       return this.i;
      }
 
-     i++;
-
-     if (!splitText.get(i).equals(";") && !splitText.get(i).toLowerCase().equals("where")) {
-       System.out.println(Constants.ERR_BAD_FORMAT);
-       i--;
-       return i;
-     }
-
-     //find tuples that match where conditions and delete
-     if (splitText.get(i).toLowerCase().equals("where")) {
-       Where where = new Where();
-       if (where.whereFormat(splitText,i)) {
-         ArrayList<Boolean> deleteList = where.whereFind(splitText,database,i);
+     if (splitText.get(this.i).equals("where")) {
+       if (where.whereFormat(splitText,this.i)) {
+         ArrayList<Boolean> deleteList = where.whereFind(splitText,database,this.i);
          for (int j=1; j<database.size(); j++) {
-           if (database.get(j).getName().equals(relationName)) {
-             for (int k=0; k<deleteList.size(); k++) {
+           if (database.get(j).getName().equals(relName)) {
+             for (int k=deleteList.size()-1; k>=0; k--) {
                if (deleteList.get(k)) {
                  database.get(j).getTuples().remove(k);
                  deleteList.remove(k);
-                 k--;
                }
              }
            }
@@ -52,22 +39,41 @@ public class DeleteHandler {
        else { //format not correct, return
          System.out.println(Constants.ERR_BAD_FORMAT);
        }
-       while (!splitText.get(i).equals(";")) {
-         i++;
+       while (!splitText.get(this.i).equals(";")) {
+         this.i++;
        }
-       return i;
+       return this.i;
      }
 
      //delete all tuples in given relation
      else {
        for (int j = 1; j < database.size(); j++) {
-         if (database.get(j).getName().equals(relationName)) {
+         if (database.get(j).getName().equals(relName)) {
            database.get(j).getTuples().clear();
-           return i;
+           return this.i;
          }
        }
        System.out.println(Constants.ERR_NOT_FND);
-       return i;
+       return this.i;
      }
+   }
+
+   private boolean formatCheck(ArrayList<String> splitText) {
+     i++;
+
+     if (i >= splitText.size() || Helper.isKeyword(splitText.get(i)) || Helper.isBreakChar(splitText.get(i))) {
+       i--;
+       return false;
+     }
+
+     relName = splitText.get(i);
+     i++;
+
+     if (!splitText.get(i).equals(";") && !splitText.get(i).toLowerCase().equals("where")) {
+       i--;
+       return false;
+     }
+
+     return true;
    }
 }
