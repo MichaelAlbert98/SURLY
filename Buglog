@@ -1,12 +1,8 @@
 1.) line 97 of Where.java. Need to check if temp+4 is ";" to end the loop.
 Otherwise run risk of user inputting a ";" 4 tokens afterwards and ruining the select/delete.
 
-2.) Do more testing with selecting/deleting from relations. May still be possible to break.
-
-3.) FOR GOD'S SAKE, check if something is temp or not before deleting/inserting/destroying.
+3.) Check if something is temp or not before deleting/inserting/destroying.
 
 4.) Check if temp relation name already exists in database. If so, disallow it. (New constant message?)
 
 5.) Make sure that actual relations can overwrite temp relations. (Possible with current framework?)
-
-6.) Test if queries on temp relations work. 
