@@ -47,12 +47,12 @@ public class Where {
     Boolean found = false;
     int j = 0;
     while (!found) {
-      if (database.get(j).getName().equals(splitText.get(i-1).toLowerCase())) {
-        found = true;
-      }
-      else if (j == database.size()){
+      if (j == database.size()){
         System.out.println(Constants.ERR_NOT_FND);
         return null;
+      }
+      else if (database.get(j).getName().equals(splitText.get(i-1).toLowerCase())) {
+        found = true;
       }
       j++;
     }
@@ -65,7 +65,7 @@ public class Where {
 
     int relAttrForm;
     int temp = i; //make temp variable to maintain i
-    while (splitText.get(temp+4).equals("and") || splitText.get(temp+4).equals("or") || splitText.get(temp+4).equals(";")) {
+    while ((splitText.get(temp+4).equals("and") || splitText.get(temp+4).equals("or") || splitText.get(temp+4).equals(";")) && !splitText.get(temp).equals(";")) {
 
       meetsConds = new ArrayList<Boolean>();
       for (j=0; j<allTuples.size(); j++) {
