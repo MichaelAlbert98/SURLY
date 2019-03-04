@@ -16,24 +16,40 @@ public class DestroyHandler {
      int k = i + 2;
      if (k < splitText.size() && !Helper.isKeyword(splitText.get(j)) && !Helper.isBreakChar(splitText.get(j))
         && splitText.get(k).trim().equals(";")) {
-        String relationName = splitText.get(j).trim().toLowerCase();
+        String relationName = splitText.get(j).trim();
+
+        Relation rel = getRelation(relationName, database);
+        if (rel == null) {
+          System.out.println(Constants.ERR_NOT_FND);
+          return i + 2;
+        }
+        else if (rel.getTemp()) {
+          System.out.println(Constants.ERR_TEMP_MODIFY);
+          return i + 2;
+        }
+        database.remove(rel);
+
         //remove relation from catalog
-        for (int a = 0; a < database.get(0).getTuples().size(); a++) {
+        for (int a = database.get(0).getTuples().size()-1; a >= 0; a--) {
           if (database.get(0).getTuples().get(a).getName().equals(relationName)) {
             database.get(0).getTuples().remove(a);
           }
         }
-        //remove relation from database
-        for (int a = 1; a < database.size(); a++) {
-          if (database.get(a).getName().equals(relationName)) {
-            database.remove(a);
-            return i + 2;
-          }
-        }
-        System.out.println(Constants.ERR_NOT_FND);
         return i + 2;
      }
      System.out.println(Constants.ERR_BAD_FORMAT);
      return i;
+   }
+
+   private Relation getRelation(String s, LinkedList<Relation> db) {
+      ListIterator<Relation> l = db.listIterator();
+      Relation r = l.next(); //Skip catalog
+      while(l.hasNext()) {
+        r = l.next();
+        if(r.getName().equals(s)) {
+            return r;
+         }
+      }
+      return null;
    }
 }
