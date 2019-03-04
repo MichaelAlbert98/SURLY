@@ -27,6 +27,11 @@ public class DeleteHandler {
          ArrayList<Boolean> deleteList = where.whereFind(splitText,database,this.i);
          for (int j=1; j<database.size(); j++) {
            if (database.get(j).getName().equals(relName)) {
+             //can't delete temp relations
+             if (database.get(j).getTemp()) {
+               System.out.println(Constants.ERR_TEMP_MODIFY);
+               return Helper.findSemicolon(splitText, this.i);
+             }
              for (int k=deleteList.size()-1; k>=0; k--) {
                if (deleteList.get(k)) {
                  database.get(j).getTuples().remove(k);
@@ -39,16 +44,18 @@ public class DeleteHandler {
        else { //format not correct, return
          System.out.println(Constants.ERR_BAD_FORMAT);
        }
-       while (!splitText.get(this.i).equals(";")) {
-         this.i++;
-       }
-       return this.i;
+       return Helper.findSemicolon(splitText, this.i);
      }
 
      //delete all tuples in given relation
      else {
        for (int j = 1; j < database.size(); j++) {
          if (database.get(j).getName().equals(relName)) {
+           //can't delete temp relations
+           if (database.get(j).getTemp()) {
+             System.out.println(Constants.ERR_TEMP_MODIFY);
+             return Helper.findSemicolon(splitText, this.i);
+           }
            database.get(j).getTuples().clear();
            return this.i;
          }
