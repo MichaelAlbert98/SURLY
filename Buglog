@@ -1,8 +1,5 @@
-1.) line 97 of Where.java. Need to check if temp+4 is ";" to end the loop.
-Otherwise run risk of user inputting a ";" 4 tokens afterwards and ruining the select/delete.
+1.) Check if something is temp before inserting/deleting/destroying
+2.) Make select/insert overwrite temp relations
+3.) Make sure temp relations can't overwrite non-temp
 
-3.) Check if something is temp or not before deleting/inserting/destroying.
-
-4.) Check if temp relation name already exists in database. If so, disallow it. (New constant message?)
-
-5.) Make sure that actual relations can overwrite temp relations. (Possible with current framework?)
+Bug: TestSelect fails on print of selected catalog. 
