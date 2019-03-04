@@ -1,6 +1,7 @@
-/* Uses the sample input file to test the following cases that may break DELETE: Deleting the catalog,
-deleting from a non-existent relation, deleting with improper format, deleting normally, deleting with 
-condition, deleting with multiple conditions, deleting from a temporary relation */
+/* Uses the sample input file to test the following cases that may break SELECT: Selecting the catalog,
+selecting from a non-existant relation, selecting with improper format, selecting normally, selecting 
+with condition, selecting with conditions, selecting from a temp relation, creating a relation with
+the same name as a non-temp relation, creating a relation with the same name as a temp relation. */
 
 /*  RELATION
     DEFINITIONS */
@@ -33,22 +34,24 @@ INSERT PREREQ CSCI305 CSCI241;
 INSERT PREREQ CSCI330 CSCI241;
 INSERT PREREQ CSCI345 CSCI241;
 
-/*  CREATING TEMP TUPLES */
-TEMP = SELECT COURSE;
-
 /*  PRINTING TUPLES  */
-PRINT COURSE, PREREQ, TEMP;
+PRINT COURSE, PREREQ;
 
-/*  DELETING TUPLES  */
-DELETE CATALOG;
-DELETE FAKE;
-DELETE COURSE
-DELETE COURSE;
-DELETE PREREQ WHERE cnum = csci241;
-DELETE PREREQ WHERE cnum = csci141 or pnum = csci241 AND cnum = csci305;
-DELETE TEMP;
+/*  SELECTING TUPLES  */
+TEST = SELECT CATALOG;
+TEST2 = SELECT FAKE;
+TEST3 = SELECT COURSE
+SELECT COURSE;
+TEST4 = SELECT COURSE;
+TEST5 = SELECT COURSE;
+TEST6 = SELECT PREREQ WHERE cnum = csci241;
+TEST7 = SELECT PREREQ WHERE cnum = csci141 or pnum = csci241 AND cnum = csci305;
+TEST8 = SELECT TEST6 WHERE cnum = csci141;
+COURSE = SELECT PREREQ;
+TEST5 = SELECT PREREQ WHERE cnum = csci305 AND pnum = csci241;
 
-/*  PRINTING DELETED TUPLES  */
-PRINT COURSE, PREREQ, TEMP;
+
+/*  PRINTING SELECTED TUPLES  */
+PRINT TEST, TEST2, TEST3, TEST4, TEST5, TEST6, TEST7, TEST8, COURSE;
 
 
