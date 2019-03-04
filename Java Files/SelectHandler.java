@@ -32,25 +32,34 @@ public class SelectHandler {
      //find tuples that match where conditions and make temp relation out of them.
      if (splitText.get(i).toLowerCase().equals("where")) {
        if (where.whereFormat(splitText,i)) {
-         ArrayList<Boolean> selectList = where.whereFind(splitText,database,i);
          for (int j = 0; j < database.size(); j++) {
            if (database.get(j).getName().equals(relName)) {
-             tempRel.setAF(database.get(j).getAttributeFormat());
+
+             //can't overwrite non-temp relations
+             if (tempName.equals(relName) && !database.get(j).getTemp()) {
+               System.out.println(Constants.ERR_NAME_OVERWRITE);
+               return this.i;
+             }
+
+             //delete old temp relation
+             else if (tempName.equals(relName) && database.get(j).getTemp()) {
+               database.remove(j);
+             }
+
+             //add attribute format to catalog
+             LinkedList<Attribute> attrFormat = database.get(j).getAttributeFormat();
+             tempRel.setAF(attrFormat);
+             addToCat(attrFormat);
+
+             //add tuples which meet conditions
+             ArrayList<Boolean> selectList = where.whereFind(splitText,database,i);
              for (int k=0; k<selectList.size(); k++) {
                if (selectList.get(k)) {
                  Tuple copy = database.get(j).getTuples().get(k).deepCopy();
                  tempRel.getTuples().add(copy);
                }
              }
-             //can't overwrite non-temp relations
-             if (tempName.equals(relName) && !database.get(j).getTemp()) {
-               System.out.println(Constants.ERR_NAME_OVERWRITE);
-               return Helper.findSemicolon(splitText, this.i);
-             }
-             //delete old temp relation
-             else if (tempName.equals(relName) && database.get(j).getTemp()) {
-               database.remove(j);
-             }
+
              database.add(tempRel);
            }
          }
@@ -65,20 +74,29 @@ public class SelectHandler {
      else {
        for (int j = 0; j < database.size(); j++) {
          if (database.get(j).getName().equals(relName)) {
-           tempRel.setAF(database.get(j).getAttributeFormat());
-           for (int k = 0; k < database.get(j).getTuples().size(); k++) {
-             Tuple copy = database.get(j).getTuples().get(k).deepCopy();
-             tempRel.getTuples().add(copy);
-           }
+
            //can't overwrite non-temp relations
-           if (tempName.equals(relName) && !database.get(j).getTemp()) {
+           if (inDatabase(tempName) && !database.get(j).getTemp()) {
              System.out.println(Constants.ERR_NAME_OVERWRITE);
              return this.i;
            }
+
            //delete old temp relation
            else if (tempName.equals(relName) && database.get(j).getTemp()) {
              database.remove(j);
            }
+
+           //add attribute format to catalog
+           LinkedList<Attribute> attrFormat = database.get(j).getAttributeFormat();
+           tempRel.setAF(attrFormat);
+           addToCat(attrFormat);
+
+           //add all tuples
+           for (int k = 0; k < database.get(j).getTuples().size(); k++) {
+             Tuple copy = database.get(j).getTuples().get(k).deepCopy();
+             tempRel.getTuples().add(copy);
+           }
+
            database.add(tempRel);
            return this.i;
          }
@@ -115,14 +133,20 @@ public class SelectHandler {
      return true;
    }
 
-   private Relation getRelation(String s) {
-      ListIterator<Relation> l = database.listIterator();
-      while(l.hasNext()) {
-         Relation r = l.next();
-        if(r.getName().equals(s)) {
-            return r;
-         }
-      }
-      return null;
+   private void addToCat(LinkedList<Attribute> attrList) {
+     for (int j=0;j<attrList.size();j++) {
+       Tuple catTuple = new Tuple(tempName);
+       catTuple.addAttribute(attrList.get(j));
+       database.get(0).getTuples().add(catTuple); //add relation to catalog
+     }
+   }
+
+   private boolean inDatabase(String tempName) {
+     for (int j = 1; j < database.size();j++) {
+       if (database.get(j).getName().equals(tempName)) {
+         return true;
+       }
+     }
+     return false;
    }
 }
