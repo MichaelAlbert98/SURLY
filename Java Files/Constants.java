@@ -12,6 +12,8 @@ public class Constants {
   public final static String ERR_BAD_FORMAT = "Format is not correct.";
   public final static String ERR_NOT_FND = "Could not find the specified name.";
   public final static String ERR_DUP_ITEM = "This name already exists.";
+  public final static String ERR_NAME_OVERWRITE = "Cannot overwrite a non-temporary relation.";
+  public final static String ERR_TEMP_MODIFY = "Cannot modify temporary relations";
   public final static String ERR_ATT_OVERFLOW = "Too many attributes for selected relation";
   public final static String ERR_NO_ATT = "No insert names given.";
   public final static String ERR_INST_CAT = "Cannot insert tuples to Catalog";
