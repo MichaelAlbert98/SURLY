@@ -5,12 +5,13 @@ public class ProjectionHandler {
    public ProjectionHandler(){}
    private LinkedList<Relation> db;
    
-   public void project (ArrayList<String> tokens, LinkedList<Relation> database, int ix) {
+   public int project (ArrayList<String> tokens, LinkedList<Relation> database, int ix) {
       db = database;
       String name = parseName(tokens, ix);
       Relation relation = parseRelation(tokens, ix);
       LinkedList<Attribute> attributes = parseAttributes(tokens, relation, ix);
-      
+      System.out.println("name: " + name + "\nRelation: " + relation + "\nAttributes" + attributes);
+      return ix + 1;
    }
    
    private String parseName(ArrayList<String> tokens, int ix) {
@@ -28,6 +29,7 @@ public class ProjectionHandler {
    }
    
    private LinkedList<Attribute> parseAttributes(ArrayList<String> tokens, Relation r, int ix) {
+      Stack<Attribute> attributeStack = new Stack<Attribute>();
       LinkedList<Attribute> attributes = new LinkedList<Attribute>();
       LinkedList<Attribute> relationAttributes = r.getAttributeFormat();
       do{
@@ -35,12 +37,14 @@ public class ProjectionHandler {
          String att = tokens.get(ix);
          Attribute attribute = getAttribute(relationAttributes, att);
          if(attribute != null) {
-            attributes.push(attribute);
+            attributeStack.push(attribute);
          }
          ix++;
       }
       while (tokens.get(ix).equals(","));
-      String s = tokens.get(ix);
+      while(!attributeStack.empty()) {
+         attributes.push(attributeStack.pop());
+      }
       return attributes;
    }
    
