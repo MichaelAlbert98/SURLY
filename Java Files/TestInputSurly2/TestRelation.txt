@@ -1,6 +1,1 @@
-/*Tests the following case that may break RELATION: Adding a relation of the same name as one that exists, adding a relation called catalog. (Note: Every other possible edge case that may break the program that could be thought of was already tested in HW1.) */
-
-RELATION COURSE (CNUM CHAR 8, TITLE CHAR 30, CREDITS NUM 4);
-RELATION COURSE (TEST CHAR 8, TEST2 NUM 5, TEST3 CHAR 25);
-RELATION CATALOG (CNUM CHAR 8, TITLE CHAR 30, CREDITS NUM 4);
-PRINT COURSE, CATALOG;
+not tested

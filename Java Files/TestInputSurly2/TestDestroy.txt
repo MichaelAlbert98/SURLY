@@ -1,4 +1,4 @@
-/*Uses the sample input file to test the following cases that may break DESTROY: Destroying the catalog, destroying from a non-existent relation, destroying with improper format*/
+/*Uses the sample input file to test the following cases that may break DESTROY: Destroying the catalog, destroying from a non-existent relation, destroying with improper format, destroying a temp relation*/
 
 /*  RELATION
     DEFINITIONS */
@@ -27,19 +27,21 @@ INSERT PREREQ CSCI305 CSCI241;
 INSERT PREREQ CSCI330 CSCI241;
 INSERT PREREQ CSCI345 CSCI241;
 
+/*  SELECTING TUPLES  */
+TEMP = SELECT PREREQ;
+
 /*  PRINTING TUPLES  */
-PRINT COURSE, PREREQ;
+PRINT CATALOG, COURSE, PREREQ, TEMP;
 
 /*  DESTROYING TUPLES  */
 DESTROY CATALOG;
 DESTROY COURSE;
-DESTROY PREREQ;
 DESTROY COURSE; /* Should give error since it no longer exists. */
 DESTROY COURSE
+DESTROY TEMP;
 
-
-/*  PRINTING DESTROYED TUPLES  */
-PRINT COURSE, PREREQ;
+/*  PRINTING TUPLES  */
+PRINT CATALOG, COURSE, PREREQ, TEMP;
 
 
 
