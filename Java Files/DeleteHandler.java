@@ -70,6 +70,7 @@ public class DeleteHandler {
 
      if (i >= splitText.size() || Helper.isKeyword(splitText.get(i)) || Helper.isBreakChar(splitText.get(i))) {
        i--;
+       System.out.println(Constants.ERR_BAD_FORMAT);
        return false;
      }
 
@@ -78,6 +79,7 @@ public class DeleteHandler {
 
      if (!splitText.get(i).equals(";") && !splitText.get(i).toLowerCase().equals("where")) {
        i--;
+       System.out.println(Constants.ERR_BAD_FORMAT);
        return false;
      }
 
