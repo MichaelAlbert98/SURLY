@@ -10,6 +10,13 @@ public class Helper {
 
   private Helper() {}
 
+    public static int findSemicolon(ArrayList<String> splitText, int i) {
+      while (!splitText.get(i).equals(";")) {
+        i++;
+      }
+      return i;
+    }
+
   public static boolean compareCheck(int relAttrForm, Tuple tup, String operator, String cond) {
     Attribute attr = tup.getAttr().get(relAttrForm);
     String type = getType(cond);
