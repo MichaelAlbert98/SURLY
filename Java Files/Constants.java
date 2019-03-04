@@ -26,6 +26,7 @@ public class Constants {
   public final static String DESTROY = "destroy";
   public final static String DELETE = "delete";
   public final static String SELECT = "select";
+  public final static String PROJECT = "project";
   public final static String CHAR = "char";
   public final static String NUM = "num";
 
