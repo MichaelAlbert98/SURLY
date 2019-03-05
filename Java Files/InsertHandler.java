@@ -17,21 +17,29 @@ public class InsertHandler {
     this.i = j;
     int count = 0; // Number of attrubutes in insertion
     String relationName = parseRelationName(splitText, this.i);
-    if(relationName == null) {
+    if (relationName == null) {
       return this.i;
     }
     Relation r = getRelation(relationName, database);
-    if(r == null) {
+
+    if (r == null) {
       return this.i + 1;
     }
-    if(r.getName().toLowerCase().equals(Constants.CATALOG)) {
+
+    else if (r.getTemp()) {
+      System.out.println(Constants.ERR_TEMP_MODIFY);
+      return i + 2;
+    }
+
+    else if (r.getName().equals(Constants.CATALOG)) {
       System.out.println(Constants.ERR_INST_CAT);
       return this.i;
     }
+
     Tuple tuple = new Tuple();
     this.i += 2;
-    while(this.i < splitText.size() && !splitText.get(this.i).equals(";")) {
-      if(checkFormat(splitText,count,r)) {
+    while (this.i < splitText.size() && !splitText.get(this.i).equals(";")) {
+      if (checkFormat(splitText,count,r)) {
         return this.i;
       }
       // Create an attribute object, storing the value in attribute.name, and filling out the rest from the relation
@@ -40,7 +48,7 @@ public class InsertHandler {
       this.i++;
       count++;
     }
-    if(checkTuple(count,tuple,r)) {
+    if (checkTuple(count,tuple,r)) {
       return this.i;
     }
     r.addTuple(tuple); // If no errors are found at this point, its safe to add to the tuple to the relation
@@ -85,7 +93,7 @@ public class InsertHandler {
     Iterator<Relation> dbIterator = db.iterator();
     Relation r;
     while(dbIterator.hasNext()) {
-      if((r = dbIterator.next()).getName().toLowerCase().equals(name)) {
+      if((r = dbIterator.next()).getName().equals(name)) {
          return r;
       }
     }
@@ -103,7 +111,7 @@ public class InsertHandler {
       if( tupleAttributes.get(j).getName().length() > relationFormat.get(j).getLength() ) {
          return false;
       }
-      if( tupleAttributes.get(j).getDataType().toLowerCase().equals(Constants.NUM) ) {
+      if( tupleAttributes.get(j).getDataType().equals(Constants.NUM) ) {
          if(!isNum(tupleAttributes.get(j).getName())) {
             return false;
          }
