@@ -32,7 +32,7 @@ public class SelectHandler {
      //find tuples that match where conditions and make temp relation out of them.
      if (splitText.get(i).toLowerCase().equals("where")) {
        if (where.whereFormat(splitText,i)) {
-         for (int j = 0; j < database.size(); j++) {
+         for (int j = 1; j < database.size(); j++) {
            if (database.get(j).getName().equals(relName)) {
 
              //can't overwrite non-temp relations
@@ -72,7 +72,7 @@ public class SelectHandler {
 
      //select all tuples in given relation
      else {
-       for (int j = 0; j < database.size(); j++) {
+       for (int j = 1; j < database.size(); j++) {
          if (database.get(j).getName().equals(relName)) {
 
            //can't overwrite non-temp relations
