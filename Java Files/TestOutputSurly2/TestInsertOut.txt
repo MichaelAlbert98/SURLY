@@ -1,0 +1,103 @@
+Creating course with 3 attributes.
+Creating prereq with 2 attributes.
+Creating offering with 7 attributes.
+Creating staff with 5 attributes.
+Creating interests with 2 attributes.
+Creating dept with 2 attributes.
+Cannot insert tuples to Catalog
+Break char found where it shouldn't be. Check the file for typos.
+Inserting 3 attributes to course.
+This name already exists.
+Inserting 3 attributes to course.
+Inserting 3 attributes to course.
+Inserting 3 attributes to course.
+Inserting 3 attributes to course.
+Format is not correct.
+Inserting 3 attributes to course.
+Inserting 2 attributes to prereq.
+Too many attributes for selected relation
+Inserting 2 attributes to prereq.
+Inserting 2 attributes to prereq.
+Inserting 2 attributes to prereq.
+Inserting 2 attributes to prereq.
+Inserting 2 attributes to prereq.
+Inserting 2 attributes to prereq.
+Inserting 2 attributes to prereq.
+Inserting 2 attributes to prereq.
+Inserting 2 attributes to prereq.
+Inserting 7 attributes to offering.
+Inserting 7 attributes to offering.
+Inserting 7 attributes to offering.
+Format is not correct.
+Inserting 7 attributes to offering.
+Inserting 7 attributes to offering.
+Inserting 7 attributes to offering.
+Inserting 5 attributes to staff.
+Inserting 5 attributes to staff.
+Inserting 2 attributes to interests.
+Inserting 2 attributes to interests.
+Inserting 2 attributes to dept.
+Inserting 2 attributes to dept.
+Inserting 2 attributes to dept.
+Cannot modify temporary relations
+
+Relation name: course, Attribute format: cnum char 8 | title char 30 | credits num 4
+-------------------------------------------------
+  cnum                title             cred
+ csci141     computer programming i       4
+ csci145  comp prog & liner data struct   4
+ csci241         data structures          4
+ csci301        formal languages          5
+ csci305           algorithms             4
+ csci345     object oriented design       4
+
+Relation name: offering, Attribute format: cnum char 8 | section num 5 | starthour char 5 | endhour char 5 | days char 5 | room char 10 | instructor char 20
+-------------------------------------------------
+  cnum   secti start endho  days    room         instructor
+ csci141 27921 13:00 13:50  mwf     cf115        jagodzinski
+ csci241 27922  9:00  9:50  mwf     aw205           islam
+ csci241 27935 11:00 11:50  mwf     aw403           bover
+ csci305 27950 14:00 14:50  mtwf    aw403            liu
+ csci330 27974 12:00 12:50  mtwf    cf314          deneke
+ csci330 27977 14:00 14:50  mtwf    cf316          deneke
+
+Relation name: prereq, Attribute format: cnum char 8 | pnum char 8
+-------------------------------------------------
+  cnum     pnum
+ csci141  math112
+ csci145  math115
+ csci145  csci141
+ csci241  math124
+ csci241  csci145
+ csci301  csci145
+ csci305  csci301
+ csci305  csci241
+ csci330  csci241
+ csci345  csci241
+
+
+Printing Catalog:
+Relation name: course, Attribute format: cnum char 8
+Relation name: course, Attribute format: title char 30
+Relation name: course, Attribute format: credits num 4
+Relation name: prereq, Attribute format: cnum char 8
+Relation name: prereq, Attribute format: pnum char 8
+Relation name: offering, Attribute format: cnum char 8
+Relation name: offering, Attribute format: section num 5
+Relation name: offering, Attribute format: starthour char 5
+Relation name: offering, Attribute format: endhour char 5
+Relation name: offering, Attribute format: days char 5
+Relation name: offering, Attribute format: room char 10
+Relation name: offering, Attribute format: instructor char 20
+Relation name: staff, Attribute format: name char 20
+Relation name: staff, Attribute format: spouse char 10
+Relation name: staff, Attribute format: rank char 5
+Relation name: staff, Attribute format: campusaddr char 10
+Relation name: staff, Attribute format: extension char 9
+Relation name: interests, Attribute format: name char 20
+Relation name: interests, Attribute format: interest char 30
+Relation name: dept, Attribute format: name char 20
+Relation name: dept, Attribute format: dept char 4
+Relation name: test, Attribute format: cnum char 8
+Relation name: test, Attribute format: title char 30
+Relation name: test, Attribute format: credits num 4
