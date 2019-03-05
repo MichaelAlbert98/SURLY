@@ -51,11 +51,13 @@ public class DeleteHandler {
      else {
        for (int j = 1; j < database.size(); j++) {
          if (database.get(j).getName().equals(relName)) {
+
            //can't delete temp relations
            if (database.get(j).getTemp()) {
              System.out.println(Constants.ERR_TEMP_MODIFY);
-             return Helper.findSemicolon(splitText, this.i);
+             return this.i + 2;
            }
+
            database.get(j).getTuples().clear();
            return this.i;
          }
