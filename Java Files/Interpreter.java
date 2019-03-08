@@ -25,6 +25,7 @@ public class Interpreter {
     DeleteHandler deleter = new DeleteHandler();
     SelectHandler selecter = new SelectHandler();
     ProjectionHandler projecter = new ProjectionHandler();
+    JoinHandler joiner = new JoinHandler();
     LinkedList<Relation> database = new LinkedList<Relation>();
     Relation catalog = new Relation(Constants.CATALOG);
     database.add(catalog);
@@ -51,6 +52,9 @@ public class Interpreter {
       }
       else if (token.toLowerCase().equals(Constants.PROJECT)) {
          i = projecter.project(splitText, database, i);
+      }
+      else if (token.toLowerCase().equals(Constants.JOIN)) {
+         i = joiner.join(splitText, database, i);
       }
     }
   }
