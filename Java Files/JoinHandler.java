@@ -59,27 +59,75 @@ public class JoinHandler {
          return i + 8;
       }
       
+      int attAPos = getAttributePosition(relA, attA);
+      int attBPos = getAttributePosition(relB, attB);
+      if(attAPos == -1 || attBPos == -1) {
+         System.out.println(Constants.ERR_JOIN_LOGIC);
+         return i + 8;
+      }
+      
+      // Now that we have all of the relevant data, create the join relation
+      ListIterator<Tuple> relAIter = relA.getTuples().listIterator();
+      while(relAIter.hasNext()) {
+         LinkedList<Attribute> aTuple = relAIter.next().getAttr();
+         ListIterator<Tuple> relBIter = relB.getTuples().listIterator();
+         while(relBIter.hasNext()) {
+            LinkedList<Attribute> bTuple = relBIter.next().getAttr();
+            if(getAttributeAt(aTuple, attAPos).getName().equals(getAttributeAt(bTuple, attBPos).getName())) { // does not account for null atts?
+               // add the tuples together
+               System.out.println("Found matching tuples at " + aTuple + " matches " + bTuple);
+            }
+         }   
+      }
+      
       System.out.println("Trying to join! Syntax is good, the join name is gonna be " + name + 
          ", the relations are " + relA.getName() + " and " + relB.getName() +
          ",\nand the attributes to match on are " + relA.getName() + "." + attA.getName() + 
-         " and " + relB.getName() + "." + attB.getName());
+         " and " + relB.getName() + "." + attB.getName() + ". The attribute positions are " + attAPos + " and " + attBPos);
       
       return i + 9;
    }
    
+   private Attribute getAttributeAt(LinkedList<Attribute> list, int ix) {
+      ListIterator<Attribute> li = list.listIterator();
+      Attribute ret;
+      do {
+         ret = li.next();
+         ix--;
+      } while(ix >= 0);
+      return ret;
+   }
+   
+   private int getAttributePosition(Relation r, Attribute a) {
+      int ix = 0;
+      String aName = a.getName().toLowerCase();
+      ListIterator<Attribute> li = r.getAttributeFormat().listIterator();
+      while(li.hasNext()) {
+         Attribute ra = li.next();
+         if(ra.getName().toLowerCase().equals(aName)) {
+            return ix;
+         }
+         ix++;
+      }
+      return -1;
+   }
+   
    private Attribute getAttribute(Relation r, String a, String b) {
       
+      Attribute ret = null; 
       int dot = getDotIndex(a);
       if(dot <= 0) { return null; }
       // Get the relation given before the dot in a
       Relation preDot = getRelation(a.substring(0,dot));
-      Attribute ret = getAttribute(r, a.substring(dot + 1,a.length()));
+      if(preDot.getName().toLowerCase().equals(r.getName().toLowerCase())) {
+         ret = getAttribute(r, a.substring(dot + 1,a.length()));
+      }
       // If the relation in string a was not found, try b
       if(ret == null) {
          dot = getDotIndex(b);
          if(dot <= 0) { return null; }
          preDot = getRelation(b.substring(0,dot));
-         if(preDot == null) {
+         if(preDot == null || !preDot.getName().toLowerCase().equals(r.getName().toLowerCase())) {
             return null;
          }
          ret = getAttribute(r, b.substring(dot + 1,b.length()));
