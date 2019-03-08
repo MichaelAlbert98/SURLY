@@ -17,6 +17,7 @@ public class Constants {
   public final static String ERR_ATT_OVERFLOW = "Too many attributes for selected relation";
   public final static String ERR_NO_ATT = "No insert names given.";
   public final static String ERR_INST_CAT = "Cannot insert tuples to Catalog";
+  public final static String ERR_NO_ATTS = "No attributes specified";
 
   //string constants
   public final static String CATALOG = "catalog";
