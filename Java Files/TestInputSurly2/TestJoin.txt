@@ -73,4 +73,9 @@ BADJOIN14 = JOIN COURSE, PREREQ ON COURSE.CNUM = .PNUM; /* bad syntax: attribute
 BADJOIN13 = JOIN COURSE, PREREQ ON COURSE.CNUM = PREREQPNUM; /* bad syntax: no '.' in attribute b format */
 BADJOIN15 = JOIN COURSE, PREREQ ON COURSE.CNUM = PREREQ.; /* bad syntax: no attribute given in attribute b */
 BADJOIN16 = JOIN COURSE, PREREQ ON COURSE.CNUM = PREREQ.PNUM /* bad syntax: no ';' */
-/* Join error testing should produce 16 errors */
+BADJOIN17 = JOIN COURSE, PREREQ ON COURSE.NAME = PREREQ.PNUM /* no attribute by that name */
+BADJOIN18 = JOIN COURSE, PREREQ ON COURSE.CNUM = PREREQ.CNUM /* same attribute name for both relations */
+BADJOIN19 = JOIN COURSE, STAFF ON COURSE.CNUM = PREREQ.PNUM /* attribute given from different relation */
+BADJOIN20 = JOIN COURSE, PREREQ, STAFF ON COURSE.CNUM = PREREQ.PNUM /* attempt to join 3 relations */
+
+/* Join error testing should produce 20 errors */
