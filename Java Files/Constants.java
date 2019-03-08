@@ -19,6 +19,7 @@ public class Constants {
   public final static String ERR_INST_CAT = "Cannot insert tuples to Catalog";
   public final static String ERR_NO_ATTS = "No attributes specified";
   public final static String ERR_JOIN_SYNTAX = "Bad syntax for join";
+  public final static String ERR_JOIN_LOGIC = "Join Handler logic error";
 
   //string constants
   public final static String CATALOG = "catalog";
