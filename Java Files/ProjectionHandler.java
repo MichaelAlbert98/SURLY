@@ -10,45 +10,83 @@ public class ProjectionHandler {
       String name = parseName(tokens, ix);
       Relation relation = parseRelation(tokens, ix);
       LinkedList<Attribute> attributes = parseAttributes(tokens, relation, ix);
-      LinkedList<Boolean> keptAttributes = getKeptAttributes(attributes, relation);
-      // System.out.println("name: " + name + "\nRelation: " + relation + "\nAttributes" + attributes);
-      
+      LinkedList<Integer> attributePositions = getAttributePositions(attributes, relation);
       Relation projection = new Relation(name, attributes);
+      projection.setTemp(true);
+      fillProjection(relation, projection, attributes, attributePositions);
+      database.add(projection);
+      //System.out.println("projection is \n" + projection + "positions are: " + attributePositions + "\n");
       
-      ListIterator<Tuple> li = relation.getTuples().listIterator();
-      while(li.hasNext()){
-         ListIterator<Attribute> ti = li.next().getAttr().listIterator();
-         while(ti.hasNext()) {
-            Attribute a = ti.next();
-            //System.out.println("attribute: " + a);
-            if(projectionUsesAttribute(attributes, a)) {
-               // add the attribute to the tuple
-               System.out.println(a);
-            }
-         }
-      }
-      
-      System.out.println("projection is \n" + projection);
-      
-      return ix + 1;
+      return getNewIx(tokens, ix);
    }
    
-   private LinkedList<Boolean> getKeptAttributes(LinkedList<Attribute> atts, Relation r) {
-      ListIterator<Attribute> ri = r.getAttributeFormat().listIterator();
-      LinkedList<Boolean> keptAttributes = new LinkedList<Boolean>();
+   private void fillProjection(Relation r, Relation p, LinkedList<Attribute> atts, LinkedList<Integer> aPositions){ 
+      LinkedList<Tuple> relationTuples = r.getTuples();
+      ListIterator<Tuple> ri = relationTuples.listIterator();
       while(ri.hasNext()) {
-         Boolean found = new Boolean(false);
-         Attribute relationAttribute = ri.next();
+         LinkedList<Attribute> projectionTuple = new LinkedList<Attribute>();
          ListIterator<Attribute> ai = atts.listIterator();
-         while(ai.hasNext()) {
-            if(relationAttribute.getName().equals(ai.next().getName())) {
-               found = true;
-            }
+         ListIterator<Integer> ii = aPositions.listIterator();
+         Tuple currentTuple = ri.next();
+         while(ii.hasNext()) {
+            projectionTuple.push(getAttributeAt(ii.next(), currentTuple));
          }
-         keptAttributes.push(found);
-      
+         Tuple t = new Tuple();
+         LinkedList<Attribute> projectionTupleOrdered = reverseAtts(projectionTuple);
+         t.setAttr(projectionTupleOrdered);
+         p.addTuple(t);
+         //System.out.println("Tuple created! " + t.getAttr());
       }
-      return null;
+   }
+   
+   private Attribute getAttributeAt(Integer i, Tuple t) {
+      //System.out.print("int is " + i + " atts are: " + t.getAttr()+"\n");
+      ListIterator<Attribute> li = t.getAttr().listIterator();
+      Attribute a = li.next();
+      int ix = 0;
+      while(ix < i) {
+         a = li.next();
+         ix++;;
+      }
+      return a;
+   }
+   
+   private LinkedList<Integer> getAttributePositions(LinkedList<Attribute> atts, Relation r) {
+      LinkedList<Integer> positions = new LinkedList<Integer>();
+      LinkedList<Attribute> relationAtts = r.getAttributeFormat();
+      //System.out.print(atts + "\n" + relationAtts);
+      ListIterator<Attribute> ai = atts.listIterator();
+      while(ai.hasNext()) {
+         Attribute ai_next = ai.next();
+         ListIterator<Attribute> ri = relationAtts.listIterator();
+         int ix = 0;
+         while(ri.hasNext()) {
+            if(ai_next.getName().equals(ri.next().getName())) {
+               positions.push(new Integer(ix));
+            }
+            ix++;
+         }
+      }
+      LinkedList<Integer> positionsOrdered = reverse(positions);
+      return positionsOrdered;
+   }
+   
+   private LinkedList<Integer> reverse(LinkedList<Integer> l) {
+      LinkedList<Integer> rl = new LinkedList<Integer>();
+      ListIterator<Integer> li = l.listIterator();
+      while(li.hasNext()){
+         rl.push(li.next());
+      }
+      return rl;
+   }
+   
+   private LinkedList<Attribute> reverseAtts(LinkedList<Attribute> l) {
+      LinkedList<Attribute> rl = new LinkedList<Attribute>();
+      ListIterator<Attribute> li = l.listIterator();
+      while(li.hasNext()){
+         rl.push(li.next());
+      }
+      return rl;
    }
    
    private String parseName(ArrayList<String> tokens, int ix) {
@@ -111,6 +149,22 @@ public class ProjectionHandler {
       while(r == null);
       return null;
    }
+   
+   private int getNewIx(ArrayList<String> tokens, int ix) {
+      ix++;
+      Relation r;
+      String s;
+      do {
+         s = tokens.get(ix);
+         r = getRelation(s);
+         if(r != null) {
+            return ix;
+         }
+         ix++;
+      }
+      while(r == null);
+      return ix;
+      }
    
    private boolean projectionUsesAttribute(LinkedList<Attribute> atts, Attribute a) {   
       ListIterator<Attribute> li = atts.listIterator();
