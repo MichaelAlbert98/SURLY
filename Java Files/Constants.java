@@ -18,6 +18,7 @@ public class Constants {
   public final static String ERR_NO_ATT = "No insert names given.";
   public final static String ERR_INST_CAT = "Cannot insert tuples to Catalog";
   public final static String ERR_NO_ATTS = "No attributes specified";
+  public final static String ERR_JOIN_SYNTAX = "Bad syntax for join";
 
   //string constants
   public final static String CATALOG = "catalog";
@@ -28,6 +29,7 @@ public class Constants {
   public final static String DELETE = "delete";
   public final static String SELECT = "select";
   public final static String PROJECT = "project";
+  public final static String JOIN = "join";
   public final static String CHAR = "char";
   public final static String NUM = "num";
 
