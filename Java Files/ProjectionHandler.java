@@ -18,7 +18,6 @@ public class ProjectionHandler {
       }
       Relation relation = parseRelation(tokens, ix);
       if(relation == null) {
-         //System.out.println(Constants.ERR_NOT_FND);
          return newIx;
       }
       LinkedList<Attribute> attributes = parseAttributes(tokens, relation, ix);
@@ -36,6 +35,7 @@ public class ProjectionHandler {
       return newIx;
    }
    
+   // Checks if the relation name is in use by a non-temporary relation
    private boolean illegalRelationName(String n) {
       ListIterator<Relation> li = db.listIterator();
       while(li.hasNext()) {
@@ -50,6 +50,7 @@ public class ProjectionHandler {
       return false;
    }
    
+   // Fills the projection relation with the appropriate attributes
    private void fillProjection(Relation r, Relation p, LinkedList<Attribute> atts, LinkedList<Integer> aPositions){ 
       LinkedList<Tuple> relationTuples = r.getTuples();
       ListIterator<Tuple> ri = relationTuples.listIterator();
@@ -65,12 +66,11 @@ public class ProjectionHandler {
          LinkedList<Attribute> projectionTupleOrdered = reverseAtts(projectionTuple);
          t.setAttr(projectionTupleOrdered);
          p.addTuple(t);
-         //System.out.println("Tuple created! " + t.getAttr());
       }
    }
    
+   // Gets the attribute at the specified index
    private Attribute getAttributeAt(Integer i, Tuple t) {
-      //System.out.print("int is " + i + " atts are: " + t.getAttr()+"\n");
       ListIterator<Attribute> li = t.getAttr().listIterator();
       Attribute a = li.next();
       int ix = 0;
@@ -81,6 +81,7 @@ public class ProjectionHandler {
       return a;
    }
    
+   // Gets the positions of the attributes in the projection, relative to the original relation
    private LinkedList<Integer> getAttributePositions(LinkedList<Attribute> atts, Relation r) {
       LinkedList<Integer> positions = new LinkedList<Integer>();
       LinkedList<Attribute> relationAtts = r.getAttributeFormat();
@@ -101,6 +102,7 @@ public class ProjectionHandler {
       return positionsOrdered;
    }
    
+   // Reverses a linked list of integers
    private LinkedList<Integer> reverse(LinkedList<Integer> l) {
       LinkedList<Integer> rl = new LinkedList<Integer>();
       ListIterator<Integer> li = l.listIterator();
@@ -110,6 +112,7 @@ public class ProjectionHandler {
       return rl;
    }
    
+   // Reverses a linked list of attributes
    private LinkedList<Attribute> reverseAtts(LinkedList<Attribute> l) {
       LinkedList<Attribute> rl = new LinkedList<Attribute>();
       ListIterator<Attribute> li = l.listIterator();
@@ -119,6 +122,7 @@ public class ProjectionHandler {
       return rl;
    }
    
+   // Parses the projection name from the command
    private String parseName(ArrayList<String> tokens, int ix) {
       if(ix > 1) {
          // Make sure prev token is assignment operator
@@ -133,6 +137,7 @@ public class ProjectionHandler {
       return null;
    }
    
+   // Parses the attributes from the command
    private LinkedList<Attribute> parseAttributes(ArrayList<String> tokens, Relation r, int ix) {
       Stack<Attribute> attributeStack = new Stack<Attribute>();
       LinkedList<Attribute> attributes = new LinkedList<Attribute>();
@@ -153,6 +158,7 @@ public class ProjectionHandler {
       return attributes;
    }
    
+   // Gets the attribute with the given name
    private Attribute getAttribute(LinkedList<Attribute> atts, String name) {
       ListIterator<Attribute> li = atts.listIterator();
       while(li.hasNext()) {
@@ -164,6 +170,7 @@ public class ProjectionHandler {
       return null;
    }
    
+   // Parses the relation from the command
    private Relation parseRelation(ArrayList<String> tokens, int ix) {
       ix++;
       Relation r;
@@ -186,6 +193,7 @@ public class ProjectionHandler {
       return null;
    }
    
+   // Gets the appropriate index for i after the command is done executing
    private int getNewIx(ArrayList<String> tokens, int ix) {
       ix++;
       Relation r;
@@ -207,19 +215,9 @@ public class ProjectionHandler {
       }
       while(r == null);
       return ix;
-      }
+   }   
    
-   private boolean projectionUsesAttribute(LinkedList<Attribute> atts, Attribute a) {   
-      ListIterator<Attribute> li = atts.listIterator();
-      while(li.hasNext()) {
-         if(li.next().getName().equals(a.getName())) {
-            return true;
-         }   
-      }
-      System.out.println("couldnt find name " + a.getName());
-      return false;
-   }
-   
+   // Gets the relaion by the given name
    public Relation getRelation(String s) {
       ListIterator<Relation> l = db.listIterator();
       while(l.hasNext()) {
