@@ -1,5 +1,0 @@
-1.) Check if something is temp before inserting/deleting/destroying
-2.) Make select/insert overwrite temp relations
-3.) Make sure temp relations can't overwrite non-temp
-
-Bug: TestSelect fails on print of selected catalog. 
