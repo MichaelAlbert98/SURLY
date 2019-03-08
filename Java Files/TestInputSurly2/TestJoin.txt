@@ -54,5 +54,23 @@ INSERT DEPT DENEKE CSCI;
 INSERT DEPT ISLAM CSCI;
 INSERT DEPT GREGORY MATH;
 
-courseToStaff = JOIN Course, Staff ON course.cnum = staff.cnum;
-prereqToCourse = Join PREREQ, course on prereq.cnum = course.cnum;
+GOODJOIN = JOIN COURSE, PREREQ ON COURSE.CNUM = PREREQ.PNUM; /* good join */
+GOODJOIN = JOIN COURSE, PREREQ ON COURSE.CNUM = PREREQ.PNUM; /* replace join name */
+
+BADJOIN1 = JOIN /* no parameters given */
+COURSE = JOIN COURSE, PREREQ ON COURSE.CNUM = PREREQ.PNUM; /* attempt to replace permanent relation */ /*1*/
+ = JOIN COURSE, PREREQ ON COURSE.CNUM = PREREQ.PNUM; /* bad syntax: no join name */
+BADJOIN4 JOIN COURSE, PREREQ ON COURSE.CNUM = PREREQ.PNUM; /* bad syntax: no '=' */
+BADJOIN5 = JOIN , PREREQ ON COURSE.CNUM = PREREQ.PNUM; /* bad syntax: no relation a */
+BADJOIN6 = JOIN COURSE PREREQ ON COURSE.CNUM = PREREQ.PNUM; /* bad syntax: no ',' between relation */
+BADJOIN7 = JOIN COURSE, ON COURSE.CNUM = PREREQ.PNUM; /* bad syntax: no relation b */
+BADJOIN8 = JOIN COURSE, PREREQ COURSE.CNUM = PREREQ.PNUM; /* bad syntax: no keyword ON */
+BADJOIN9 = JOIN COURSE, PREREQ ON .CNUM = PREREQ.PNUM; /* bad syntax: attribute a relation not given */
+BADJOIN10 = JOIN COURSE, PREREQ ON COURSECNUM = PREREQ.PNUM; /* bad syntax: no '.' in attribute a format */
+BADJOIN11 = JOIN COURSE, PREREQ ON COURSE. = PREREQ.PNUM; /* bad syntax: no attribute given in attribute a */
+BADJOIN12 = JOIN COURSE, PREREQ ON COURSE.CNUM PREREQ.PNUM; /* bad syntax: no '=' */
+BADJOIN14 = JOIN COURSE, PREREQ ON COURSE.CNUM = .PNUM; /* bad syntax: attribute b relation not given */
+BADJOIN13 = JOIN COURSE, PREREQ ON COURSE.CNUM = PREREQPNUM; /* bad syntax: no '.' in attribute b format */
+BADJOIN15 = JOIN COURSE, PREREQ ON COURSE.CNUM = PREREQ.; /* bad syntax: no attribute given in attribute b */
+BADJOIN16 = JOIN COURSE, PREREQ ON COURSE.CNUM = PREREQ.PNUM /* bad syntax: no ';' */
+/* Join error testing should produce 16 errors */
