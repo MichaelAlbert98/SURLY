@@ -3,7 +3,7 @@ import java.util.*;
 public class JoinHandler {
    
    private LinkedList<Relation> db;
-   private final int DEBUG_LEVEL = 1;
+   private final int DEBUG_LEVEL = 0;
    
    public JoinHandler(){}
    public int join(ArrayList<String> tokens, LinkedList<Relation> database, int i) {
@@ -86,7 +86,10 @@ public class JoinHandler {
             " and " + relB.getName() + "." + attB.getName() + ". The attribute positions are " + attAPos + " and " + attBPos +
             ". The relation is:\n" + joinRelation);
       }
-      return i + 9;
+      
+      db.add(joinRelation);
+      
+      return i + 8;
    }
    
    private void fillJoinRelation(Relation joinRelation, Relation relA, Relation relB, int attAPos, int attBPos) {
@@ -165,7 +168,10 @@ public class JoinHandler {
       
       Attribute ret = null; 
       int dot = getDotIndex(a);
-      if(dot <= 0) { return null; }
+      if(dot <= 0) {
+         System.out.println(Constants.ERR_JOIN_SYNTAX); 
+         return null;
+      }
       // Get the relation given before the dot in a
       Relation preDot = getRelation(a.substring(0,dot));
       if(preDot.getName().toLowerCase().equals(r.getName().toLowerCase())) {
@@ -174,9 +180,13 @@ public class JoinHandler {
       // If the relation in string a was not found, try b
       if(ret == null) {
          dot = getDotIndex(b);
-         if(dot <= 0) { return null; }
+         if(dot <= 0) {
+            System.out.println(Constants.ERR_JOIN_SYNTAX); 
+            return null;
+         }
          preDot = getRelation(b.substring(0,dot));
          if(preDot == null || !preDot.getName().toLowerCase().equals(r.getName().toLowerCase())) {
+            System.out.println(Constants.ERR_NOT_FND);
             return null;
          }
          ret = getAttribute(r, b.substring(dot + 1,b.length()));
