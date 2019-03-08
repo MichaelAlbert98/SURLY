@@ -36,14 +36,10 @@ public class SelectHandler {
            if (database.get(j).getName().equals(relName)) {
 
              //can't overwrite non-temp relations
-             if (tempName.equals(relName) && !database.get(j).getTemp()) {
+             Relation getRel = getRelation(tempName);
+             if (getRel != null && !getRel.getTemp()) {
                System.out.println(Constants.ERR_NAME_OVERWRITE);
                return this.i;
-             }
-
-             //delete old temp relation
-             else if (tempName.equals(relName) && database.get(j).getTemp()) {
-               database.remove(j);
              }
 
              //add attribute format to catalog
@@ -60,7 +56,13 @@ public class SelectHandler {
                }
              }
 
+             //delete old temp relation
+             if (getRel != null && !getRel.getTemp()) {
+               database.remove(j);
+               database.get(0).getTuples().remove(j);
+             }
              database.add(tempRel);
+             return Helper.findSemicolon(splitText, this.i);
            }
          }
        }
@@ -76,14 +78,10 @@ public class SelectHandler {
          if (database.get(j).getName().equals(relName)) {
 
            //can't overwrite non-temp relations
-           if (inDatabase(tempName) && !database.get(j).getTemp()) {
+           Relation getRel = getRelation(tempName);
+           if (getRel != null && !getRel.getTemp()) {
              System.out.println(Constants.ERR_NAME_OVERWRITE);
              return this.i;
-           }
-
-           //delete old temp relation
-           else if (tempName.equals(relName) && database.get(j).getTemp()) {
-             database.remove(j);
            }
 
            //add attribute format to catalog
@@ -97,6 +95,11 @@ public class SelectHandler {
              tempRel.getTuples().add(copy);
            }
 
+           //delete old temp relation
+           if (getRel != null && !getRel.getTemp()) {
+             database.remove(j);
+             database.get(0).getTuples().remove(j);
+           }
            database.add(tempRel);
            return this.i;
          }
@@ -141,12 +144,15 @@ public class SelectHandler {
      }
    }
 
-   private boolean inDatabase(String tempName) {
-     for (int j = 1; j < database.size();j++) {
-       if (database.get(j).getName().equals(tempName)) {
-         return true;
-       }
-     }
-     return false;
+   // Gets the relaion by the given name
+   public Relation getRelation(String s) {
+      ListIterator<Relation> l = database.listIterator();
+      while(l.hasNext()) {
+         Relation r = l.next();
+        if(r.getName().toLowerCase().equals(s.toLowerCase())) {
+            return r;
+         }
+      }
+      return null;
    }
 }
