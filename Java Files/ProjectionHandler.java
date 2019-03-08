@@ -18,7 +18,7 @@ public class ProjectionHandler {
       }
       Relation relation = parseRelation(tokens, ix);
       if(relation == null) {
-         System.out.println(Constants.ERR_NOT_FND);
+         //System.out.println(Constants.ERR_NOT_FND);
          return newIx;
       }
       LinkedList<Attribute> attributes = parseAttributes(tokens, relation, ix);
@@ -173,7 +173,7 @@ public class ProjectionHandler {
             return null;
          }
          s = tokens.get(ix);
-         if(Helper.isKeyword(s)) {
+         if(Helper.isKeyword(s) || (Helper.isBreakChar(s) && !s.equals("="))) {
             return null;
          }
          r = getRelation(s);
