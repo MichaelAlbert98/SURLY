@@ -7,9 +7,25 @@ public class ProjectionHandler {
    
    public int project (ArrayList<String> tokens, LinkedList<Relation> database, int ix) {
       db = database;
+      int newIx = getNewIx(tokens, ix);
       String name = parseName(tokens, ix);
+      if(name == null) {
+         return newIx;
+      }
+      if(illegalRelationName(name)) {
+         System.out.println(Constants.ERR_NAME_OVERWRITE);
+         return newIx;
+      }
       Relation relation = parseRelation(tokens, ix);
+      if(relation == null) {
+         System.out.println(Constants.ERR_NOT_FND);
+         return newIx;
+      }
       LinkedList<Attribute> attributes = parseAttributes(tokens, relation, ix);
+      if(attributes.isEmpty()){
+         System.out.println(Constants.ERR_NO_ATTS);
+         return newIx;
+      }
       LinkedList<Integer> attributePositions = getAttributePositions(attributes, relation);
       Relation projection = new Relation(name, attributes);
       projection.setTemp(true);
@@ -17,7 +33,21 @@ public class ProjectionHandler {
       database.add(projection);
       //System.out.println("projection is \n" + projection + "positions are: " + attributePositions + "\n");
       
-      return getNewIx(tokens, ix);
+      return newIx;
+   }
+   
+   private boolean illegalRelationName(String n) {
+      ListIterator<Relation> li = db.listIterator();
+      while(li.hasNext()) {
+         Relation r = li.next();
+         if(r.getTemp() == false) {
+            String name = r.getName();
+            if(name.equals(n)) {
+               return true;
+            }
+         }
+      }
+      return false;
    }
    
    private void fillProjection(Relation r, Relation p, LinkedList<Attribute> atts, LinkedList<Integer> aPositions){ 
@@ -96,7 +126,7 @@ public class ProjectionHandler {
             return null;
          }
          String name = tokens.get(ix - 2);
-         if(!Helper.isKeyword(name) && !Helper.isBreakChar(name) && (getRelation(name) == null)){
+         if(!Helper.isKeyword(name) && !Helper.isBreakChar(name)){
             return name;
          }
       }
@@ -139,7 +169,13 @@ public class ProjectionHandler {
       Relation r;
       String s;
       do {
+         if(ix >= tokens.size()) {
+            return null;
+         }
          s = tokens.get(ix);
+         if(Helper.isKeyword(s)) {
+            return null;
+         }
          r = getRelation(s);
          if(r != null) {
             return r;
@@ -155,7 +191,14 @@ public class ProjectionHandler {
       Relation r;
       String s;
       do {
+         if(ix >= tokens.size()) {
+            System.out.printf(Constants.ERR_END_REACHED);
+            return ix - 1;
+         }
          s = tokens.get(ix);
+         if(Helper.isKeyword(s)) {
+            return ix;
+         }
          r = getRelation(s);
          if(r != null) {
             return ix;
