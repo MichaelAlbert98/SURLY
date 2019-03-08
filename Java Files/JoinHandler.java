@@ -3,6 +3,7 @@ import java.util.*;
 public class JoinHandler {
    
    private LinkedList<Relation> db;
+   private final int DEBUG_LEVEL = 1;
    
    public JoinHandler(){}
    public int join(ArrayList<String> tokens, LinkedList<Relation> database, int i) {
@@ -12,7 +13,7 @@ public class JoinHandler {
       int valid = validateIndex(tokens, i);
       if(valid != 0) { return valid; }
       
-      // Parse and validate each of the 11 parts of the command
+      // -------------------------Parsing and validation --------------------------------
       // Part 1 - Name
       String name = tokens.get(i-2);
       if(illegalName(name)) { return i + 1; }
@@ -59,6 +60,9 @@ public class JoinHandler {
          return i + 8;
       }
       
+      // ---------------------------- Computation -------------------------------//
+      
+      // Get the indecies of the matching attributes
       int attAPos = getAttributePosition(relA, attA);
       int attBPos = getAttributePosition(relB, attB);
       if(attAPos == -1 || attBPos == -1) {
@@ -66,7 +70,26 @@ public class JoinHandler {
          return i + 8;
       }
       
-      // Now that we have all of the relevant data, create the join relation
+      // Create the join relation      
+      LinkedList<Attribute> joinAttributeFormat = getJoinAttributeFormat(relA, relB);
+      Relation joinRelation = new Relation(name, joinAttributeFormat);
+      joinRelation.setTemp(true);
+      
+      // Fill the join relation
+      fillJoinRelation(joinRelation, relA, relB, attAPos, attBPos);
+      
+      if(DEBUG_LEVEL > 0) {
+         System.out.println("-----------------------------------------------------\n" +
+            "Trying to join! Syntax is good, the join name is gonna be " + name + 
+            ", the relations are " + relA.getName() + " and " + relB.getName() +
+            ",\nand the attributes to match on are " + relA.getName() + "." + attA.getName() + 
+            " and " + relB.getName() + "." + attB.getName() + ". The attribute positions are " + attAPos + " and " + attBPos +
+            ". The relation is:\n" + joinRelation);
+      }
+      return i + 9;
+   }
+   
+   private void fillJoinRelation(Relation joinRelation, Relation relA, Relation relB, int attAPos, int attBPos) {
       ListIterator<Tuple> relAIter = relA.getTuples().listIterator();
       while(relAIter.hasNext()) {
          LinkedList<Attribute> aTuple = relAIter.next().getAttr();
@@ -75,17 +98,43 @@ public class JoinHandler {
             LinkedList<Attribute> bTuple = relBIter.next().getAttr();
             if(getAttributeAt(aTuple, attAPos).getName().equals(getAttributeAt(bTuple, attBPos).getName())) { // does not account for null atts?
                // add the tuples together
-               System.out.println("Found matching tuples at " + aTuple + " matches " + bTuple);
+               Tuple t = mergeTuples(aTuple, bTuple);
+               joinRelation.addTuple(t);
+               if(DEBUG_LEVEL > 1) {
+                  System.out.println("Found matching tuples at " + aTuple + " matches " + bTuple + ".\nNew tuple is " + t.getAttr());
+               }
             }
          }   
       }
-      
-      System.out.println("Trying to join! Syntax is good, the join name is gonna be " + name + 
-         ", the relations are " + relA.getName() + " and " + relB.getName() +
-         ",\nand the attributes to match on are " + relA.getName() + "." + attA.getName() + 
-         " and " + relB.getName() + "." + attB.getName() + ". The attribute positions are " + attAPos + " and " + attBPos);
-      
-      return i + 9;
+   }
+   
+   private Tuple mergeTuples(LinkedList<Attribute> aTuple, LinkedList<Attribute> bTuple) {
+      LinkedList<Attribute> atts = new LinkedList<Attribute>();
+      ListIterator<Attribute> aAttsIter = aTuple.listIterator();
+      ListIterator<Attribute> bAttsIter = bTuple.listIterator();
+      while(aAttsIter.hasNext()) {
+         atts.add(aAttsIter.next());
+      }
+      while(bAttsIter.hasNext()) {
+         atts.add(bAttsIter.next());
+      }
+      Tuple t = new Tuple();
+      t.setAttr(atts);
+      return t;
+   }
+   
+   private LinkedList<Attribute> getJoinAttributeFormat(Relation relA, Relation relB) {
+      LinkedList<Attribute> relationAttributeFormat = new LinkedList<Attribute>();
+      ListIterator<Attribute> aIter = relA.getAttributeFormat().listIterator();
+      ListIterator<Attribute> bIter = relB.getAttributeFormat().listIterator();
+      while(aIter.hasNext()) {
+         relationAttributeFormat.add(aIter.next());
+      }
+      int ix = 0;
+      while(bIter.hasNext()) {
+         relationAttributeFormat.add(bIter.next());
+      }
+      return relationAttributeFormat;
    }
    
    private Attribute getAttributeAt(LinkedList<Attribute> list, int ix) {
