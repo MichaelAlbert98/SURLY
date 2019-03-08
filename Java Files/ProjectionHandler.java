@@ -42,7 +42,7 @@ public class ProjectionHandler {
          Relation r = li.next();
          if(r.getTemp() == false) {
             String name = r.getName();
-            if(name.equals(n)) {
+            if(name.toLowerCase().equals(n.toLowerCase())) {
                return true;
             }
          }
@@ -92,7 +92,7 @@ public class ProjectionHandler {
          ListIterator<Attribute> ri = relationAtts.listIterator();
          int ix = 0;
          while(ri.hasNext()) {
-            if(ai_next.getName().equals(ri.next().getName())) {
+            if(ai_next.getName().toLowerCase().equals(ri.next().getName().toLowerCase())) {
                positions.push(new Integer(ix));
             }
             ix++;
@@ -163,7 +163,7 @@ public class ProjectionHandler {
       ListIterator<Attribute> li = atts.listIterator();
       while(li.hasNext()) {
          Attribute a = li.next();
-         if(a.getName().equals(name)) {
+         if(a.getName().toLowerCase().equals(name.toLowerCase())) {
             return a;
          }
       }
@@ -180,7 +180,7 @@ public class ProjectionHandler {
             return null;
          }
          s = tokens.get(ix);
-         if(Helper.isKeyword(s) || (Helper.isBreakChar(s) && !s.equals("="))) {
+         if(Helper.isKeyword(s)) {
             return null;
          }
          r = getRelation(s);
@@ -222,7 +222,7 @@ public class ProjectionHandler {
       ListIterator<Relation> l = db.listIterator();
       while(l.hasNext()) {
          Relation r = l.next();
-        if(r.getName().equals(s)) {
+        if(r.getName().toLowerCase().equals(s.toLowerCase())) {
             return r;
          }
       }
