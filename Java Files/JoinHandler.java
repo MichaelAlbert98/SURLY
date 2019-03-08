@@ -62,6 +62,10 @@ public class JoinHandler {
       
       // ---------------------------- Computation -------------------------------//
       
+      // Check if either of the attributes are ambiguous
+      
+      if(isAmbig(tokens.get(i + 5), relA, relB) || isAmbig(tokens.get(i + 7), relA, relB)) { return i + 8; }
+      
       // Get the indecies of the matching attributes
       int attAPos = getAttributePosition(relA, attA);
       int attBPos = getAttributePosition(relB, attB);
@@ -90,6 +94,19 @@ public class JoinHandler {
       db.add(joinRelation);
       
       return i + 8;
+   }
+   
+   private boolean isAmbig (String attr, Relation a, Relation b) {
+      if(getDotIndex(attr) < 0) {
+         Attribute attA = getAttribute(a, attr);
+         Attribute attB = getAttribute(b, attr);
+         boolean isAmbiguous = (attA != null && attB != null);
+         if(isAmbiguous) {
+            System.out.println(Constants.ERR_JOIN_AMBIG);
+            return true;
+         }
+      }
+      return false;
    }
    
    private void fillJoinRelation(Relation joinRelation, Relation relA, Relation relB, int attAPos, int attBPos) {
@@ -166,30 +183,41 @@ public class JoinHandler {
    
    private Attribute getAttribute(Relation r, String a, String b) {
       
-      Attribute ret = null; 
+      Attribute ret = null;
+      Relation preDot;
       int dot = getDotIndex(a);
-      if(dot <= 0) {
+      if(dot == 0) {
          System.out.println(Constants.ERR_JOIN_SYNTAX); 
          return null;
       }
-      // Get the relation given before the dot in a
-      Relation preDot = getRelation(a.substring(0,dot));
-      if(preDot.getName().toLowerCase().equals(r.getName().toLowerCase())) {
-         ret = getAttribute(r, a.substring(dot + 1,a.length()));
+      else if(dot > 0) {
+         // Get the relation given before the dot in a
+         preDot = getRelation(a.substring(0,dot));
+         if(preDot.getName().toLowerCase().equals(r.getName().toLowerCase())) {
+            ret = getAttribute(r, a.substring(dot + 1,a.length()));
+         }
+      }
+      else {
+         ret = getAttribute(r, a);
       }
       // If the relation in string a was not found, try b
       if(ret == null) {
          dot = getDotIndex(b);
-         if(dot <= 0) {
+         if(dot == 0) {
             System.out.println(Constants.ERR_JOIN_SYNTAX); 
             return null;
          }
-         preDot = getRelation(b.substring(0,dot));
-         if(preDot == null || !preDot.getName().toLowerCase().equals(r.getName().toLowerCase())) {
-            System.out.println(Constants.ERR_NOT_FND);
-            return null;
+         else if(dot > 0) {
+            preDot = getRelation(b.substring(0,dot));
+            if(preDot == null || !preDot.getName().toLowerCase().equals(r.getName().toLowerCase())) {
+               System.out.println(Constants.ERR_NOT_FND);
+               return null;
+            }
+            ret = getAttribute(r, b.substring(dot + 1,b.length()));
          }
-         ret = getAttribute(r, b.substring(dot + 1,b.length()));
+         else {
+            ret = getAttribute(r, b);
+         }
       }
       if(ret == null) {
          System.out.println(Constants.ERR_NOT_FND);
