@@ -1,7 +1,8 @@
 /* Uses the sample input file to test the following cases that may break SELECT: Selecting the catalog,
 selecting from a non-existant relation, selecting with improper format, selecting normally, selecting 
-with condition, selecting with conditions, selecting from a temp relation, creating a relation with
-the same name as a non-temp relation, creating a relation with the same name as a temp relation. */
+with a condition using an non-existing attribute, selecting with condition, selecting with conditions, 
+selecting from a temp relation, creating a relation with the same name as a non-temp relation, creating 
+a relation with the same name as a temp relation. */
 
 /*  RELATION
     DEFINITIONS */
@@ -44,14 +45,15 @@ TEST3 = SELECT COURSE
 SELECT COURSE;
 TEST4 = SELECT COURSE;
 TEST5 = SELECT COURSE;
-TEST6 = SELECT PREREQ WHERE cnum = csci241;
-TEST7 = SELECT PREREQ WHERE cnum = csci141 or pnum = csci241 AND cnum = csci305;
-TEST8 = SELECT TEST6 WHERE cnum = csci141;
+TEST6 = SELECT COURSE WHERE fake = 100;
+TEST7 = SELECT PREREQ WHERE cnum = csci241;
+TEST8 = SELECT PREREQ WHERE cnum = csci141 or pnum = csci241 AND cnum = csci305;
+TEST9 = SELECT TEST7 WHERE cnum = csci141;
 COURSE = SELECT PREREQ;
 TEST5 = SELECT PREREQ WHERE cnum = csci305 AND pnum = csci241;
 
 
 /*  PRINTING SELECTED TUPLES  */
-PRINT TEST, TEST2, TEST3, TEST4, TEST5, TEST6, TEST7, TEST8, COURSE;
+PRINT TEST, TEST2, TEST3, TEST4, TEST5, TEST6, TEST7, TEST8, TEST9, COURSE;
 
 
