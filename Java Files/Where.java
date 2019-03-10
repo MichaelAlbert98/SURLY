@@ -1,7 +1,7 @@
-//Helper.java - List of utility functions for Surly
+//Where.java - Checks formatting and correctness of where conditions for various commands
 //Created by Michael Albert
 //Created Febuary 25, 2019
-//Revised March 2, 2019
+//Revised March 10, 2019
 
 import java.util.*;
 import java.lang.*;
@@ -12,7 +12,7 @@ public class Where {
 
   //returns boolean that lets user know if the format is correct
   public Boolean whereFormat(ArrayList<String> splitText, int i) {
-    //cannot delete catalog
+    //cannot use where on catalog
     if (splitText.get(i-1).toLowerCase().equals(Constants.CATALOG)) {
       System.out.println(Constants.ERR_BAD_FORMAT);
       return false;
