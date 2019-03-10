@@ -2,7 +2,7 @@
 //prints to the terminal based on the commands found.
 //Created by Michael Albert and Jacob Coffland
 //Created January 09, 2019
-//Revised January 18, 2019
+//Revised March 10, 2019
 
 import java.util.*;
 import java.lang.*;
@@ -26,6 +26,7 @@ public class Interpreter {
     SelectHandler selecter = new SelectHandler();
     ProjectionHandler projecter = new ProjectionHandler();
     JoinHandler joiner = new JoinHandler();
+    Integrity_Constraint constrainer = new Integrity_Constraint();
     LinkedList<Relation> database = new LinkedList<Relation>();
     Relation catalog = new Relation(Constants.CATALOG);
     database.add(catalog);
@@ -55,6 +56,9 @@ public class Interpreter {
       }
       else if (token.toLowerCase().equals(Constants.JOIN)) {
          i = joiner.join(splitText, database, i);
+      }
+      else if (token.toLowerCase().equals(Constants.INTEGRITY_CONSTRAINT)) {
+         i = constrainer.constrain(splitText, database, i);
       }
     }
   }
