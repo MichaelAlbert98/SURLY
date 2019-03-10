@@ -55,6 +55,7 @@ Could not find the specified name.
 Could not find the specified name.
 Format is not correct.
 Format is not correct.
+Format is not correct.
 Cannot overwrite a non-temporary relation.
 
 Could not find the specified name.
@@ -80,19 +81,23 @@ Relation name: test5, Attribute format: cnum char 8 | pnum char 8
   cnum     pnum
  csci305  csci241
 
-Relation name: test6, Attribute format: cnum char 8 | pnum char 8
+Relation name: test6, Attribute format: cnum char 8 | title char 30 | credits num 4
+-------------------------------------------------
+  cnum                title             cred
+
+Relation name: test7, Attribute format: cnum char 8 | pnum char 8
 -------------------------------------------------
   cnum     pnum
  csci241  math124
  csci241  csci145
 
-Relation name: test7, Attribute format: cnum char 8 | pnum char 8
+Relation name: test8, Attribute format: cnum char 8 | pnum char 8
 -------------------------------------------------
   cnum     pnum
  csci141  math112
  csci305  csci241
 
-Relation name: test8, Attribute format: cnum char 8 | pnum char 8
+Relation name: test9, Attribute format: cnum char 8 | pnum char 8
 -------------------------------------------------
   cnum     pnum
 
