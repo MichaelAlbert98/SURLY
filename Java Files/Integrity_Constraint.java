@@ -10,7 +10,6 @@ public class Integrity_Constraint {
 
   private int i;
   private String relName;
-  private String tempName;
   private LinkedList<Relation> database;
 
    public Integrity_Constraint(){}
@@ -19,11 +18,21 @@ public class Integrity_Constraint {
      this.i = ix;
      this.database = database;
      Where where = new Where();
-     tempName = splitText.get(i-2);
 
      if (!formatCheck(splitText)) {
        return this.i;
      }
+
+     //add qualifier to relation qualifier.
+     else if (where.whereFormat(splitText,this.i)) {
+       Relation rel = getRelation(this.relName);
+       ArrayList<String> qualifier = new ArrayList<String>();
+       while (!splitText.get(i).equals(";")) {
+         qualifier.add(splitText.get(i));
+       }
+       rel.getConstraints().add(qualifier);
+     }
+
      return this.i;
    }
 
@@ -36,10 +45,10 @@ public class Integrity_Constraint {
        return false;
      }
 
-     relName = splitText.get(i);
+     this.relName = splitText.get(i);
      i++;
 
-     if (!splitText.get(i).equals(";") && !splitText.get(i).toLowerCase().equals("where")) {
+     if (!splitText.get(i).toLowerCase().equals("where")) {
        i--;
        System.out.println(Constants.ERR_BAD_FORMAT);
        return false;
