@@ -3,7 +3,7 @@
 //have been inserted.
 //Created by Michael Albert
 //Created January 27, 2019
-//Revised March 2, 2019
+//Revised March 10, 2019
 
 import java.util.*;
 import java.lang.*;
@@ -12,6 +12,7 @@ public class Relation {
 
   private String name;
   private boolean temp;
+  private ArrayList<ArrayList<String>> constraints;
   private LinkedList<Attribute> attributeFormat;
   private LinkedList<Tuple> tuples;
 
@@ -19,6 +20,7 @@ public class Relation {
    public Relation(String name, LinkedList<Attribute> af){
      this.name = name;
      this.temp = false;
+     this.constraints = new ArrayList<ArrayList<String>>();
      this.attributeFormat = af;
      this.tuples = new LinkedList<Tuple>();
    }
@@ -26,6 +28,7 @@ public class Relation {
    public Relation(String name) {
      this.name = name;
      this.temp = false;
+     this.constraints = new ArrayList<ArrayList<String>>();
      this.attributeFormat = null;
      this.tuples = new LinkedList<Tuple>();
    }
@@ -46,6 +49,10 @@ public class Relation {
 
    public void setTuples(LinkedList<Tuple> tups) {
      this.tuples = tups;
+   }
+
+   public ArrayList<ArrayList<String>> getConstraints() {
+     return this.constraints;
    }
 
    public LinkedList<Attribute> getAttributeFormat() {
