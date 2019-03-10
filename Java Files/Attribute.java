@@ -11,6 +11,7 @@ public class Attribute {
 
    private String name;
    private String dataType;
+   private String relation;
    private int length;
 
    //constructor
@@ -32,9 +33,17 @@ public class Attribute {
    public int getLength() {
       return this.length;
    }
+   
+   public String getRelation() {
+      return this.relation;
+   }
 
    // ---------------Other Methods -------------------------
 
+   public void setRelation(String r) {
+      this.relation = r;
+   }
+   
    public String toString() {
       return "" + name + " " + dataType + " " + length + "";
    }
