@@ -90,9 +90,41 @@ public class JoinHandler {
             " and " + relB.getName() + "." + attB.getName() + ". The attribute positions are " + attAPos + " and " + attBPos +
             ". The relation is:\n" + joinRelation);
       }
-      
+      // Search the db for a temporary relation of the same name, and delete it
+      ListIterator<Relation> dbIterator = db.listIterator();
+      int j = 0;
+      while(dbIterator.hasNext()) {
+         Relation r = dbIterator.next();
+         if(r.getName().equals(name)) {
+            db.remove(j);
+         }
+         j++;
+      }
+      LinkedList<Tuple> catalog = db.get(0).getTuples();
+      int ix = 0;
+      while(ix < catalog.size()) {
+         Tuple t = catalog.get(ix);
+         if(t.getName().equals(name)){ 
+            catalog.remove(ix);
+         }
+         else {
+            ix++;
+         }
+      }
       db.add(joinRelation);
+      /*
       
+    for (int j=0;j<attrList.size();j++) {
+      Tuple catTuple = new Tuple(relationName);
+      catTuple.addAttribute(attrList.get(j));
+      database.get(0).getTuples().add(catTuple); //add relation to catalog
+    }
+    */
+      for(int k = 0; k < joinAttributeFormat.size(); k++) {
+         Tuple catalogEntry = new Tuple(name);
+         catalogEntry.addAttribute(joinAttributeFormat.get(k));
+         database.get(0).getTuples().add(catalogEntry);
+      }
       return i + 8;
    }
    
@@ -116,9 +148,9 @@ public class JoinHandler {
          ListIterator<Tuple> relBIter = relB.getTuples().listIterator();
          while(relBIter.hasNext()) {
             LinkedList<Attribute> bTuple = relBIter.next().getAttr();
-            if(getAttributeAt(aTuple, attAPos).getName().equals(getAttributeAt(bTuple, attBPos).getName())) { // does not account for null atts?
+            if(getAttributeAt(aTuple, attAPos).getName().equals(getAttributeAt(bTuple, attBPos).getName())) {
                // add the tuples together
-               Tuple t = mergeTuples(aTuple, bTuple);
+               Tuple t = mergeTuples(aTuple, bTuple, relA.getName(), relB.getName());
                joinRelation.addTuple(t);
                if(DEBUG_LEVEL > 1) {
                   System.out.println("Found matching tuples at " + aTuple + " matches " + bTuple + ".\nNew tuple is " + t.getAttr());
@@ -128,17 +160,23 @@ public class JoinHandler {
       }
    }
    
-   private Tuple mergeTuples(LinkedList<Attribute> aTuple, LinkedList<Attribute> bTuple) {
+   private Tuple mergeTuples(LinkedList<Attribute> aTuple, LinkedList<Attribute> bTuple, String relAName, String relBName) {
       LinkedList<Attribute> atts = new LinkedList<Attribute>();
       ListIterator<Attribute> aAttsIter = aTuple.listIterator();
       ListIterator<Attribute> bAttsIter = bTuple.listIterator();
+      Attribute nextAttribute;
       while(aAttsIter.hasNext()) {
-         atts.add(aAttsIter.next());
+         nextAttribute = aAttsIter.next();
+         nextAttribute.setRelation(relAName);
+         atts.add(nextAttribute);
       }
       while(bAttsIter.hasNext()) {
-         atts.add(bAttsIter.next());
+         nextAttribute = bAttsIter.next();
+         nextAttribute.setRelation(relBName);
+         atts.add(nextAttribute);
       }
       Tuple t = new Tuple();
+      System.out.println(atts + ", names: " + relAName + ", " + relBName);
       t.setAttr(atts);
       return t;
    }
