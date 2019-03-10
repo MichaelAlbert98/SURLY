@@ -73,6 +73,10 @@ public class Where {
       }
       //do first condition no matter what
       relAttrForm = relation.getAttrFormSpecif(splitText.get(temp+1));
+      if (relAttrForm == -1) {
+        System.out.println(Constants.ERR_BAD_FORMAT);
+        return new ArrayList<Boolean>();
+      }
       for (j=0; j<allTuples.size(); j++) {
         if (!Helper.compareCheck(relAttrForm, allTuples.get(j), splitText.get(temp+2), splitText.get(temp+3))) {
           meetsConds.set(j,false);
@@ -84,6 +88,10 @@ public class Where {
         temp = temp + 4;
         //narrow down List to tuples who fulfill condition
         relAttrForm = relation.getAttrFormSpecif(splitText.get(temp+1));
+        if (relAttrForm == -1) {
+          System.out.println(Constants.ERR_BAD_FORMAT);
+          return new ArrayList<Boolean>();
+        }
         for (j=0; j<allTuples.size(); j++) {
           if (meetsConds.get(j)) {
             if (!Helper.compareCheck(relAttrForm, allTuples.get(j), splitText.get(temp+2), splitText.get(temp+3))) {
