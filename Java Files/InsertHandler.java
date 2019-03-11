@@ -17,18 +17,19 @@ public class InsertHandler {
     this.i = j;
     int count = 0; // Number of attrubutes in insertion
     String relationName = parseRelationName(splitText, this.i);
+
     if (relationName == null) {
       return this.i;
     }
     Relation r = getRelation(relationName, database);
 
     if (r == null) {
-      return this.i + 1;
+      return this.i;
     }
 
     else if (r.getTemp()) {
       System.out.println(Constants.ERR_TEMP_MODIFY);
-      return i + 2;
+      return this.i;
     }
 
     else if (r.getName().equals(Constants.CATALOG)) {
@@ -36,8 +37,14 @@ public class InsertHandler {
       return this.i;
     }
 
+    else if (checkQualifiers(r)) {
+      System.out.println(Constants.ERR_NOT_QUALIFIED);
+      return this.i;
+    }
+
     Tuple tuple = new Tuple();
     this.i += 2;
+
     while (this.i < splitText.size() && !splitText.get(this.i).equals(";")) {
       if (checkFormat(splitText,count,r)) {
         return this.i;
@@ -48,9 +55,11 @@ public class InsertHandler {
       this.i++;
       count++;
     }
+
     if (checkTuple(count,tuple,r)) {
       return this.i;
     }
+
     r.addTuple(tuple); // If no errors are found at this point, its safe to add to the tuple to the relation
     System.out.println("Inserting " + count + " attributes to " + relationName + ".");
     return this.i;
@@ -137,5 +146,14 @@ public class InsertHandler {
       return false;
     }
     return true;
+  }
+
+  private boolean checkQualifiers(Relation r) {
+    ArrayList<ArrayList<String>> constraints = r.getConstraints();
+
+    for (int j = 0; j < constraints.size(); j++) {
+      ArrayList<String> constraint = constraints.get(j);
+
+    }
   }
 }
