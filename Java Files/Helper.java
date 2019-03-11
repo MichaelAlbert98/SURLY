@@ -189,6 +189,11 @@ public class Helper {
       return -1;
    }
    
+   // Returns true if the given string is an ambiguous attribute for the given relation
+   // Ex:
+   // for join = prereq.cnum, prereq.pnum, course.cnum, course.title, course.credits
+   // isAmbiguous(join, cnum, database) returns true
+   // isAmbiguous(join, title, database) returns false
    public static boolean isAmbiguous(Relation r, String attribute, LinkedList<Relation> database) {
       String relationA = "";
       String relationB = "";
@@ -209,6 +214,9 @@ public class Helper {
       }
       Relation a = getRelationByName(relationA, database);
       Relation b = getRelationByName(relationB, database);
+      if(b == null) {
+         return false;
+      }
       boolean aContainsAttribute = false;
       boolean bContainsAttribute = false;
       LinkedList<Attribute> aAttributeFormat = a.getAttributeFormat();
