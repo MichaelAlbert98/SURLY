@@ -195,7 +195,25 @@ public class Helper {
    // isAmbiguous(join, cnum, database) returns true
    // isAmbiguous(join, title, database) returns false
    public static boolean isAmbiguous(Relation r, String attribute, LinkedList<Relation> database) {
-      String relationA = "";
+      int dot = isQualifiedAttribute(attribute);
+      if(dot > -1) {
+         return false;
+      }
+      ListIterator<Attribute> relationAttributesIterator = r.getAttributeFormat().listIterator();
+      int count = 0;
+      while(relationAttributesIterator.hasNext()) {
+         String name = relationAttributesIterator.next().getName();
+         if(name.equals(attribute)) {
+            count++;
+         }
+      }
+      if(count > 1) {
+         return true;
+      }  
+      return false;
+   
+   
+      /*String relationA = "";
       String relationB = "";
       ListIterator<Attribute> relationAttributesIterator = r.getAttributeFormat().listIterator();
       while(relationAttributesIterator.hasNext()) {
@@ -233,6 +251,7 @@ public class Helper {
       }
       System.out.println("Relation a: " + relationA + ", relation b: " + relationB);
       return aContainsAttribute && bContainsAttribute;
+      */
    }
    
    // Gets an atribute from a relation, including qualified attributes
