@@ -127,7 +127,7 @@ public class JoinHandler {
       }
       
       //System.out.print("testing the helper method: " + joinRelation + "\n att is: " + Helper.getQualifiedAttributeIndex(joinRelation, "course.pnum"));
-      
+      //System.out.println("Test:" + Helper.isAmbiguous(joinRelation, "pnum", db));
       return i + 8;
    }
    

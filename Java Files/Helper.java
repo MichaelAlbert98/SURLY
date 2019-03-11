@@ -189,11 +189,48 @@ public class Helper {
       return -1;
    }
    
+   public static boolean isAmbiguous(Relation r, String attribute, LinkedList<Relation> database) {
+      String relationA = "";
+      String relationB = "";
+      ListIterator<Attribute> relationAttributesIterator = r.getAttributeFormat().listIterator();
+      while(relationAttributesIterator.hasNext()) {
+         Attribute a = relationAttributesIterator.next();
+         if(!a.getRelation().equals("")) {
+            if(relationA.equals("")) {
+               relationA = a.getRelation();
+            }
+            else if (relationA.equals(a.getRelation())) {
+               // do nothing
+            }
+            else {
+               relationB = a.getRelation();
+            }
+         }
+      }
+      Relation a = getRelationByName(relationA, database);
+      Relation b = getRelationByName(relationB, database);
+      boolean aContainsAttribute = false;
+      boolean bContainsAttribute = false;
+      LinkedList<Attribute> aAttributeFormat = a.getAttributeFormat();
+      for(int i = 0; i < aAttributeFormat.size(); i++) {
+         if(aAttributeFormat.get(i).getName().equals(attribute)) {
+            aContainsAttribute = true;
+         }
+      }
+      LinkedList<Attribute> bAttributeFormat = b.getAttributeFormat();
+      for(int j = 0; j < bAttributeFormat.size(); j++) {
+         if(bAttributeFormat.get(j).getName().equals(attribute)) {
+            bContainsAttribute = true;
+         }
+      }
+      System.out.println("Relation a: " + relationA + ", relation b: " + relationB);
+      return aContainsAttribute && bContainsAttribute;
+   }
    
    // Gets an atribute from a relation, including qualified attributes
    // Ex:
    // getQualifiedAttribute(course, "course.cnum") returns the attribute cnum from the course relation
-   // getQualifiedAttribute(course, "prereq.cnum") returns null
+   // getQualifiedAttribute(course, "prereq.cnum") returns null   
    public static Attribute getQualifiedAttribute(Relation r, String s) {
       int dot = isQualifiedAttribute(s);
       String attributeName;
@@ -238,6 +275,17 @@ public class Helper {
          }
       }
       return -1;
+   }
+   
+   public static Relation getRelationByName(String name, LinkedList<Relation> database) {
+      ListIterator<Relation> iter = database.listIterator();
+      while(iter.hasNext()) {
+         Relation r = iter.next();
+         if(r.getName().equals(name)) {
+            return r;
+         }
+      }
+      return null;
    }
      
 }
