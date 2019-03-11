@@ -64,3 +64,8 @@ badsyntax = project project something;
 p1 = project cnum from prereq;
 
 print projectNoRelation;
+
+JOIN1 = JOIN COURSE, PREREQ ON COURSE.cnum = prereq.pnum;
+PROJECTJOIN = PROJECT cnum FROM JOIN1;
+PRINT JOIN1, PROJECTJOIN;
+
