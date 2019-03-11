@@ -148,4 +148,96 @@ public class Helper {
       }
       return leadingSpaces + choppedString + trailingSpaces;
    }
+   
+   // Returns the index of a qualified attribute in a relation
+   // Ex:
+   // Relation join has the following attribute format: prereq.cnum, prereq.pnum, course.cnum, course.title, course.credits
+   // getQualifiedAttributeIndex(join, "prereq.cnum") returns 0
+   // getQualifiedAttributeIndex(join, "prereq.title") returns -1
+   // getQualifiedAttributeIndex(join, "course.cnum") returns 2
+
+   
+   public static int getQualifiedAttributeIndex(Relation r, String s) {
+      int dot = isQualifiedAttribute(s);
+      String attributeName;
+      String relationName = "";
+      if(dot == -1) {
+         attributeName = s;
+      }
+      else {
+         relationName = s.substring(0,dot);
+         attributeName = s.substring(dot + 1,s.length());
+      }
+      System.out.println(relationName + ", " + attributeName);
+      int ix = 0;
+      ListIterator<Attribute> rIter = r.getAttributeFormat().listIterator();
+      while(rIter.hasNext()) {
+         Attribute a = rIter.next();
+         System.out.println("attribute: " + a.getRelation() + "." + a + ", attName: " + attributeName);
+         if(a.getName().equals(attributeName)) {
+            if(dot != -1) {
+               if(a.getRelation() !="" && relationName.equals(a.getRelation())) {
+                  return ix;
+               }
+            }
+            else {
+               return ix;
+            }
+         }
+         ix++;
+      }
+      return -1;
+   }
+   
+   
+   // Gets an atribute from a relation, including qualified attributes
+   // Ex:
+   // getQualifiedAttribute(course, "course.cnum") returns the attribute cnum from the course relation
+   // getQualifiedAttribute(course, "prereq.cnum") returns null
+   public static Attribute getQualifiedAttribute(Relation r, String s) {
+      int dot = isQualifiedAttribute(s);
+      String attributeName;
+      String relationName = "";
+      if(dot == -1) {
+         attributeName = s;
+      }
+      else {
+         relationName = s.substring(0,dot);
+         attributeName = s.substring(dot + 1,s.length());
+      }
+      System.out.println(relationName + ", " + attributeName);
+      ListIterator<Attribute> rIter = r.getAttributeFormat().listIterator();
+      while(rIter.hasNext()) {
+         Attribute a = rIter.next();
+         System.out.println("attribute: " + a.getRelation() + "." + a + ", attName: " + attributeName);
+         if(a.getName().equals(attributeName)) {
+            if(dot != -1) {
+               if(a.getRelation() !="" && relationName.equals(a.getRelation())) {
+                  return a;
+               }
+            }
+            else {
+               return a;
+            }
+         }
+      }
+      return null;
+   }
+   
+   // Returns location of the '.' in a qualified attribute. If attribute is not qualified, returns -1.
+   // String s- the string representation of the attribue, including qualifier
+   // Ex:
+   // isQualifiedAttribute("COURSE.CNUM") returns 6,
+   // isQualifiedAttribute(".COURSECNUM") returns 0 (which should generate an error in the calling function)
+   // isQualifiedAttribute("CNUM") returns -1
+   private static int isQualifiedAttribute(String s) {
+      int ix;
+      for(ix = 0; ix < s.length(); ix++) {
+         if(s.charAt(ix) == '.') {
+            return ix;
+         }
+      }
+      return -1;
+   }
+     
 }
