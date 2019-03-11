@@ -19,6 +19,7 @@ public class Attribute {
      this.name = name;
      this.dataType = dataType;
      this.length = length;
+     this.relation = "";
    }
 
    // -------------------Getters ---------------------------
@@ -45,6 +46,9 @@ public class Attribute {
    }
    
    public String toString() {
+      /*if(relation != null) {
+         return relation + "." + name + " " + dataType + " " + length + "";
+      }*/
       return "" + name + " " + dataType + " " + length + "";
    }
 
