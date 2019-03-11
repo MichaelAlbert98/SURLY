@@ -125,6 +125,9 @@ public class JoinHandler {
          catalogEntry.addAttribute(joinAttributeFormat.get(k));
          database.get(0).getTuples().add(catalogEntry);
       }
+      
+      //System.out.print("testing the helper method: " + joinRelation + "\n att is: " + Helper.getQualifiedAttributeIndex(joinRelation, "course.pnum"));
+      
       return i + 8;
    }
    
@@ -176,7 +179,6 @@ public class JoinHandler {
          atts.add(nextAttribute);
       }
       Tuple t = new Tuple();
-      System.out.println(atts + ", names: " + relAName + ", " + relBName);
       t.setAttr(atts);
       return t;
    }
@@ -186,11 +188,15 @@ public class JoinHandler {
       ListIterator<Attribute> aIter = relA.getAttributeFormat().listIterator();
       ListIterator<Attribute> bIter = relB.getAttributeFormat().listIterator();
       while(aIter.hasNext()) {
-         relationAttributeFormat.add(aIter.next());
+         Attribute a = aIter.next();
+         a.setRelation(relA.getName());
+         relationAttributeFormat.add(a);
       }
       int ix = 0;
       while(bIter.hasNext()) {
-         relationAttributeFormat.add(bIter.next());
+         Attribute a = bIter.next();
+         a.setRelation(relB.getName());
+         relationAttributeFormat.add(a);
       }
       return relationAttributeFormat;
    }
