@@ -22,7 +22,6 @@ public class ProjectionHandler {
       }
       LinkedList<Attribute> attributes = parseAttributes(tokens, relation, ix);
       if(attributes.isEmpty()){
-         System.out.println(Constants.ERR_NO_ATTS);
          return newIx;
       }
       LinkedList<Integer> attributePositions = getAttributePositions(attributes, relation);
@@ -145,6 +144,10 @@ public class ProjectionHandler {
       do{
          ix++;
          String att = tokens.get(ix);
+         if(Helper.isAmbiguous(r, att)) {
+            System.out.println(Constants.ERR_AMBIG);
+            return new LinkedList<Attribute>();
+         }
          Attribute attribute = getAttribute(relationAttributes, att);
          if(attribute != null) {
             attributeStack.push(attribute);
@@ -155,6 +158,7 @@ public class ProjectionHandler {
       while(!attributeStack.empty()) {
          attributes.push(attributeStack.pop());
       }
+      if(attributes.isEmpty()){ System.out.println(Constants.ERR_NO_ATTS); }
       return attributes;
    }
    
