@@ -72,7 +72,12 @@ public class Where {
         meetsConds.add(true);
       }
       //do first condition no matter what
-      relAttrForm = relation.getAttrFormSpecif(splitText.get(temp+1));
+      //relAttrForm = relation.getAttrFormSpecif(splitText.get(temp+1));
+      if(Helper.isAmbiguous(relation, splitText.get(temp+1))) {
+         System.out.println(Constants.ERR_AMBIG);
+         return null;
+      }
+      relAttrForm = Helper.getQualifiedAttributeIndex(relation, splitText.get(temp+1));
       if (relAttrForm == -1) {
         System.out.println(Constants.ERR_BAD_FORMAT);
         return new ArrayList<Boolean>();
@@ -87,7 +92,8 @@ public class Where {
 
         temp = temp + 4;
         //narrow down List to tuples who fulfill condition
-        relAttrForm = relation.getAttrFormSpecif(splitText.get(temp+1));
+        //relAttrForm = relation.getAttrFormSpecif(splitText.get(temp+1));
+        relAttrForm = Helper.getQualifiedAttributeIndex(relation, splitText.get(temp+1));
         if (relAttrForm == -1) {
           System.out.println(Constants.ERR_BAD_FORMAT);
           return new ArrayList<Boolean>();
