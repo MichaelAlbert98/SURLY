@@ -20,7 +20,7 @@ public class Constants {
   public final static String ERR_NO_ATTS = "No attributes specified";
   public final static String ERR_JOIN_SYNTAX = "Bad syntax for join";
   public final static String ERR_JOIN_LOGIC = "Join Handler logic error";
-  public final static String ERR_JOIN_AMBIG = "Bad syntax: ambiguous join attribute";
+  public final static String ERR_AMBIG = "ambiguous attribute";
 
   //string constants
   public final static String CATALOG = "catalog";
