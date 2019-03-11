@@ -1,3 +1,8 @@
+//PrintHandler.java - Checks the formatting of print commands and if it is
+//correct, prints out the selected relations
+//Created by Michael Albert and Jacob Coffland
+//Created January 27, 2019
+//Revised March 10, 2019
 import java.util.*;
 import java.lang.*;
 

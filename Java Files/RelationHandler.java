@@ -1,3 +1,9 @@
+//RelationHandler.java - Checks the formatting of relation commands and if it is
+//correct, adds the new relation to the database.
+//Created by Michael Albert and Jacob Coffland
+//Created January 27, 2019
+//Revised March 10, 2019
+
 import java.util.*;
 import java.lang.*;
 

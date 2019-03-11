@@ -1,7 +1,7 @@
 //Constants.java - List of constants used by Surly
-//Created by Michael Albert
+//Created by Michael Albert and Jacob Coffland
 //Created Febuary 27, 2019
-//Revised January 27, 2019
+//Revised March 10, 2019
 
 import java.util.*;
 
@@ -31,6 +31,7 @@ public class Constants {
   public final static String DELETE = "delete";
   public final static String SELECT = "select";
   public final static String PROJECT = "project";
+  public final static String INTEGRITY_CONSTRAINT = "integrity_constraint";
   public final static String JOIN = "join";
   public final static String CHAR = "char";
   public final static String NUM = "num";
