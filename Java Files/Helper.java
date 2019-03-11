@@ -10,12 +10,12 @@ public class Helper {
 
   private Helper() {}
 
-    public static int findSemicolon(ArrayList<String> splitText, int i) {
-      while (!splitText.get(i).equals(";")) {
-        i++;
-      }
-      return i;
+  public static int findSemicolon(ArrayList<String> splitText, int i) {
+    while (!splitText.get(i).equals(";")) {
+      i++;
     }
+    return i;
+  }
 
   public static boolean compareCheck(int relAttrForm, Tuple tup, String operator, String cond) {
     Attribute attr = tup.getAttr().get(relAttrForm);
@@ -148,7 +148,7 @@ public class Helper {
       }
       return leadingSpaces + choppedString + trailingSpaces;
    }
-   
+
    // Returns the index of a qualified attribute in a relation
    // Ex:
    // Relation join has the following attribute format: prereq.cnum, prereq.pnum, course.cnum, course.title, course.credits
@@ -156,7 +156,7 @@ public class Helper {
    // getQualifiedAttributeIndex(join, "prereq.title") returns -1
    // getQualifiedAttributeIndex(join, "course.cnum") returns 2
 
-   
+
    public static int getQualifiedAttributeIndex(Relation r, String s) {
       int dot = isQualifiedAttribute(s);
       String attributeName;
@@ -188,7 +188,7 @@ public class Helper {
       }
       return -1;
    }
-   
+
    // Returns true if the given string is an ambiguous attribute for the given relation
    // Ex:
    // for join = prereq.cnum, prereq.pnum, course.cnum, course.title, course.credits
@@ -209,10 +209,10 @@ public class Helper {
       }
       if(count > 1) {
          return true;
-      }  
+      }
       return false;
-   
-   
+
+
       /*String relationA = "";
       String relationB = "";
       ListIterator<Attribute> relationAttributesIterator = r.getAttributeFormat().listIterator();
@@ -253,11 +253,11 @@ public class Helper {
       return aContainsAttribute && bContainsAttribute;
       */
    }
-   
+
    // Gets an atribute from a relation, including qualified attributes
    // Ex:
    // getQualifiedAttribute(course, "course.cnum") returns the attribute cnum from the course relation
-   // getQualifiedAttribute(course, "prereq.cnum") returns null   
+   // getQualifiedAttribute(course, "prereq.cnum") returns null
    public static Attribute getQualifiedAttribute(Relation r, String s) {
       int dot = isQualifiedAttribute(s);
       String attributeName;
@@ -287,7 +287,7 @@ public class Helper {
       }
       return null;
    }
-   
+
    // Returns location of the '.' in a qualified attribute. If attribute is not qualified, returns -1.
    // String s- the string representation of the attribue, including qualifier
    // Ex:
@@ -303,7 +303,7 @@ public class Helper {
       }
       return -1;
    }
-   
+
    public static Relation getRelationByName(String name, LinkedList<Relation> database) {
       ListIterator<Relation> iter = database.listIterator();
       while(iter.hasNext()) {
@@ -314,5 +314,5 @@ public class Helper {
       }
       return null;
    }
-     
+
 }
