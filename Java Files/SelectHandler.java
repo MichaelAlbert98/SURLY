@@ -49,6 +49,9 @@ public class SelectHandler {
 
              //add tuples which meet conditions
              ArrayList<Boolean> selectList = where.whereFind(splitText,database,i);
+             if(selectList == null) {
+               return this.i;
+             }
              for (int k=0; k<selectList.size(); k++) {
                if (selectList.get(k)) {
                  Tuple copy = database.get(j).getTuples().get(k).deepCopy();

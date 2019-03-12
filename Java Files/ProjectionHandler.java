@@ -22,12 +22,12 @@ public class ProjectionHandler {
       }
       LinkedList<Attribute> attributes = parseAttributes(tokens, relation, ix);
       if(attributes.isEmpty()){
-         System.out.println(Constants.ERR_NO_ATTS);
          return newIx;
       }
       LinkedList<Integer> attributePositions = getAttributePositions(attributes, relation);
       Relation projection = new Relation(name, attributes);
       projection.setTemp(true);
+      //System.out.println("Name: " + name + " Attributes: " + attributes + " relation: " + relation + " projection " + "Apos: " + attributePositions + "\nEND\n\n");
       fillProjection(relation, projection, attributes, attributePositions);
       database.add(projection);
       //System.out.println("projection is \n" + projection + "positions are: " + attributePositions + "\n");
@@ -76,7 +76,7 @@ public class ProjectionHandler {
       int ix = 0;
       while(ix < i) {
          a = li.next();
-         ix++;;
+         ix++;
       }
       return a;
    }
@@ -89,14 +89,16 @@ public class ProjectionHandler {
       ListIterator<Attribute> ai = atts.listIterator();
       while(ai.hasNext()) {
          Attribute ai_next = ai.next();
-         ListIterator<Attribute> ri = relationAtts.listIterator();
+         String attributeAsString = ai_next.getRelation() + ai_next.getName();
+         positions.push(new Integer(Helper.getQualifiedAttributeIndex(r, attributeAsString)));
+         /* ListIterator<Attribute> ri = relationAtts.listIterator();
          int ix = 0;
          while(ri.hasNext()) {
             if(ai_next.getName().toLowerCase().equals(ri.next().getName().toLowerCase())) {
                positions.push(new Integer(ix));
             }
             ix++;
-         }
+         } */
       }
       LinkedList<Integer> positionsOrdered = reverse(positions);
       return positionsOrdered;
@@ -145,7 +147,11 @@ public class ProjectionHandler {
       do{
          ix++;
          String att = tokens.get(ix);
-         Attribute attribute = getAttribute(relationAttributes, att);
+         if(Helper.isAmbiguous(r, att)) {
+            System.out.println(Constants.ERR_AMBIG);
+            return new LinkedList<Attribute>();
+         }
+         Attribute attribute = Helper.getQualifiedAttribute(r, att);
          if(attribute != null) {
             attributeStack.push(attribute);
          }
@@ -155,6 +161,7 @@ public class ProjectionHandler {
       while(!attributeStack.empty()) {
          attributes.push(attributeStack.pop());
       }
+      if(attributes.isEmpty()){ System.out.println(Constants.ERR_NO_ATTS); }
       return attributes;
    }
    
@@ -189,7 +196,7 @@ public class ProjectionHandler {
          }
          ix++;
       }
-      while(r == null);
+      while(r == null && !tokens.get(ix).equals(";"));
       return null;
    }
    

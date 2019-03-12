@@ -137,7 +137,7 @@ public class JoinHandler {
          Attribute attB = getAttribute(b, attr);
          boolean isAmbiguous = (attA != null && attB != null);
          if(isAmbiguous) {
-            System.out.println(Constants.ERR_JOIN_AMBIG);
+            System.out.println(Constants.ERR_AMBIG);
             return true;
          }
       }

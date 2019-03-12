@@ -57,10 +57,15 @@ INSERT DEPT ISLAM CSCI;
 INSERT DEPT GREGORY MATH;
 
 projectNothing = project nothing from course;
-projectNoRelation = project cnum from nothing;
+projectNoRelation = project cnum from course;
 course = project cnum from course;
 badsyntax = project project something;
 = project cnum from course;
 p1 = project cnum from prereq;
 
 print projectNoRelation;
+
+JOIN1 = JOIN COURSE, PREREQ ON COURSE.cnum = prereq.pnum;
+PROJECTJOIN = PROJECT cnum FROM JOIN1;
+PRINT JOIN1, PROJECTJOIN;
+

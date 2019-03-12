@@ -168,12 +168,12 @@ public class Helper {
          relationName = s.substring(0,dot);
          attributeName = s.substring(dot + 1,s.length());
       }
-      System.out.println(relationName + ", " + attributeName);
+      //System.out.println(relationName + ", " + attributeName);
       int ix = 0;
       ListIterator<Attribute> rIter = r.getAttributeFormat().listIterator();
       while(rIter.hasNext()) {
          Attribute a = rIter.next();
-         System.out.println("attribute: " + a.getRelation() + "." + a + ", attName: " + attributeName);
+         //System.out.println("attribute: " + a.getRelation() + "." + a + ", attName: " + attributeName);
          if(a.getName().equals(attributeName)) {
             if(dot != -1) {
                if(a.getRelation() !="" && relationName.equals(a.getRelation())) {
@@ -194,7 +194,7 @@ public class Helper {
    // for join = prereq.cnum, prereq.pnum, course.cnum, course.title, course.credits
    // isAmbiguous(join, cnum, database) returns true
    // isAmbiguous(join, title, database) returns false
-   public static boolean isAmbiguous(Relation r, String attribute, LinkedList<Relation> database) {
+   public static boolean isAmbiguous(Relation r, String attribute) {
       int dot = isQualifiedAttribute(attribute);
       if(dot > -1) {
          return false;
@@ -269,11 +269,11 @@ public class Helper {
          relationName = s.substring(0,dot);
          attributeName = s.substring(dot + 1,s.length());
       }
-      System.out.println(relationName + ", " + attributeName);
+      // System.out.println(relationName + ", " + attributeName);
       ListIterator<Attribute> rIter = r.getAttributeFormat().listIterator();
       while(rIter.hasNext()) {
          Attribute a = rIter.next();
-         System.out.println("attribute: " + a.getRelation() + "." + a + ", attName: " + attributeName);
+         // System.out.println("attribute: " + a.getRelation() + "." + a + ", attName: " + attributeName);
          if(a.getName().equals(attributeName)) {
             if(dot != -1) {
                if(a.getRelation() !="" && relationName.equals(a.getRelation())) {
