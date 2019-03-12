@@ -160,6 +160,10 @@ public class InsertHandler {
       constraint.add(";");
       ArrayList<Boolean> bool = where.whereIterate(tempRel,constraint,0);
 
+      if (bool.size() == 0) {
+        return false;
+      }
+
       for (int k = 0; k < bool.size(); k++) {
         if (!bool.get(k)) {
           return false;
