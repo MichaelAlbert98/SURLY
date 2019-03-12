@@ -55,7 +55,7 @@ public class DeleteHandler {
            //can't delete temp relations
            if (database.get(j).getTemp()) {
              System.out.println(Constants.ERR_TEMP_MODIFY);
-             return this.i + 2;
+             return this.i;
            }
 
            database.get(j).getTuples().clear();
