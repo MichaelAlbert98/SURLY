@@ -112,22 +112,11 @@ public class JoinHandler {
          }
       }
       db.add(joinRelation);
-      /*
-      
-    for (int j=0;j<attrList.size();j++) {
-      Tuple catTuple = new Tuple(relationName);
-      catTuple.addAttribute(attrList.get(j));
-      database.get(0).getTuples().add(catTuple); //add relation to catalog
-    }
-    */
       for(int k = 0; k < joinAttributeFormat.size(); k++) {
          Tuple catalogEntry = new Tuple(name);
          catalogEntry.addAttribute(joinAttributeFormat.get(k));
          database.get(0).getTuples().add(catalogEntry);
       }
-      
-      //System.out.print("testing the helper method: " + joinRelation + "\n att is: " + Helper.getQualifiedAttributeIndex(joinRelation, "course.pnum"));
-      //System.out.println("Test:" + Helper.isAmbiguous(joinRelation, "cnum", db));
       return i + 8;
    }
    

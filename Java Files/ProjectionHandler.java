@@ -30,10 +30,8 @@ public class ProjectionHandler {
       LinkedList<Integer> attributePositions = getAttributePositions(attributes, relation);
       Relation projection = new Relation(name, attributes);
       projection.setTemp(true);
-      //System.out.println("Name: " + name + " Attributes: " + attributes + " relation: " + relation + " projection " + "Apos: " + attributePositions + "\nEND\n\n");
       fillProjection(relation, projection, attributes, attributePositions);
       database.add(projection);
-      //System.out.println("projection is \n" + projection + "positions are: " + attributePositions + "\n");
       
       return newIx;
    }
@@ -99,21 +97,11 @@ public class ProjectionHandler {
    private LinkedList<Integer> getAttributePositions(LinkedList<Attribute> atts, Relation r) {
       LinkedList<Integer> positions = new LinkedList<Integer>();
       LinkedList<Attribute> relationAtts = r.getAttributeFormat();
-      //System.out.print(atts + "\n" + relationAtts);
       ListIterator<Attribute> ai = atts.listIterator();
       while(ai.hasNext()) {
          Attribute ai_next = ai.next();
          String attributeAsString = ai_next.getRelation() + "." + ai_next.getName();
-         //System.out.println("new here!!------- " + atts + " | " + ai_next);
          positions.push(new Integer(Helper.getQualifiedAttributeIndex(r, attributeAsString)));
-         /* ListIterator<Attribute> ri = relationAtts.listIterator();
-         int ix = 0;
-         while(ri.hasNext()) {
-            if(ai_next.getName().toLowerCase().equals(ri.next().getName().toLowerCase())) {
-               positions.push(new Integer(ix));
-            }
-            ix++;
-         } */
       }
       LinkedList<Integer> positionsOrdered = reverse(positions);
       return positionsOrdered;

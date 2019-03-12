@@ -168,12 +168,10 @@ public class Helper {
          relationName = s.substring(0,dot);
          attributeName = s.substring(dot + 1,s.length());
       }
-      //System.out.println(relationName + ", " + attributeName);
       int ix = 0;
       ListIterator<Attribute> rIter = r.getAttributeFormat().listIterator();
       while(rIter.hasNext()) {
          Attribute a = rIter.next();
-         //System.out.println("attribute: " + a.getRelation() + "." + a + ", attName: " + attributeName);
          if(a.getName().equals(attributeName)) {
             if(dot != -1) {
                if(a.getRelation() !="" && relationName.equals(a.getRelation())) {
@@ -211,47 +209,6 @@ public class Helper {
          return true;
       }
       return false;
-
-
-      /*String relationA = "";
-      String relationB = "";
-      ListIterator<Attribute> relationAttributesIterator = r.getAttributeFormat().listIterator();
-      while(relationAttributesIterator.hasNext()) {
-         Attribute a = relationAttributesIterator.next();
-         if(!a.getRelation().equals("")) {
-            if(relationA.equals("")) {
-               relationA = a.getRelation();
-            }
-            else if (relationA.equals(a.getRelation())) {
-               // do nothing
-            }
-            else {
-               relationB = a.getRelation();
-            }
-         }
-      }
-      Relation a = getRelationByName(relationA, database);
-      Relation b = getRelationByName(relationB, database);
-      if(b == null) {
-         return false;
-      }
-      boolean aContainsAttribute = false;
-      boolean bContainsAttribute = false;
-      LinkedList<Attribute> aAttributeFormat = a.getAttributeFormat();
-      for(int i = 0; i < aAttributeFormat.size(); i++) {
-         if(aAttributeFormat.get(i).getName().equals(attribute)) {
-            aContainsAttribute = true;
-         }
-      }
-      LinkedList<Attribute> bAttributeFormat = b.getAttributeFormat();
-      for(int j = 0; j < bAttributeFormat.size(); j++) {
-         if(bAttributeFormat.get(j).getName().equals(attribute)) {
-            bContainsAttribute = true;
-         }
-      }
-      System.out.println("Relation a: " + relationA + ", relation b: " + relationB);
-      return aContainsAttribute && bContainsAttribute;
-      */
    }
 
    // Gets an atribute from a relation, including qualified attributes
@@ -269,11 +226,9 @@ public class Helper {
          relationName = s.substring(0,dot);
          attributeName = s.substring(dot + 1,s.length());
       }
-      // System.out.println(relationName + ", " + attributeName);
       ListIterator<Attribute> rIter = r.getAttributeFormat().listIterator();
       while(rIter.hasNext()) {
          Attribute a = rIter.next();
-         // System.out.println("attribute: " + a.getRelation() + "." + a + ", attName: " + attributeName);
          if(a.getName().equals(attributeName)) {
             if(dot != -1) {
                if(a.getRelation() !="" && relationName.equals(a.getRelation())) {

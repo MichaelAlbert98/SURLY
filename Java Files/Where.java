@@ -19,19 +19,19 @@ public class Where {
     }
 
     while ((i+4) < splitText.size() && !splitText.get(i).equals(";")) {
-      //return if first part of conditions isn't non-keyword string
+      // return if first part of conditions isn't non-keyword string
       if (Helper.isKeyword(splitText.get(i+1)) || Helper.isBreakChar(splitText.get(i+1))) {
         return false;
-      }
-      //return if second part of conditions isn't operator
+      } 
+      // return if second part of conditions isn't operator
       if (!Constants.OPERATORS.contains(splitText.get(i+2))) {
         return false;
       }
-      //return if third part of conditions isn't non-keyword string
+      // return if third part of conditions isn't non-keyword string
       if (Helper.isKeyword(splitText.get(i+3)) || Helper.isBreakChar(splitText.get(i+3))) {
         return false;
       }
-      //check if 'and' or 'or' or ';'
+      // check if 'and' or 'or' or ';'
       if ((!splitText.get(i+4).toLowerCase().equals("and")) && (!splitText.get(i+4).toLowerCase().equals("or"))
          && (!splitText.get(i+4).toLowerCase().equals(";")))  {
         return false;
@@ -41,9 +41,9 @@ public class Where {
     return true;
   }
 
-  //returns a arraylist of booleans where true means that tuple matched and false means it did not
+  // returns a arraylist of booleans where true means that tuple matched and false means it did not
   public ArrayList<Boolean> whereFind(ArrayList<String> splitText, LinkedList<Relation> database, int i) {
-    //get specified relation
+    // get specified relation
     Boolean found = false;
     int j = 0;
     while (!found) {
@@ -75,7 +75,6 @@ public class Where {
         meetsConds.add(true);
       }
       //do first condition no matter what
-      //relAttrForm = relation.getAttrFormSpecif(splitText.get(temp+1));
       if(Helper.isAmbiguous(relation, splitText.get(temp+1))) {
          System.out.println(Constants.ERR_AMBIG);
          return null;
@@ -95,7 +94,6 @@ public class Where {
 
         temp = temp + 4;
         //narrow down List to tuples who fulfill condition
-        //relAttrForm = relation.getAttrFormSpecif(splitText.get(temp+1));
         relAttrForm = Helper.getQualifiedAttributeIndex(relation, splitText.get(temp+1));
         if (relAttrForm == -1) {
           System.out.println(Constants.ERR_BAD_FORMAT);
