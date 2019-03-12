@@ -1,0 +1,80 @@
+Creating course with 3 attributes.
+Creating prereq with 2 attributes.
+Creating offering with 7 attributes.
+Creating staff with 5 attributes.
+Creating interests with 2 attributes.
+Creating dept with 2 attributes.
+Inserting 3 attributes to course.
+Inserting 3 attributes to course.
+Inserting 3 attributes to course.
+Tuple to be inserted did not meet relation qualifiers.
+Inserting 3 attributes to course.
+Tuple to be inserted did not meet relation qualifiers.
+Inserting 3 attributes to course.
+Tuple to be inserted did not meet relation qualifiers.
+Inserting 2 attributes to prereq.
+Inserting 2 attributes to prereq.
+Inserting 2 attributes to prereq.
+Inserting 2 attributes to prereq.
+Inserting 2 attributes to prereq.
+Tuple to be inserted did not meet relation qualifiers.
+Tuple to be inserted did not meet relation qualifiers.
+Inserting 2 attributes to prereq.
+Inserting 2 attributes to prereq.
+Inserting 7 attributes to offering.
+Inserting 7 attributes to offering.
+Inserting 7 attributes to offering.
+Inserting 7 attributes to offering.
+Tuple to be inserted did not meet relation qualifiers.
+Tuple to be inserted did not meet relation qualifiers.
+Inserting 5 attributes to staff.
+Inserting 5 attributes to staff.
+Tuple to be inserted did not meet relation qualifiers.
+Tuple to be inserted did not meet relation qualifiers.
+Tuple to be inserted did not meet relation qualifiers.
+Inserting 2 attributes to dept.
+Inserting 2 attributes to dept.
+
+Relation name: course, Attribute format: cnum char 8 | title char 30 | credits num 4
+-------------------------------------------------
+  cnum                title             cred 
+ csci141     computer programming i       4  
+ csci145  comp prog & liner data struct   4  
+ csci241         data structures          4  
+ csci305           algorithms             4  
+ csci345     object oriented design       4  
+
+Relation name: prereq, Attribute format: cnum char 8 | pnum char 8
+-------------------------------------------------
+  cnum     pnum   
+ csci145  math115 
+ csci145  csci141 
+ csci241  math124 
+ csci241  csci145 
+ csci301  csci145 
+ csci330  csci241 
+ csci345  csci241 
+
+Relation name: offering, Attribute format: cnum char 8 | section num 5 | starthour char 5 | endhour char 5 | days char 5 | room char 10 | instructor char 20
+-------------------------------------------------
+  cnum   secti start endho  days    room         instructor      
+ csci141 27921 13:00 13:50  mwf     cf115        jagodzinski     
+ csci241 27922  9:00  9:50  mwf     aw205           islam        
+ csci241 27935 11:00 11:50  mwf     aw403           bover        
+ csci305 27950 14:00 14:50  mtwf    aw403            liu         
+
+Relation name: staff, Attribute format: name char 20 | spouse char 10 | rank char 5 | campusaddr char 10 | extension char 9
+-------------------------------------------------
+        name           spouse    rank campusaddr extension 
+       gregory           don     sec      a8c       0030   
+       deneke            who    assis   cf 479      3769   
+
+Relation name: interests, Attribute format: name char 20 | interest char 30
+-------------------------------------------------
+        name                    interest            
+
+Relation name: dept, Attribute format: name char 20 | dept char 4
+-------------------------------------------------
+        name         dept 
+        islam        csci 
+       gregory       math

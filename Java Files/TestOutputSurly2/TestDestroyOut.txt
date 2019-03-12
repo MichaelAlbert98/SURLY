@@ -24,6 +24,8 @@ Relation name: course, Attribute format: title char 30
 Relation name: course, Attribute format: credits num 4
 Relation name: prereq, Attribute format: cnum char 8
 Relation name: prereq, Attribute format: pnum char 8
+Relation name: temp, Attribute format: cnum char 8
+Relation name: temp, Attribute format: pnum char 8
 
 Relation name: course, Attribute format: cnum char 8 | title char 30 | credits num 4
 -------------------------------------------------
@@ -72,6 +74,8 @@ Cannot modify temporary relations
 Printing Catalog:
 Relation name: prereq, Attribute format: cnum char 8
 Relation name: prereq, Attribute format: pnum char 8
+Relation name: temp, Attribute format: cnum char 8
+Relation name: temp, Attribute format: pnum char 8
 
 Could not find the specified name.
 Relation name: prereq, Attribute format: cnum char 8 | pnum char 8
@@ -100,4 +104,4 @@ Relation name: temp, Attribute format: cnum char 8 | pnum char 8
  csci305  csci301 
  csci305  csci241 
  csci330  csci241 
- csci345  csci241
+ csci345  csci241 

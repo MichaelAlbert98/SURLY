@@ -43,37 +43,37 @@ Cannot modify temporary relations
 
 Relation name: course, Attribute format: cnum char 8 | title char 30 | credits num 4
 -------------------------------------------------
-  cnum                title             cred
- csci141     computer programming i       4
- csci145  comp prog & liner data struct   4
- csci241         data structures          4
- csci301        formal languages          5
- csci305           algorithms             4
- csci345     object oriented design       4
+  cnum                title             cred 
+ csci141     computer programming i       4  
+ csci145  comp prog & liner data struct   4  
+ csci241         data structures          4  
+ csci301        formal languages          5  
+ csci305           algorithms             4  
+ csci345     object oriented design       4  
 
 Relation name: offering, Attribute format: cnum char 8 | section num 5 | starthour char 5 | endhour char 5 | days char 5 | room char 10 | instructor char 20
 -------------------------------------------------
-  cnum   secti start endho  days    room         instructor
- csci141 27921 13:00 13:50  mwf     cf115        jagodzinski
- csci241 27922  9:00  9:50  mwf     aw205           islam
- csci241 27935 11:00 11:50  mwf     aw403           bover
- csci305 27950 14:00 14:50  mtwf    aw403            liu
- csci330 27974 12:00 12:50  mtwf    cf314          deneke
- csci330 27977 14:00 14:50  mtwf    cf316          deneke
+  cnum   secti start endho  days    room         instructor      
+ csci141 27921 13:00 13:50  mwf     cf115        jagodzinski     
+ csci241 27922  9:00  9:50  mwf     aw205           islam        
+ csci241 27935 11:00 11:50  mwf     aw403           bover        
+ csci305 27950 14:00 14:50  mtwf    aw403            liu         
+ csci330 27974 12:00 12:50  mtwf    cf314          deneke        
+ csci330 27977 14:00 14:50  mtwf    cf316          deneke        
 
 Relation name: prereq, Attribute format: cnum char 8 | pnum char 8
 -------------------------------------------------
-  cnum     pnum
- csci141  math112
- csci145  math115
- csci145  csci141
- csci241  math124
- csci241  csci145
- csci301  csci145
- csci305  csci301
- csci305  csci241
- csci330  csci241
- csci345  csci241
+  cnum     pnum   
+ csci141  math112 
+ csci145  math115 
+ csci145  csci141 
+ csci241  math124 
+ csci241  csci145 
+ csci301  csci145 
+ csci305  csci301 
+ csci305  csci241 
+ csci330  csci241 
+ csci345  csci241 
 
 
 Printing Catalog:

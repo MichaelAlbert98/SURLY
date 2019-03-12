@@ -37,35 +37,134 @@ Inserting 2 attributes to dept.
 
 Relation name: course, Attribute format: cnum char 8 | title char 30 | credits num 4
 -------------------------------------------------
-  cnum                title             cred
- csci141     computer programming i       4
- csci145  comp prog & liner data struct   4
- csci241         data structures          4
- csci301        formal languages          5
- csci305           algorithms             4
- csci330        database systems          4
- csci345     object oriented design       4
+  cnum                title             cred 
+ csci141     computer programming i       4  
+ csci145  comp prog & liner data struct   4  
+ csci241         data structures          4  
+ csci301        formal languages          5  
+ csci305           algorithms             4  
+ csci330        database systems          4  
+ csci345     object oriented design       4  
 
 Relation name: offering, Attribute format: cnum char 8 | section num 5 | starthour char 5 | endhour char 5 | days char 5 | room char 10 | instructor char 20
 -------------------------------------------------
-  cnum   secti start endho  days    room         instructor
- csci141 27921 13:00 13:50  mwf     cf115        jagodzinski
- csci241 27922  9:00  9:50  mwf     aw205           islam
- csci241 27935 11:00 11:50  mwf     aw403           bover
- csci305 27950 14:00 14:50  mtwf    aw403            liu
- csci330 27974 12:00 12:50  mtwf    cf314          deneke
- csci330 27977 14:00 14:50  mtwf    cf316          deneke
+  cnum   secti start endho  days    room         instructor      
+ csci141 27921 13:00 13:50  mwf     cf115        jagodzinski     
+ csci241 27922  9:00  9:50  mwf     aw205           islam        
+ csci241 27935 11:00 11:50  mwf     aw403           bover        
+ csci305 27950 14:00 14:50  mtwf    aw403            liu         
+ csci330 27974 12:00 12:50  mtwf    cf314          deneke        
+ csci330 27977 14:00 14:50  mtwf    cf316          deneke        
 
 Relation name: prereq, Attribute format: cnum char 8 | pnum char 8
 -------------------------------------------------
-  cnum     pnum
- csci141  math112
- csci145  math115
- csci145  csci141
- csci241  math124
- csci241  csci145
- csci301  csci145
- csci305  csci301
- csci305  csci241
- csci330  csci241
- csci345  csci241
+  cnum     pnum   
+ csci141  math112 
+ csci145  math115 
+ csci145  csci141 
+ csci241  math124 
+ csci241  csci145 
+ csci301  csci145 
+ csci305  csci301 
+ csci305  csci241 
+ csci330  csci241 
+ csci345  csci241 
+
+Relation name: cnumsonly, Attribute format: cnum char 8
+-------------------------------------------------
+  cnum   
+ csci141 
+ csci145 
+ csci241 
+ csci301 
+ csci305 
+ csci330 
+ csci345 
+
+Relation name: myprojection, Attribute format: title char 30 | cnum char 8 | credits num 4
+-------------------------------------------------
+             title               cnum   cred 
+    computer programming i      csci141   4  
+ comp prog & liner data struct  csci145   4  
+        data structures         csci241   4  
+       formal languages         csci301   5  
+          algorithms            csci305   4  
+       database systems         csci330   4  
+    object oriented design      csci345   4  
+
+Relation name: cnumandtitle, Attribute format: cnum char 8 | title char 30
+-------------------------------------------------
+  cnum                title             
+ csci141     computer programming i     
+ csci145  comp prog & liner data struct 
+ csci241         data structures        
+ csci301        formal languages        
+ csci305           algorithms           
+ csci330        database systems        
+ csci345     object oriented design     
+
+Relation name: cnumliketentimes, Attribute format: cnum char 8 | cnum char 8 | cnum char 8 | cnum char 8 | cnum char 8 | cnum char 8 | cnum char 8 | cnum char 8 | cnum char 8
+-------------------------------------------------
+  cnum     cnum     cnum     cnum     cnum     cnum     cnum     cnum     cnum   
+ csci141  csci141  csci141  csci141  csci141  csci141  csci141  csci141  csci141 
+ csci145  csci145  csci145  csci145  csci145  csci145  csci145  csci145  csci145 
+ csci241  csci241  csci241  csci241  csci241  csci241  csci241  csci241  csci241 
+ csci301  csci301  csci301  csci301  csci301  csci301  csci301  csci301  csci301 
+ csci305  csci305  csci305  csci305  csci305  csci305  csci305  csci305  csci305 
+ csci330  csci330  csci330  csci330  csci330  csci330  csci330  csci330  csci330 
+ csci345  csci345  csci345  csci345  csci345  csci345  csci345  csci345  csci345 
+
+
+Relation name: myjoin, Attribute format: cnum char 8 | title char 30 | credits num 4 | cnum char 8 | pnum char 8
+-------------------------------------------------
+  cnum                title             cred   cnum     pnum   
+ csci141     computer programming i       4   csci145  csci141 
+ csci145  comp prog & liner data struct   4   csci241  csci145 
+ csci145  comp prog & liner data struct   4   csci301  csci145 
+ csci241         data structures          4   csci305  csci241 
+ csci241         data structures          4   csci330  csci241 
+ csci241         data structures          4   csci345  csci241 
+ csci301        formal languages          5   csci305  csci301 
+
+
+Relation name: myjoin, Attribute format: cnum char 8 | pnum char 8 | cnum char 8 | title char 30 | credits num 4
+-------------------------------------------------
+  cnum     pnum     cnum                title             cred 
+ csci141  math112  csci141     computer programming i       4  
+ csci145  math115  csci145  comp prog & liner data struct   4  
+ csci145  csci141  csci145  comp prog & liner data struct   4  
+ csci241  math124  csci241         data structures          4  
+ csci241  csci145  csci241         data structures          4  
+ csci301  csci145  csci301        formal languages          5  
+ csci305  csci301  csci305           algorithms             4  
+ csci305  csci241  csci305           algorithms             4  
+ csci330  csci241  csci330        database systems          4  
+ csci345  csci241  csci345     object oriented design       4  
+
+Printing Catalog:
+Relation name: course, Attribute format: cnum char 8
+Relation name: course, Attribute format: title char 30
+Relation name: course, Attribute format: credits num 4
+Relation name: prereq, Attribute format: cnum char 8
+Relation name: prereq, Attribute format: pnum char 8
+Relation name: offering, Attribute format: cnum char 8
+Relation name: offering, Attribute format: section num 5
+Relation name: offering, Attribute format: starthour char 5
+Relation name: offering, Attribute format: endhour char 5
+Relation name: offering, Attribute format: days char 5
+Relation name: offering, Attribute format: room char 10
+Relation name: offering, Attribute format: instructor char 20
+Relation name: staff, Attribute format: name char 20
+Relation name: staff, Attribute format: spouse char 10
+Relation name: staff, Attribute format: rank char 5
+Relation name: staff, Attribute format: campusaddr char 10
+Relation name: staff, Attribute format: extension char 9
+Relation name: interests, Attribute format: name char 20
+Relation name: interests, Attribute format: interest char 30
+Relation name: dept, Attribute format: name char 20
+Relation name: dept, Attribute format: dept char 4
+Relation name: myjoin, Attribute format: cnum char 8
+Relation name: myjoin, Attribute format: pnum char 8
+Relation name: myjoin, Attribute format: cnum char 8
+Relation name: myjoin, Attribute format: title char 30
+Relation name: myjoin, Attribute format: credits num 4
