@@ -37,11 +37,6 @@ public class InsertHandler {
       return this.i;
     }
 
-    else if (checkQualifiers(r)) {
-      System.out.println(Constants.ERR_NOT_QUALIFIED);
-      return this.i;
-    }
-
     Tuple tuple = new Tuple();
     this.i += 2;
 
@@ -57,6 +52,11 @@ public class InsertHandler {
     }
 
     if (checkTuple(count,tuple,r)) {
+      return this.i;
+    }
+
+    else if (!checkQualifiers(r,tuple)) {
+      System.out.println(Constants.ERR_NOT_QUALIFIED);
       return this.i;
     }
 
@@ -148,12 +148,24 @@ public class InsertHandler {
     return true;
   }
 
-  private boolean checkQualifiers(Relation r) {
+  private boolean checkQualifiers(Relation r, Tuple tup) {
+    Where where = new Where();
     ArrayList<ArrayList<String>> constraints = r.getConstraints();
+    Relation tempRel = new Relation("temp", r.getAttributeFormat());
+    tempRel.getTuples().add(tup);
 
     for (int j = 0; j < constraints.size(); j++) {
       ArrayList<String> constraint = constraints.get(j);
+      constraint.add(";");
+      ArrayList<Boolean> bool = where.whereIterate(tempRel,constraint,0);
+
+      for (int k = 0; k < bool.size(); k++) {
+        if (!bool.get(k)) {
+          return false;
+        }
+      }
 
     }
+    return true;
   }
 }
