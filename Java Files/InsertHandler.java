@@ -46,7 +46,6 @@ public class InsertHandler {
       }
       // Create an attribute object, storing the value in attribute.name, and filling out the rest from the relation
       Attribute a = new Attribute(splitText.get(this.i), r.getAttributeType(count), r.getAttributeLength(count));
-      a.setRelation(r.getName());
       tuple.addAttribute(a);
       this.i++;
       count++;
