@@ -8,6 +8,9 @@ public class ProjectionHandler {
    public int project (ArrayList<String> tokens, LinkedList<Relation> database, int ix) {
       db = database;
       int newIx = getNewIx(tokens, ix);
+      if(badSyntax(tokens, ix)) {
+         System.out.println(Constants.ERR_BAD_FORMAT);
+      }
       String name = parseName(tokens, ix);
       if(name == null) {
          return newIx;
@@ -33,6 +36,17 @@ public class ProjectionHandler {
       //System.out.println("projection is \n" + projection + "positions are: " + attributePositions + "\n");
       
       return newIx;
+   }
+   
+   private boolean badSyntax(ArrayList<String> tokens, int ix) {
+      if(ix < 2) { return true; }
+      if(ix + 3 > tokens.size()) { return true;}
+      if(!tokens.get(ix - 1).equals("=")) {return true;}
+      if(tokens.get(ix + 1).equals(";")) {return true;}
+      if(tokens.get(ix + 2).equals(";")) {return true;}
+      if(tokens.get(ix + 3).equals(";")) {return true;}
+      
+      return false;
    }
    
    // Checks if the relation name is in use by a non-temporary relation

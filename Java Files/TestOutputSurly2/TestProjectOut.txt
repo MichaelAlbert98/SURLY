@@ -1,0 +1,231 @@
+Creating course with 3 attributes.
+Creating prereq with 2 attributes.
+Creating offering with 7 attributes.
+Creating staff with 5 attributes.
+Creating interests with 2 attributes.
+Creating dept with 2 attributes.
+Inserting 3 attributes to course.
+Inserting 3 attributes to course.
+Inserting 3 attributes to course.
+Inserting 3 attributes to course.
+Inserting 3 attributes to course.
+Inserting 3 attributes to course.
+Inserting 3 attributes to course.
+Inserting 2 attributes to prereq.
+Inserting 2 attributes to prereq.
+Inserting 2 attributes to prereq.
+Inserting 2 attributes to prereq.
+Inserting 2 attributes to prereq.
+Inserting 2 attributes to prereq.
+Inserting 2 attributes to prereq.
+Inserting 2 attributes to prereq.
+Inserting 2 attributes to prereq.
+Inserting 2 attributes to prereq.
+Inserting 7 attributes to offering.
+Inserting 7 attributes to offering.
+Inserting 7 attributes to offering.
+Inserting 7 attributes to offering.
+Inserting 7 attributes to offering.
+Inserting 7 attributes to offering.
+Inserting 5 attributes to staff.
+Inserting 5 attributes to staff.
+Inserting 2 attributes to interests.
+Inserting 2 attributes to interests.
+Inserting 2 attributes to dept.
+Inserting 2 attributes to dept.
+Inserting 2 attributes to dept.
+No attributes specified
+No attributes specified
+ambiguous attribute
+Format is not correct.
+Cannot overwrite a non-temporary relation.
+
+Could not find the specified name.
+Could not find the specified name.
+Could not find the specified name.
+Could not find the specified name.
+Could not find the specified name.
+Relation name: goodproject1, Attribute format: pnum char 8
+-------------------------------------------------
+  pnum   
+ csci141 
+ csci145 
+ csci145 
+ csci241 
+ csci241 
+ csci241 
+ csci301 
+
+Relation name: goodproject2, Attribute format: cnum char 8
+-------------------------------------------------
+  cnum   
+ csci141 
+ csci145 
+ csci145 
+ csci241 
+ csci241 
+ csci241 
+ csci301 
+
+Relation name: goodproject3, Attribute format: cnum char 8
+-------------------------------------------------
+  cnum   
+ csci141 
+ csci145 
+ csci145 
+ csci241 
+ csci241 
+ csci241 
+ csci301 
+
+Relation name: goodproject4, Attribute format: cnum char 8
+-------------------------------------------------
+  cnum   
+ csci141 
+ csci145 
+ csci241 
+ csci301 
+ csci305 
+ csci330 
+ csci345 
+
+Relation name: goodproject5, Attribute format: cnum char 8
+-------------------------------------------------
+  cnum   
+ csci141 
+ csci145 
+ csci241 
+ csci301 
+ csci305 
+ csci330 
+ csci345 
+
+
+Relation name: goodproject5, Attribute format: cnum char 8
+-------------------------------------------------
+  cnum   
+ csci141 
+ csci145 
+ csci241 
+ csci301 
+ csci305 
+ csci330 
+ csci345 
+
+
+ ----jGRASP: operation complete.
+
+ ----jGRASP exec: java Main TestInputSurly2/TestProject.txt
+Creating course with 3 attributes.
+Creating prereq with 2 attributes.
+Creating offering with 7 attributes.
+Creating staff with 5 attributes.
+Creating interests with 2 attributes.
+Creating dept with 2 attributes.
+Inserting 3 attributes to course.
+Inserting 3 attributes to course.
+Inserting 3 attributes to course.
+Inserting 3 attributes to course.
+Inserting 3 attributes to course.
+Inserting 3 attributes to course.
+Inserting 3 attributes to course.
+Inserting 2 attributes to prereq.
+Inserting 2 attributes to prereq.
+Inserting 2 attributes to prereq.
+Inserting 2 attributes to prereq.
+Inserting 2 attributes to prereq.
+Inserting 2 attributes to prereq.
+Inserting 2 attributes to prereq.
+Inserting 2 attributes to prereq.
+Inserting 2 attributes to prereq.
+Inserting 2 attributes to prereq.
+Inserting 7 attributes to offering.
+Inserting 7 attributes to offering.
+Inserting 7 attributes to offering.
+Inserting 7 attributes to offering.
+Inserting 7 attributes to offering.
+Inserting 7 attributes to offering.
+Inserting 5 attributes to staff.
+Inserting 5 attributes to staff.
+Inserting 2 attributes to interests.
+Inserting 2 attributes to interests.
+Inserting 2 attributes to dept.
+Inserting 2 attributes to dept.
+Inserting 2 attributes to dept.
+No attributes specified
+No attributes specified
+ambiguous attribute
+Format is not correct.
+Cannot overwrite a non-temporary relation.
+
+Could not find the specified name.
+Could not find the specified name.
+Could not find the specified name.
+Could not find the specified name.
+Could not find the specified name.
+Relation name: goodproject1, Attribute format: pnum char 8
+-------------------------------------------------
+  pnum   
+ csci141 
+ csci145 
+ csci145 
+ csci241 
+ csci241 
+ csci241 
+ csci301 
+
+Relation name: goodproject2, Attribute format: cnum char 8
+-------------------------------------------------
+  cnum   
+ csci141 
+ csci145 
+ csci145 
+ csci241 
+ csci241 
+ csci241 
+ csci301 
+
+Relation name: goodproject3, Attribute format: cnum char 8
+-------------------------------------------------
+  cnum   
+ csci141 
+ csci145 
+ csci145 
+ csci241 
+ csci241 
+ csci241 
+ csci301 
+
+Relation name: goodproject4, Attribute format: cnum char 8 | title char 30
+-------------------------------------------------
+  cnum                title             
+ csci141  csci141 
+ csci145  csci145 
+ csci241  csci241 
+ csci301  csci301 
+ csci305  csci305 
+ csci330  csci330 
+ csci345  csci345 
+
+Relation name: goodproject5, Attribute format: cnum char 8
+-------------------------------------------------
+  cnum   
+ csci141 
+ csci145 
+ csci241 
+ csci301 
+ csci305 
+ csci330 
+ csci345 
+
+
+Relation name: goodproject5, Attribute format: cnum char 8
+-------------------------------------------------
+  cnum   
+ csci141 
+ csci145 
+ csci241 
+ csci301 
+ csci305 
+ csci330 
+ csci345 

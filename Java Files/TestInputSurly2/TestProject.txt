@@ -56,16 +56,24 @@ INSERT DEPT DENEKE CSCI;
 INSERT DEPT ISLAM CSCI;
 INSERT DEPT GREGORY MATH;
 
-projectNothing = project nothing from course;
-projectNoRelation = project cnum from course;
-course = project cnum from course;
-badsyntax = project project something;
-= project cnum from course;
-p1 = project cnum from prereq;
+PREREQ_TO_COURSE = JOIN COURSE, PREREQ ON COURSE.CNUM = PREREQ.PNUM;
+/* Bad Projects */
 
-print projectNoRelation;
+BADPROJECT1 = PROJECT NOTHING FROM COURSE; /* try to project attribute that doesnt exist */
+BADPROJECT2 = PROJECT NOTHING FROM COURSE; /* try to project from relation that doesnt exist */
+BADPROJECT3 = PROJECT CNUM FROM PREREQ_TO_COURSE; /* ambiguous attribute */
+BADPROJECT4 = PROJECT X FROM ; /* bad syntax */
+COURSE = PROJECT CNUM FROM COURSE; /* overwrite permanent relation */
 
-JOIN1 = JOIN COURSE, PREREQ ON COURSE.cnum = prereq.pnum;
-PROJECTJOIN = PROJECT cnum FROM JOIN1;
-PRINT JOIN1, PROJECTJOIN;
+GOODPROJECT1 = PROJECT PNUM FROM PREREQ_TO_COURSE; /* project non-ambiguous attribute from join */
+GOODPROJECT2 = PROJECT COURSE.CNUM FROM PREREQ_TO_COURSE; /* project qualified ambiguous attribute from join */
+GOODPROJECT3 = PROJECT PREREQ.CNUM FROM PREREQ_TO_COURSE; /* project qualified ambigous attribute from join */
+GOODPROJECT4 = PROJECT CNUM, TITLE FROM COURSE; /* project non-ambiguous attribute from relation */
+GOODPROJECT5 = PROJECT COURSE.CNUM FROM COURSE; /* project qualified non-ambiguous attribute from join */
+
+PRINT BADPROJECT1, BADPROJECT2, BADPROJECT3, BADPROJECT4, BADPROJECT5, GOODPROJECT1, GOODPROJECT2, GOODPROJECT3, GOODPROJECT4, GOODPROJECT5;
+
+GOODPROJECT 5 = PROJECT CNUM FROM COURSE;
+
+PRINT GOODPROJECT5;
 
