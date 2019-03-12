@@ -29,6 +29,7 @@ public class Integrity_Constraint {
        ArrayList<String> qualifier = new ArrayList<String>();
        while (!splitText.get(i).equals(";")) {
          qualifier.add(splitText.get(i));
+         i++;
        }
        rel.getConstraints().add(qualifier);
      }
