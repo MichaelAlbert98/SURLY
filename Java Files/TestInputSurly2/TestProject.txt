@@ -57,7 +57,7 @@ INSERT DEPT ISLAM CSCI;
 INSERT DEPT GREGORY MATH;
 
 projectNothing = project nothing from course;
-projectNoRelation = project cnum from nothing;
+projectNoRelation = project cnum from course;
 course = project cnum from course;
 badsyntax = project project something;
 = project cnum from course;
