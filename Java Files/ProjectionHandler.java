@@ -103,7 +103,8 @@ public class ProjectionHandler {
       ListIterator<Attribute> ai = atts.listIterator();
       while(ai.hasNext()) {
          Attribute ai_next = ai.next();
-         String attributeAsString = ai_next.getRelation() + ai_next.getName();
+         String attributeAsString = ai_next.getRelation() + "." + ai_next.getName();
+         //System.out.println("new here!!------- " + atts + " | " + ai_next);
          positions.push(new Integer(Helper.getQualifiedAttributeIndex(r, attributeAsString)));
          /* ListIterator<Attribute> ri = relationAtts.listIterator();
          int ix = 0;
