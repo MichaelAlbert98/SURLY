@@ -57,18 +57,21 @@ public class Where {
       j++;
     }
     Relation relation = database.get(j-1);
+    ArrayList<Boolean> trueTuples = whereIterate(relation,splitText,i);
+    return trueTuples;
+  }
+
+  public ArrayList<Boolean> whereIterate(Relation relation,ArrayList<String> splitText, int i) {
+    ArrayList<ArrayList<Boolean>> andConds = new ArrayList<ArrayList<Boolean>>();
     LinkedList<Tuple> allTuples = relation.getTuples();
     ArrayList<Boolean> meetsConds;
-
-    //create list of a list of booleans which represent the tuples that fit each grouped 'and' condition
-    ArrayList<ArrayList<Boolean>> andConds = new ArrayList<ArrayList<Boolean>>();
-
     int relAttrForm;
     int temp = i; //make temp variable to maintain i
-    while ((splitText.get(temp+4).equals("and") || splitText.get(temp+4).equals("or") || splitText.get(temp+4).equals(";")) && !splitText.get(temp).equals(";")) {
+
+    while (( temp+4 < splitText.size() && (splitText.get(temp+4).equals("and") || splitText.get(temp+4).equals("or") || splitText.get(temp+4).equals(";")) && !splitText.get(temp).equals(";"))) {
 
       meetsConds = new ArrayList<Boolean>();
-      for (j=0; j<allTuples.size(); j++) {
+      for (int j=0; j<allTuples.size(); j++) {
         meetsConds.add(true);
       }
       //do first condition no matter what
@@ -77,7 +80,7 @@ public class Where {
         System.out.println(Constants.ERR_BAD_FORMAT);
         return new ArrayList<Boolean>();
       }
-      for (j=0; j<allTuples.size(); j++) {
+      for (int j=0; j<allTuples.size(); j++) {
         if (!Helper.compareCheck(relAttrForm, allTuples.get(j), splitText.get(temp+2), splitText.get(temp+3))) {
           meetsConds.set(j,false);
         }
@@ -92,7 +95,7 @@ public class Where {
           System.out.println(Constants.ERR_BAD_FORMAT);
           return new ArrayList<Boolean>();
         }
-        for (j=0; j<allTuples.size(); j++) {
+        for (int j=0; j<allTuples.size(); j++) {
           if (meetsConds.get(j)) {
             if (!Helper.compareCheck(relAttrForm, allTuples.get(j), splitText.get(temp+2), splitText.get(temp+3))) {
               meetsConds.set(j,false);
@@ -107,12 +110,11 @@ public class Where {
     }
 
     //now 'or' together all of the grouped 'and' Tuples into a single linkedlist
-    temp = i; //remake temp
     int count = 1;
     while (count < andConds.size()) {
 
       //check each grouped 'and'. If it has matched tuples not in the first grouped 'and', add them.
-      for (j=0; j<andConds.get(count).size(); j++) {
+      for (int j=0; j<andConds.get(count).size(); j++) {
         if (!andConds.get(0).get(j) && andConds.get(count).get(j)) {
           andConds.get(0).set(j,true);
         }
