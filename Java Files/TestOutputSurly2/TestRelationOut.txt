@@ -1,0 +1,10 @@
+Creating course with 3 attributes.
+This name already exists.
+This name already exists.
+
+Relation name: course, Attribute format: cnum char 8 | title char 30 | credits num 4
+-------------------------------------------------
+  cnum                title             cred
+
+Printing Catalog:
+Relation name: course, Attribute format: cnum char 8 | title char 30 | credits num 4
