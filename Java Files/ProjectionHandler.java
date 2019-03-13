@@ -100,7 +100,8 @@ public class ProjectionHandler {
       ListIterator<Attribute> ai = atts.listIterator();
       while(ai.hasNext()) {
          Attribute ai_next = ai.next();
-         String attributeAsString = ai_next.getRelation() + "." + ai_next.getName();
+         String attributeAsString;
+	 attributeAsString = ai_next.getRelation() + "." + ai_next.getName();
          positions.push(new Integer(Helper.getQualifiedAttributeIndex(r, attributeAsString)));
       }
       LinkedList<Integer> positionsOrdered = reverse(positions);
@@ -155,8 +156,8 @@ public class ProjectionHandler {
             return new LinkedList<Attribute>();
          }
          Attribute attribute = Helper.getQualifiedAttribute(r, att);
-	 attribute.setRelation(r.getName());
          if(attribute != null) {
+	    attribute.setRelation(r.getName());
             attributeStack.push(attribute);
          }
          ix++;
