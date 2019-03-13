@@ -155,6 +155,7 @@ public class ProjectionHandler {
             return new LinkedList<Attribute>();
          }
          Attribute attribute = Helper.getQualifiedAttribute(r, att);
+	 attribute.setRelation(r.getName());
          if(attribute != null) {
             attributeStack.push(attribute);
          }
