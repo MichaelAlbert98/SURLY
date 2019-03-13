@@ -7,4 +7,6 @@ Relation name: course, Attribute format: cnum char 8 | title char 30 | credits n
   cnum                title             cred
 
 Printing Catalog:
-Relation name: course, Attribute format: cnum char 8 | title char 30 | credits num 4
+Relation name: course, Attribute format: cnum char 8
+Relation name: course, Attribute format: title char 30
+Relation name: course, Attribute format: credits num 4
