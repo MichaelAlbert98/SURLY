@@ -60,7 +60,7 @@ PREREQ_TO_COURSE = JOIN COURSE, PREREQ ON COURSE.CNUM = PREREQ.PNUM;
 /* Bad Projects */
 
 BADPROJECT1 = PROJECT NOTHING FROM COURSE; /* try to project attribute that doesnt exist */
-BADPROJECT2 = PROJECT NOTHING FROM COURSE; /* try to project from relation that doesnt exist */
+BADPROJECT2 = PROJECT CNUM FROM NOTHING; /* try to project from relation that doesnt exist */
 BADPROJECT3 = PROJECT CNUM FROM PREREQ_TO_COURSE; /* ambiguous attribute */
 BADPROJECT4 = PROJECT X FROM ; /* bad syntax */
 COURSE = PROJECT CNUM FROM COURSE; /* overwrite permanent relation */
